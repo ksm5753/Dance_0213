@@ -504,9 +504,9 @@ public class BackendServerManager : MonoBehaviour
     public void DrawCard(bool isOne)
     {
 
-        Enqueue(Backend.Probability.GetProbabilitys, "3914", isOne ? 1 : 10, callback =>
+        Enqueue(Backend.Probability.GetProbabilitys, "4044", isOne ? 1 : 10, callback =>
         {
-            for (int i = 0; i < (isOne ? 1 : 10); i++)
+            for (int i = 0; i < (isOne ? 1 : 11); i++)
             {
                 var data = callback.GetReturnValuetoJSON()["elements"][i]["itemID"]["S"].ToString();
                 Param param = new Param();
