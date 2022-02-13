@@ -1198,3 +1198,4 @@ Received Import Request.
 Start importing Assets/Scenes/2. Lobby.unity using Guid(b8ed402469ee162478ca454c5144c584) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd3eb3774c04274aab7cadbd90cd7ffda') in 0.003449 seconds 
   Import took 0.008023 seconds .
 
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file
