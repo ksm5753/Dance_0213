@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 11041517}
   m_Layer: 5
   m_Name: PriceText (1)
-  m_TagString: Untagged
+  m_TagString: Element
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -216,7 +216,7 @@ GameObject:
   - component: {fileID: 45455871}
   m_Layer: 5
   m_Name: Restart
-  m_TagString: Untagged
+  m_TagString: Element
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -348,7 +348,7 @@ GameObject:
   - component: {fileID: 45671798}
   m_Layer: 5
   m_Name: Image
-  m_TagString: Untagged
+  m_TagString: Element
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -410,6 +410,59 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 45671796}
   m_CullTransparentMesh: 1
+--- !u!1 &51282301
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 51282302}
+  - component: {fileID: 51282303}
+  m_Layer: 0
+  m_Name: SoundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &51282302
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 51282301}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 151.19035, y: 1235.3134, z: -6848.426}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1623769621}
+  - {fileID: 1905525224}
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &51282303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 51282301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 915a892017f3b634a8f8ca228b7f0e4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bgmSource: {fileID: 1623769622}
+  effectAudio: {fileID: 1905525225}
+  effectSounds:
+  - {fileID: 8300000, guid: b0e08c7c18fa15641a991c94bd7472a7, type: 3}
+  - {fileID: 8300000, guid: 63cfa260c5ee77446a3d2e89b08bd918, type: 3}
+  bgmClips:
+  - {fileID: 8300000, guid: 63d26957374094149aa8e0cb2882efcd, type: 3}
+  - {fileID: 8300000, guid: 63cfa260c5ee77446a3d2e89b08bd918, type: 3}
 --- !u!1 &122477197
 GameObject:
   m_ObjectHideFlags: 0
@@ -422,7 +475,7 @@ GameObject:
   - component: {fileID: 122477200}
   m_Layer: 5
   m_Name: Student_Place_1
-  m_TagString: Untagged
+  m_TagString: Element
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -548,7 +601,7 @@ GameObject:
   - component: {fileID: 240626765}
   m_Layer: 5
   m_Name: GameOverText
-  m_TagString: Untagged
+  m_TagString: Element
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -627,7 +680,7 @@ GameObject:
   - component: {fileID: 311703665}
   m_Layer: 5
   m_Name: ItemFog
-  m_TagString: Untagged
+  m_TagString: Element
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -705,11 +758,11 @@ GameObject:
   - component: {fileID: 353020660}
   m_Layer: 5
   m_Name: Revive
-  m_TagString: Untagged
+  m_TagString: Element
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &353020657
 RectTransform:
   m_ObjectHideFlags: 0
@@ -837,7 +890,7 @@ GameObject:
   - component: {fileID: 377789017}
   m_Layer: 5
   m_Name: Panel
-  m_TagString: Untagged
+  m_TagString: Background
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -912,7 +965,7 @@ GameObject:
   - component: {fileID: 390457823}
   m_Layer: 5
   m_Name: BackGround
-  m_TagString: Untagged
+  m_TagString: Element
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -987,7 +1040,7 @@ GameObject:
   - component: {fileID: 404739028}
   m_Layer: 5
   m_Name: Student
-  m_TagString: Untagged
+  m_TagString: Element
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1062,7 +1115,7 @@ GameObject:
   - component: {fileID: 406556461}
   m_Layer: 5
   m_Name: Student
-  m_TagString: Untagged
+  m_TagString: Element
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1137,7 +1190,7 @@ GameObject:
   - component: {fileID: 411120057}
   m_Layer: 5
   m_Name: Student
-  m_TagString: Untagged
+  m_TagString: Element
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1212,7 +1265,7 @@ GameObject:
   - component: {fileID: 489252769}
   m_Layer: 5
   m_Name: TimeBackGround
-  m_TagString: Untagged
+  m_TagString: Element
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1371,7 +1424,7 @@ GameObject:
   - component: {fileID: 526145782}
   m_Layer: 5
   m_Name: RestartText
-  m_TagString: Untagged
+  m_TagString: Element
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1428,7 +1481,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uC7AC\uC2DC\uC791"
+  m_Text: "\uB85C\uBE44\uB85C"
 --- !u!222 &526145783
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1530,7 +1583,7 @@ GameObject:
   - component: {fileID: 565407802}
   m_Layer: 0
   m_Name: SkeletonGraphic (BalgaRock)
-  m_TagString: Untagged
+  m_TagString: Element
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1544,7 +1597,7 @@ RectTransform:
   m_GameObject: {fileID: 565407798}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 778421775}
   m_RootOrder: 0
@@ -1638,7 +1691,7 @@ GameObject:
   - component: {fileID: 570322879}
   m_Layer: 5
   m_Name: Price
-  m_TagString: Untagged
+  m_TagString: Element
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1770,7 +1823,7 @@ GameObject:
   - component: {fileID: 571901973}
   m_Layer: 5
   m_Name: ItemLongerTimer
-  m_TagString: Untagged
+  m_TagString: Element
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1847,7 +1900,7 @@ GameObject:
   - component: {fileID: 599025791}
   m_Layer: 5
   m_Name: Table
-  m_TagString: Untagged
+  m_TagString: Element
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1922,7 +1975,7 @@ GameObject:
   - component: {fileID: 661133179}
   m_Layer: 5
   m_Name: ReviveText
-  m_TagString: Untagged
+  m_TagString: Element
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2079,7 +2132,7 @@ GameObject:
   - component: {fileID: 698364802}
   m_Layer: 5
   m_Name: Student_Place_3
-  m_TagString: Untagged
+  m_TagString: Element
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2128,7 +2181,7 @@ GameObject:
   - component: {fileID: 707494527}
   m_Layer: 5
   m_Name: PlayBtn
-  m_TagString: Untagged
+  m_TagString: Element
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2258,7 +2311,7 @@ GameObject:
   - component: {fileID: 736437650}
   m_Layer: 5
   m_Name: Student_Place_2
-  m_TagString: Untagged
+  m_TagString: Element
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2307,7 +2360,7 @@ GameObject:
   - component: {fileID: 757046012}
   m_Layer: 5
   m_Name: Price
-  m_TagString: Untagged
+  m_TagString: Element
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2452,7 +2505,7 @@ RectTransform:
   m_GameObject: {fileID: 778421774}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_Children:
   - {fileID: 565407799}
   m_Father: {fileID: 1757745561}
@@ -2460,7 +2513,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 195, y: 83}
+  m_AnchoredPosition: {x: 237, y: 0}
   m_SizeDelta: {x: 441, y: 688}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &778421777
@@ -2559,7 +2612,7 @@ GameObject:
   - component: {fileID: 883245282}
   m_Layer: 5
   m_Name: ItemNameText
-  m_TagString: Untagged
+  m_TagString: Element
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2638,7 +2691,7 @@ GameObject:
   - component: {fileID: 903619705}
   m_Layer: 5
   m_Name: ItemNameText (2)
-  m_TagString: Untagged
+  m_TagString: Element
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2718,7 +2771,7 @@ GameObject:
   - component: {fileID: 929541193}
   m_Layer: 5
   m_Name: CloseBtn
-  m_TagString: Untagged
+  m_TagString: Element
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2969,7 +3022,7 @@ GameObject:
   - component: {fileID: 1006310075}
   m_Layer: 5
   m_Name: Chair
-  m_TagString: Untagged
+  m_TagString: Element
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3119,7 +3172,7 @@ GameObject:
   - component: {fileID: 1090383186}
   m_Layer: 5
   m_Name: ScoreText
-  m_TagString: Untagged
+  m_TagString: Element
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3198,7 +3251,7 @@ GameObject:
   - component: {fileID: 1129906265}
   m_Layer: 5
   m_Name: Image
-  m_TagString: Untagged
+  m_TagString: Element
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3386,6 +3439,7 @@ MonoBehaviour:
   score: 0
   resultWin: {fileID: 1870664843}
   isItemFog: 0
+  isReviveOn: 0
   maxItemTime: 1
   nowItemTime: 0
   useCount: 0
@@ -3398,6 +3452,9 @@ MonoBehaviour:
   - {fileID: 570322875}
   - {fileID: 1528749767}
   - {fileID: 757046008}
+  UIOBjs:
+  - {fileID: 1870664843}
+  - {fileID: 1583649577}
   isPlaying: 0
 --- !u!4 &1332298380
 Transform:
@@ -3426,7 +3483,7 @@ GameObject:
   - component: {fileID: 1422600706}
   m_Layer: 5
   m_Name: CurrentScore
-  m_TagString: Untagged
+  m_TagString: Element
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3506,7 +3563,7 @@ GameObject:
   - component: {fileID: 1528749771}
   m_Layer: 5
   m_Name: Price
-  m_TagString: Untagged
+  m_TagString: Element
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3638,7 +3695,7 @@ GameObject:
   - component: {fileID: 1554899947}
   m_Layer: 5
   m_Name: Table
-  m_TagString: Untagged
+  m_TagString: Element
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3714,11 +3771,11 @@ GameObject:
   - component: {fileID: 1583649578}
   m_Layer: 5
   m_Name: ItemBtn
-  m_TagString: Untagged
+  m_TagString: Element
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1583649578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3993,6 +4050,133 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1623769620
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1623769621}
+  - component: {fileID: 1623769622}
+  m_Layer: 0
+  m_Name: BGM
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1623769621
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1623769620}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 51282302}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &1623769622
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1623769620}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1654566035
 GameObject:
   m_ObjectHideFlags: 0
@@ -4006,7 +4190,7 @@ GameObject:
   - component: {fileID: 1654566037}
   m_Layer: 5
   m_Name: PriceText
-  m_TagString: Untagged
+  m_TagString: Element
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4085,7 +4269,7 @@ GameObject:
   - component: {fileID: 1660376595}
   m_Layer: 5
   m_Name: PriceText (2)
-  m_TagString: Untagged
+  m_TagString: Element
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4164,7 +4348,7 @@ GameObject:
   - component: {fileID: 1684257188}
   m_Layer: 5
   m_Name: Chair
-  m_TagString: Untagged
+  m_TagString: Element
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4239,7 +4423,7 @@ GameObject:
   - component: {fileID: 1756087384}
   m_Layer: 5
   m_Name: Chair
-  m_TagString: Untagged
+  m_TagString: Element
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4312,7 +4496,7 @@ GameObject:
   - component: {fileID: 1757745561}
   m_Layer: 5
   m_Name: GamePack
-  m_TagString: Untagged
+  m_TagString: Background
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4358,6 +4542,8 @@ GameObject:
   - component: {fileID: 1767414526}
   - component: {fileID: 1767414525}
   - component: {fileID: 1767414524}
+  - component: {fileID: 1767414529}
+  - component: {fileID: 1767414528}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -4447,6 +4633,35 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1767414528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1767414523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 020fefcac398a9647ba99de874f69761, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1767414529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1767414523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ec676aaa2ce2b64db1259e2d4cb8b42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rw: 1080
+  ry: 1920
+  x: 0
+  y: 0
+  value: 0
 --- !u!1 &1819658626
 GameObject:
   m_ObjectHideFlags: 0
@@ -4535,7 +4750,7 @@ GameObject:
   - component: {fileID: 1867870640}
   m_Layer: 5
   m_Name: ItemRevive
-  m_TagString: Untagged
+  m_TagString: Element
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4612,11 +4827,11 @@ GameObject:
   - component: {fileID: 1870664845}
   m_Layer: 5
   m_Name: ResultOverMenu
-  m_TagString: Untagged
+  m_TagString: Background
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1870664844
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4692,7 +4907,7 @@ GameObject:
   - component: {fileID: 1877389957}
   m_Layer: 5
   m_Name: LevelGage
-  m_TagString: Untagged
+  m_TagString: Element
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4755,6 +4970,133 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1877389955}
   m_CullTransparentMesh: 1
+--- !u!1 &1905525223
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1905525224}
+  - component: {fileID: 1905525225}
+  m_Layer: 0
+  m_Name: EFFECT
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1905525224
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1905525223}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 51282302}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &1905525225
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1905525223}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1946096682
 GameObject:
   m_ObjectHideFlags: 0
@@ -4768,7 +5110,7 @@ GameObject:
   - component: {fileID: 1946096684}
   m_Layer: 5
   m_Name: ItemNameText (1)
-  m_TagString: Untagged
+  m_TagString: Element
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4925,7 +5267,7 @@ GameObject:
   - component: {fileID: 2047204060}
   m_Layer: 5
   m_Name: Table
-  m_TagString: Untagged
+  m_TagString: Element
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5000,7 +5342,7 @@ GameObject:
   - component: {fileID: 2057050746}
   m_Layer: 5
   m_Name: BackGround
-  m_TagString: Untagged
+  m_TagString: Element
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

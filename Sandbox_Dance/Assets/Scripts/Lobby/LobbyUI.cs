@@ -31,6 +31,8 @@ public class LobbyUI : MonoBehaviour
     public GameObject[] Cards;
     public Sprite[] CardImage;
 
+    public GameObject CardInfo;
+
     [Space(15f)]
     [Header("DrawCard Panel")]
     public GameObject drawCardPanel;
@@ -43,7 +45,7 @@ public class LobbyUI : MonoBehaviour
     public GameObject errorObject;
 
     private static LobbyUI instance;
-    
+
 
     #region 초기화 (ScaleCtrl -> Initialize)
     public void Initialize()
@@ -56,6 +58,7 @@ public class LobbyUI : MonoBehaviour
         rankPanel.SetActive(false);
         collectionPanel.SetActive(false);
         drawCardPanel.SetActive(false);
+        CardInfo.SetActive(false);
     }
     #endregion
 
@@ -64,9 +67,9 @@ public class LobbyUI : MonoBehaviour
         if (BackendServerManager.GetInstance() != null) setNickName(); //로비 들어오면 닉네임 설정
 
         settingPanel.GetComponentsInChildren<Toggle>()[0].isOn = PlayerPrefs.GetInt("BGM_Mute") == 1 ? true : false; //소리 설정
-                                                                                                                     
+
         BackendServerManager.GetInstance().InitalizeGameData(); //게임데이터 초기설정
-        
+
     }
 
     #region 닉네임 설정
@@ -127,9 +130,21 @@ public class LobbyUI : MonoBehaviour
         }
 
         Cards[cardNum].GetComponentInChildren<Text>().text = count.ToString();
+        Cards[cardNum].GetComponent<Button>().onClick.AddListener(() => OpenCardInfo(cardNum, count));
 
         GameObject.Find("Scroll View").GetComponent<ScrollRect>().velocity = new Vector2(0, 0); //스크롤 하면서 다른 창으로 넘어갈 때 스크롤 저항 생김
         GameObject.Find("Content").GetComponent<RectTransform>().position = new Vector2(GameObject.Find("Content").GetComponent<RectTransform>().position.x, 0); //다른 창으로 넘길때 맨 위로 이동
+    }
+
+    public void OpenCardInfo(int cardNum, string count)
+    {
+        if (count != "0")
+        {
+            CardInfo.SetActive(true);
+
+            CardInfo.transform.GetChild(3).GetComponent<Text>().text = count;
+            CardInfo.transform.GetChild(2).GetComponent<Image>().sprite = CardImage[cardNum + 1];
+        }
     }
 
 

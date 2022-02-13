@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Spine.Unity;
 
 public class ScaleCtrl : MonoBehaviour
 {
@@ -30,6 +31,8 @@ public class ScaleCtrl : MonoBehaviour
                     if (temp[i].GetComponent<VerticalLayoutGroup>() != null || temp[i].GetComponent<HorizontalLayoutGroup>() != null || temp[i].GetComponent<GridLayoutGroup>() != null) temp[i].GetComponent<RectTransform>().localScale *= new Vector2(Fixed.GetInstance().x, Fixed.GetInstance().x);
                     else temp[i].GetComponent<RectTransform>().sizeDelta *= new Vector2(Fixed.GetInstance().x, Fixed.GetInstance().x);
 
+                    if (temp[i].GetComponent<SkeletonGraphic>() != null) temp[i].GetComponent<RectTransform>().localScale *= new Vector2(Fixed.GetInstance().x, Fixed.GetInstance().x);
+
                     //텍스트일 경우 폰트 크기 조절
                     if (temp[i].GetComponent<Text>() != null)
                         temp[i].GetComponent<Text>().fontSize = Mathf.FloorToInt(temp[i].GetComponent<Text>().fontSize / Fixed.GetInstance().value);
@@ -42,10 +45,11 @@ public class ScaleCtrl : MonoBehaviour
             case "1. Login":
                 LoginUI.GetInstance().Initialize();
                 break;
-                case "2. Lobby":
+            case "2. Lobby":
                 LobbyUI.GetInstance().Initialize();
                 break;
             case "3. Game":
+                Game.Instance.Initialize();
                 break;
         }
     }

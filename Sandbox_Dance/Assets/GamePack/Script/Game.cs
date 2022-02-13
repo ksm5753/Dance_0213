@@ -27,7 +27,7 @@ public class Game : MonoBehaviour
     public int actLevel; // 현재 플레이어의 행동 레벨
     public int maxActLevel; // 최대 레벨
     [SerializeField] GameObject actBar; // 플레이어의 딴짓 레벨 경험치 바
-    [SerializeField] GameObject []students; // 학생들 게임 오브젝트
+    [SerializeField] GameObject[] students; // 학생들 게임 오브젝트
     [SerializeField] Sprite[] studentSprite; // 학생들 사진들 (수정후 없어질것) 지
     bool isDancing = false;
 
@@ -44,15 +44,18 @@ public class Game : MonoBehaviour
 
     [Header("아이템 관련")]
     public bool isItemFog; // 아이템이 사용중인가
+    public bool isReviveOn; // 부활 아이템 구매 여부
     [SerializeField] float maxItemTime; // 아이템 지속 시간
     [SerializeField] float nowItemTime; // 아이템 현재 시간
     [SerializeField] byte useCount; // 사용횟수
     [SerializeField] byte maxUseCount; // 최대 사용 횟수 후에 지워질수 있음
 
     [SerializeField] int[] itemPrices; // 0 : 무적아이템, 1 : 시간 증가, 2 : 부활
-    [SerializeField] GameObject [] itemBtn; // 0 : 무적아이템, 1 : 부활 ...아이템 버튼들
+    [SerializeField] GameObject[] itemBtn; // 0 : 무적아이템, 1 : 부활 ...아이템 버튼들
 
     [SerializeField] GameObject[] itemBuyBtns; // 0 : 무적아이템, 1 : 시간 증가, 2 : 부활....아이템 구매 버튼들
+
+    [SerializeField] GameObject[] UIOBjs; // 게임이 시작되면 꺼야할 OBJ
 
 
     // 게임 진행 관련
@@ -74,9 +77,17 @@ public class Game : MonoBehaviour
 
     private void Start()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this.GetComponent<Game>();
+        }
+    }
+
+    public void Initialize()
+    {
+        foreach (GameObject i in UIOBjs)
+        {
+            i.SetActive(false);
         }
     }
 
@@ -94,6 +105,7 @@ public class Game : MonoBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.Mouse0))
                 {
+                    SoundManager.Instance.PlayBGM(1);
                     foreach (GameObject studenObj in students)
                     {
                         studenObj.GetComponent<Image>().sprite = studentSprite[actLevel];
@@ -103,6 +115,7 @@ public class Game : MonoBehaviour
 
                 if (Input.GetKeyUp(KeyCode.Mouse0))
                 {
+                    SoundManager.Instance.PlayBGM(0);
                     foreach (GameObject studenObj in students)
                     {
                         studenObj.GetComponent<Image>().sprite = studentSprite[4];
@@ -125,9 +138,7 @@ public class Game : MonoBehaviour
 
                     foreach (GameObject studenObj in students)
                     {
-                        //studenObj.GetComponent<StudentPos>().posChecker = false;
                         studenObj.GetComponent<Image>().sprite = studentSprite[4];
-                        //studenObj.GetComponent<StudentPos>().changeCurrentPos();
                     }
                 }
             }
@@ -149,7 +160,7 @@ public class Game : MonoBehaviour
         {
             // 눌렀을 때 시간이 오르는 것과 딴짓 게이지가 오름
             playTime += plusSpeed * Time.deltaTime;
-            actProcess +=  gainExpSpeed * Time.deltaTime;
+            actProcess += gainExpSpeed * Time.deltaTime;
 
             // 점수 오르기 딴짓 레벨에 따라 경험치 얻는 속도 달라짐
             if (actLevel != 0) score += actLevel * Time.deltaTime;
@@ -233,12 +244,12 @@ public class Game : MonoBehaviour
         float turnTime = Random.Range(rotateTimeRange[0], rotateTimeRange[1]);
 
         isWatching += 1;
-        if(isWatching > 2)
+        if (isWatching > 2)
         {
             isWatching = 0;
         }
 
-        if(isWatching == 2)
+        if (isWatching == 2)
         {
             turnTime = turnTime / 3;
         }
@@ -253,6 +264,7 @@ public class Game : MonoBehaviour
     // 게임 오버 결과 처리
     void EndGame()
     {
+        SoundManager.Instance.PlayEffect(1);
         resultWin.SetActive(true);
         score = Mathf.RoundToInt(score);
         resultText.text = score.ToString() + "0" + " 점!!";
@@ -274,7 +286,7 @@ public class Game : MonoBehaviour
 
     public void ItemBtn()
     {
-        if(!isItemFog && useCount < maxUseCount)
+        if (!isItemFog && useCount < maxUseCount)
         {
             useCount++;
             isWatching = 0;
@@ -287,7 +299,7 @@ public class Game : MonoBehaviour
                 //studenObj.GetComponent<StudentPos>().changeCurrentPos();
             }
 
-            if(maxUseCount <= useCount)
+            if (maxUseCount <= useCount)
             {
                 itemBtn[0].SetActive(false);
             }
@@ -303,7 +315,7 @@ public class Game : MonoBehaviour
     public void BuyItemBtn(int itemNum) // 0 : 무적아이템, 1 : 시간 증가, 2 : 부활
     {
         int playermoney = 500;
-        if(playermoney >= itemPrices[itemNum])
+        if (playermoney >= itemPrices[itemNum])
         {
             // 이곳에 플레이어 돈을 없애주는 스크립트 작성
             switch (itemNum)
@@ -317,7 +329,7 @@ public class Game : MonoBehaviour
                     break;
 
                 case 2:
-                    itemBtn[1].SetActive(true);
+                    isReviveOn = true;
                     break;
             }
 
