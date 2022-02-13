@@ -153,15 +153,36 @@ public class InAppPurchaser : MonoBehaviour, IStoreListener
 	 */
     public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs args)
     {
+        string id = string.Empty;
+        string token = string.Empty;
+        Param param = new Param();
+
         text.text = (args.purchasedProduct.availableToPurchase).ToString();
         // 뒤끝 영수증 검증 처리    
         BackendReturnObject validation = null;
 #if UNITY_ANDROID || UNITY_EDITOR
         validation = Backend.Receipt.IsValidateGooglePurchase(args.purchasedProduct.receipt, "receiptDescriptionGoogle");
+
+        BackEnd.Game.Payment.GoogleReceiptData.FromJson(args.purchasedProduct.receipt, out id, out token);
+        param.Add("productID", id);
+        param.Add("token", token);
+
+        param.Add("platform", "google");
 #elif UNITY_IOS
         validation = Backend.Receipt.IsValidateApplePurchase(args.purchasedProduct.receipt, "receiptDescriptionApple");
 #endif
         string msg = "";
+
+        // 뒤끝 펑션 호출
+        Backend.BFunc.InvokeFunction("receiptVaildate", param, callback => {
+            if (callback.IsSuccess() == false)
+            {
+                text.text = ("뒤끝펑션 실행 실패: " + callback);
+                return;
+            }
+            var result = callback.GetReturnValuetoJSON()["result"].ToString();
+            text.text = ("뒤끝펑션 실행 결과: " + result);
+        });
 
         // 영수증 검증에 성공한 경우
         if (validation.IsSuccess())
@@ -193,6 +214,7 @@ public class InAppPurchaser : MonoBehaviour, IStoreListener
         // Return a flag indicating whether this product has completely been received, or if the application needs 
         // to be reminded of this purchase at next app launch. Use PurchaseProcessingResult.Pending when still 
         // saving purchased products to the cloud, and when that save is delayed.
+        Backend.TBC.ChargeTBC(args.purchasedProduct.receipt, "파격 할인중!");
         return PurchaseProcessingResult.Complete;
     }
     #endregion
