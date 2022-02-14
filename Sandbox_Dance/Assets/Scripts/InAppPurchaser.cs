@@ -75,6 +75,17 @@ public class InAppPurchaser : MonoBehaviour, IStoreListener
                             // TODO : TEST 기능 (이미 구매한 상품이면 광고 지우기)
                             //AdsManager.instance.SetRemoveAds();
                             //BackEndServerManager.instance.SetRemoveAds();
+                            switch (_productId)
+                            {
+                                case FRESH_MAN:
+                                    PlayerPrefs.SetInt("isBuyNewStudent", 1);
+                                    break;
+                                case GRADUATE:
+                                    PlayerPrefs.SetInt("isBuyOldStudent", 1);
+                                    break;
+                            }
+
+                            LobbyUI.GetInstance().CheckBuyItems();
                         }
                         else
                         {

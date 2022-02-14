@@ -53,7 +53,7 @@ public class Game : MonoBehaviour
     public int[] itemPrices; // 0 : 무적아이템, 1 : 시간 증가, 2 : 부활
     [SerializeField] GameObject[] itemBtn; // 0 : 무적아이템, 1 : 부활 ...아이템 버튼들
 
-    public GameObject[] itemBuyBtns; // 0 : 무적아이템, 1 : 시간 증가, 2 : 부활....아이템 구매 버튼들
+    public Toggle[] itemBuyBtns; // 0 : 무적아이템, 1 : 시간 증가, 2 : 부활....아이템 구매 버튼들
 
     [SerializeField] GameObject[] UIOBjs; // 게임이 시작되면 꺼야할 OBJ
 
@@ -281,6 +281,22 @@ public class Game : MonoBehaviour
         reviveBtn.SetActive(false);
     }
 
+    public void StartGame()
+    {
+        BuyItemBtn();
+        float turnTime = Random.Range(rotateTimeRange[0], rotateTimeRange[1]);
+        Invoke("TeacherChange", turnTime);
+        playTime = playTime + 2f;
+        isPlaying = true;
+        isWatching = 0;
+        SpineTeacher.GetComponent<SoldierT>().Move(0);
+        resultWin.SetActive(false);
+        if (!isReviveOn)
+        {
+            itemBtn[1].SetActive(false);
+        }
+    }
+
     public void ItemBtn()
     {
         if (!isItemFog && useCount < maxUseCount)
@@ -309,23 +325,36 @@ public class Game : MonoBehaviour
         SceneManager.LoadScene("2. Lobby");
     }
 
-    public void BuyItemBtn(int itemNum) // 0 : 무적아이템, 1 : 시간 증가, 2 : 부활
+    public void BuyItemBtn() // 0 : 무적아이템, 1 : 시간 증가, 2 : 부활
+    {
+        for(int i = 0; i < itemBuyBtns.Length; i++)
+        {
+            if (itemBuyBtns[i].isOn == false)
+            {
+                ActivateItem(i);
+            }
+        }
+    }
+
+    public void ActivateItem(int itemNum)
     {
         switch (itemNum)
         {
             case 0:
                 itemBtn[0].SetActive(true);
-                BackendServerManager.GetInstance().BuyInGameItem(100);
+                print("A");
+                BackendServerManager.GetInstance().BuyInGameItem(itemPrices[0]);
                 break;
             case 1:
                 maxTime += 10;
-                BackendServerManager.GetInstance().BuyInGameItem(200);
+                print("B");
+                BackendServerManager.GetInstance().BuyInGameItem(itemPrices[1]);
 
                 break;
             case 2:
                 isReviveOn = true;
-                BackendServerManager.GetInstance().BuyInGameItem(300);
-
+                print("C");
+                BackendServerManager.GetInstance().BuyInGameItem(itemPrices[2]);
                 break;
         }
     }

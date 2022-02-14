@@ -31,7 +31,12 @@ public class LobbyUI : MonoBehaviour
     public GameObject[] Cards;
     public Sprite[] CardImage;
 
+    // 내가 추가한거(이태호)
     public GameObject CardInfo;
+    public GameObject getRubyInfo;
+    public GameObject popUpUI;
+    public GameObject drawCardUI;
+    public GameObject detailPopUpUI;
 
     [Space(15f)]
     [Header("DrawCard Panel")]
@@ -59,6 +64,12 @@ public class LobbyUI : MonoBehaviour
         collectionPanel.SetActive(false);
         drawCardPanel.SetActive(false);
         CardInfo.SetActive(false);
+        getRubyInfo.SetActive(false);
+        popUpUI.SetActive(false);
+        drawCardUI.SetActive(false);
+        detailPopUpUI.SetActive(false);
+
+        CheckBuyItems();
     }
     #endregion
 
@@ -69,6 +80,16 @@ public class LobbyUI : MonoBehaviour
         settingPanel.GetComponentsInChildren<Toggle>()[0].isOn = PlayerPrefs.GetInt("BGM_Mute") == 1 ? true : false; //소리 설정
 
         BackendServerManager.GetInstance().InitalizeGameData(); //게임데이터 초기설정
+
+        if (!PlayerPrefs.HasKey("isBuyNewStudent"))
+        {
+            PlayerPrefs.SetInt("isBuyNewStudent", 0);
+        }
+
+        if (!PlayerPrefs.HasKey("isBuyOldStudent"))
+        {
+            PlayerPrefs.SetInt("isBuyOldStudent", 0);
+        }
 
     }
 
@@ -144,7 +165,30 @@ public class LobbyUI : MonoBehaviour
 
             CardInfo.transform.GetChild(3).GetComponent<Text>().text = count;
             CardInfo.transform.GetChild(2).GetComponent<Image>().sprite = CardImage[cardNum + 1];
+
+            CardInfo.transform.GetChild(5).GetComponent<Button>().onClick.AddListener(() => DiscardCard(int.Parse(count)));
         }
+    }
+
+    void DiscardCard(int cardCount)
+    {
+        int getRubyNum = 0;
+
+        if (cardCount > 100) getRubyNum = 10;
+
+        else if (cardCount > 50) getRubyNum = 5;
+
+
+        else if (cardCount > 30) getRubyNum = 3;
+
+
+        else if (cardCount > 10) getRubyNum = 1;
+
+
+        // 이곳에 플레이어게 루비추가해주는 기능 추가
+        // 플레이어 루비 += getRubyNum;
+        getRubyInfo.SetActive(true);
+        getRubyInfo.transform.GetChild(2).GetComponent<Text>().text = cardCount + " 개 획득";
     }
 
 
@@ -178,6 +222,18 @@ public class LobbyUI : MonoBehaviour
         }
     }
 
+    public void CheckBuyItems()
+    {
+        if(PlayerPrefs.GetInt("isBuyNewStudent") == 1)
+        {
+            storePanel.transform.GetChild(1).GetChild(0).GetChild(0).GetChild(0).GetChild(0).gameObject.SetActive(false);
+        }
+
+        if(PlayerPrefs.GetInt("isBuyOldStudent") == 1)
+        {
+            storePanel.transform.GetChild(1).GetChild(0).GetChild(0).GetChild(0).GetChild(1).gameObject.SetActive(false);
+        }
+    }
 
 
     public static LobbyUI GetInstance()

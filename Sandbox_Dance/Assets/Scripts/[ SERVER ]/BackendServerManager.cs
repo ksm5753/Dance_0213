@@ -506,7 +506,7 @@ public class BackendServerManager : MonoBehaviour
     public void DrawCard(bool isOne)
     {
 
-        Enqueue(Backend.Probability.GetProbabilitys, "4044", isOne ? 1 : 10, callback =>
+        Enqueue(Backend.Probability.GetProbabilitys, "4044", isOne ? 1 : 11, callback =>
         {
             for (int i = 0; i < (isOne ? 1 : 11); i++)
             {
@@ -514,14 +514,41 @@ public class BackendServerManager : MonoBehaviour
                 Param param = new Param();
 
                 param.AddCalculation("Card " + data.ToString().Split('i')[1], GameInfoOperator.addition, 1);
-
+                Debug.LogWarning(i);
+                int n = i;
                 Backend.GameData.UpdateWithCalculation("Option5", new Where(), param, callback =>
                 {
                     if (callback.IsSuccess())
                     {
+                        LobbyUI.GetInstance().drawCardUI.transform.GetChild(1).GetComponent<CardInverser>().OffOneUI(isOne);
+                        LobbyUI.GetInstance().drawCardUI.SetActive(true);
+
+                        if (isOne)
+                        {
+                            print(data.ToString().Split('i')[1]);
+                            LobbyUI.GetInstance().drawCardUI.transform.GetChild(1).GetComponent<CardInverser>().cardNum = int.Parse(data.ToString().Split('i')[1]);
+                            LobbyUI.GetInstance().drawCardUI.transform.GetChild(1).GetComponent<CardInverser>().SetCard(int.Parse(data.ToString().Split('i')[1]));
+                        }
+
+                        else
+                        {
+                            Debug.LogWarning(n + "n");
+                            LobbyUI.GetInstance().drawCardUI.transform.GetChild(1).GetComponent<CardInverser>().elevenCards[n].transform.GetChild(0).GetComponent<CardInverser>().cardNum = int.Parse(data.ToString().Split('i')[1]);
+                        }
+                        Debug.Log(i);
                     }
                     else print("DrawCard() - " + callback);
                 });
+            }
+
+            if (isOne)
+            {
+                LobbyUI.GetInstance().drawCardUI.transform.GetChild(1).GetComponent<CardInverser>().CloseWindowInvoke();
+            }
+
+            else
+            {
+
             }
         });
     }
@@ -612,7 +639,6 @@ public class BackendServerManager : MonoBehaviour
                         {
                             Param param = new Param();
                             param.Add("Gold", int.Parse(money) - 100);
-                            Game.Instance.itemBuyBtns[0].GetComponent<Button>().interactable = false;
                             Backend.GameData.UpdateV2("User", userIndate, Backend.UserInDate, param);
                         }
                         else print("µ· ¾øÀ½");
@@ -623,7 +649,6 @@ public class BackendServerManager : MonoBehaviour
                         {
                             Param param = new Param();
                             param.Add("Gold", int.Parse(money) - 200);
-                            Game.Instance.itemBuyBtns[1].GetComponent<Button>().interactable = false;
                             Backend.GameData.UpdateV2("User", userIndate, Backend.UserInDate, param);
                         }
                         else print("µ· ¾øÀ½");
@@ -634,10 +659,16 @@ public class BackendServerManager : MonoBehaviour
                         {
                             Param param = new Param();
                             param.Add("Gold", int.Parse(money) - 300);
-                            Game.Instance.itemBuyBtns[2].GetComponent<Button>().interactable = false;
                             Backend.GameData.UpdateV2("User", userIndate, Backend.UserInDate, param);
                         }
-                        else print("µ· ¾øÀ½");
+                        else
+                        {
+                            print("µ· ¾øÀ½");
+                            if (SceneManager.GetActiveScene().name == "2. Lobby") 
+                            { 
+                                LobbyUI.GetInstance().popUpUI.SetActive(true); 
+                            }
+                        }
                         break;
                 }
 
@@ -679,7 +710,11 @@ public class BackendServerManager : MonoBehaviour
                         }
                     });
                 }
-                else print("µ·ÀÌ ºÎÁ·ÇÕ´Ï´Ù.");
+                else
+                {
+                    LobbyUI.GetInstance().popUpUI.SetActive(true);
+                    print("µ·ÀÌ ºÎÁ·ÇÕ´Ï´Ù.");
+                }
             }
             else print("BuyItems() - " + callback);
         });
