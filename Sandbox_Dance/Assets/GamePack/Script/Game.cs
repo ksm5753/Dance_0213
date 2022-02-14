@@ -50,10 +50,10 @@ public class Game : MonoBehaviour
     [SerializeField] byte useCount; // 사용횟수
     [SerializeField] byte maxUseCount; // 최대 사용 횟수 후에 지워질수 있음
 
-    [SerializeField] int[] itemPrices; // 0 : 무적아이템, 1 : 시간 증가, 2 : 부활
+    public int[] itemPrices; // 0 : 무적아이템, 1 : 시간 증가, 2 : 부활
     [SerializeField] GameObject[] itemBtn; // 0 : 무적아이템, 1 : 부활 ...아이템 버튼들
 
-    [SerializeField] GameObject[] itemBuyBtns; // 0 : 무적아이템, 1 : 시간 증가, 2 : 부활....아이템 구매 버튼들
+    public GameObject[] itemBuyBtns; // 0 : 무적아이템, 1 : 시간 증가, 2 : 부활....아이템 구매 버튼들
 
     [SerializeField] GameObject[] UIOBjs; // 게임이 시작되면 꺼야할 OBJ
 
@@ -105,7 +105,6 @@ public class Game : MonoBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.Mouse0))
                 {
-                    SoundManager.Instance.PlayBGM(1);
                     foreach (GameObject studenObj in students)
                     {
                         studenObj.GetComponent<Image>().sprite = studentSprite[actLevel];
@@ -115,7 +114,6 @@ public class Game : MonoBehaviour
 
                 if (Input.GetKeyUp(KeyCode.Mouse0))
                 {
-                    SoundManager.Instance.PlayBGM(0);
                     foreach (GameObject studenObj in students)
                     {
                         studenObj.GetComponent<Image>().sprite = studentSprite[4];
@@ -264,7 +262,6 @@ public class Game : MonoBehaviour
     // 게임 오버 결과 처리
     void EndGame()
     {
-        SoundManager.Instance.PlayEffect(1);
         resultWin.SetActive(true);
         score = Mathf.RoundToInt(score);
         resultText.text = score.ToString() + "0" + " 점!!";
@@ -314,27 +311,22 @@ public class Game : MonoBehaviour
 
     public void BuyItemBtn(int itemNum) // 0 : 무적아이템, 1 : 시간 증가, 2 : 부활
     {
-        int playermoney = 500;
-        if (playermoney >= itemPrices[itemNum])
+        switch (itemNum)
         {
-            // 이곳에 플레이어 돈을 없애주는 스크립트 작성
-            switch (itemNum)
-            {
-                case 0:
-                    itemBtn[0].SetActive(true);
-                    break;
+            case 0:
+                itemBtn[0].SetActive(true);
+                BackendServerManager.GetInstance().BuyInGameItem(100);
+                break;
+            case 1:
+                maxTime += 10;
+                BackendServerManager.GetInstance().BuyInGameItem(200);
 
-                case 1:
-                    maxTime += 10;
-                    break;
+                break;
+            case 2:
+                isReviveOn = true;
+                BackendServerManager.GetInstance().BuyInGameItem(300);
 
-                case 2:
-                    isReviveOn = true;
-                    break;
-            }
-
-            itemBuyBtns[itemNum].SetActive(false);
-            playermoney -= itemPrices[itemNum];
+                break;
         }
     }
 }

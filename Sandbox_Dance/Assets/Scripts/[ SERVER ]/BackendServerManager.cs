@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 // Include Backend
 using BackEnd;
 using static BackEnd.SendQueue;
@@ -563,15 +565,27 @@ public class BackendServerManager : MonoBehaviour
                 var gold = callback.GetReturnValuetoJSON()["rows"][0]["Gold"]["N"];
                 var diamond = callback.GetReturnValuetoJSON()["rows"][0]["Diamond"]["N"];
 
-                if (LobbyUI.GetInstance().drawCardPanel.activeSelf)
+                if(SceneManager.GetActiveScene().name == "2. Lobby")
                 {
-                    LobbyUI.GetInstance().goldText.text = gold.ToString();
-                    LobbyUI.GetInstance().diamondText.text = diamond.ToString();
+                    if (LobbyUI.GetInstance().drawCardPanel.activeSelf)
+                    {
+                        LobbyUI.GetInstance().goldText.text = gold.ToString();
+                        LobbyUI.GetInstance().diamondText.text = diamond.ToString();
+                    }
+                    else if (LobbyUI.GetInstance().storePanel.activeSelf)
+                    {
+                        LobbyUI.GetInstance().goldText2.text = gold.ToString();
+                        LobbyUI.GetInstance().diamondText2.text = diamond.ToString();
+                    }
                 }
-                else if (LobbyUI.GetInstance().storePanel.activeSelf)
+
+                else if (SceneManager.GetActiveScene().name == "3. Game")
                 {
-                    LobbyUI.GetInstance().goldText2.text = gold.ToString();
-                    LobbyUI.GetInstance().diamondText2.text = diamond.ToString();
+                    if (GameUI.GetInstance().itemBuyPanel.activeSelf)
+                    {
+                        GameUI.GetInstance().coinText.text = gold.ToString();
+                        GameUI.GetInstance().diaText.text = diamond.ToString();
+                    }
                 }
 
             }
@@ -582,6 +596,55 @@ public class BackendServerManager : MonoBehaviour
     #endregion
 
     #region ¾ÆÀÌÅÛ ±¸¸Å
+
+    public void BuyInGameItem(int num)
+    {
+        Backend.GameData.GetMyData("User", new Where(), callback =>
+        {
+            if (callback.IsSuccess())
+            {
+                var money = callback.GetReturnValuetoJSON()["rows"][0]["Gold"]["N"].ToString();
+
+                switch (num)
+                {
+                    case 100:
+                        if (int.Parse(money) > 100)
+                        {
+                            Param param = new Param();
+                            param.Add("Gold", int.Parse(money) - 100);
+                            Game.Instance.itemBuyBtns[0].GetComponent<Button>().interactable = false;
+                            Backend.GameData.UpdateV2("User", userIndate, Backend.UserInDate, param);
+                        }
+                        else print("µ· ¾øÀ½");
+                        break;
+
+                    case 200:
+                        if (int.Parse(money) > 200)
+                        {
+                            Param param = new Param();
+                            param.Add("Gold", int.Parse(money) - 200);
+                            Game.Instance.itemBuyBtns[1].GetComponent<Button>().interactable = false;
+                            Backend.GameData.UpdateV2("User", userIndate, Backend.UserInDate, param);
+                        }
+                        else print("µ· ¾øÀ½");
+                        break;
+
+                    case 300:
+                        if (int.Parse(money) > 300)
+                        {
+                            Param param = new Param();
+                            param.Add("Gold", int.Parse(money) - 300);
+                            Game.Instance.itemBuyBtns[2].GetComponent<Button>().interactable = false;
+                            Backend.GameData.UpdateV2("User", userIndate, Backend.UserInDate, param);
+                        }
+                        else print("µ· ¾øÀ½");
+                        break;
+                }
+
+                GetMyMoney();
+            }
+        });
+    }
     public void BuyItems(int num, bool isGold)
     {
         Backend.GameData.GetMyData("User", new Where(), callback =>

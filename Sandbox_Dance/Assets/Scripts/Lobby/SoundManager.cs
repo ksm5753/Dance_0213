@@ -36,6 +36,7 @@ public class SoundManager : MonoBehaviour
     void Update()
     {
         bgmSource.mute = PlayerPrefs.GetInt("BGM_Mute") == 1 ? false : true;
+        effectAudio.mute = PlayerPrefs.GetInt("Effect_Mute") == 1 ? false : true;
     }
 
 
@@ -47,17 +48,6 @@ public class SoundManager : MonoBehaviour
 
     public void SetEffect(bool check)
     {
-        PlayerPrefs.SetInt("Effect_State", (check) ? 1 : 0);
-    }
-
-    public void PlayEffect(int i)
-    {
-        effectAudio.PlayOneShot(effectSounds[i], PlayerPrefs.GetInt("Effect_State"));
-    }
-
-    public void PlayBGM(int i)
-    {
-        bgmSource.clip = bgmClips[i];
-        bgmSource.Play();
+        PlayerPrefs.SetInt("Effect_Mute", (check) ? 1 : 0);
     }
 }

@@ -8,11 +8,17 @@ using UnityEngine.Purchasing;
 
 public class InAppPurchaser : MonoBehaviour, IStoreListener
 {
-    public Text text;
     public static InAppPurchaser instance;
 
     private static IStoreController storeController;
     private static IExtensionProvider extensionProvider;
+
+    public const string FRESH_MAN = "com.touchtouch.sandbox_dance.freshman";
+    public const string COIN10000 = "com.touchtouch.sandbox_dance.coin10000";
+    public const string GRADUATE = "com.touchtouch.sandbox_dance.graduate";
+    public const string DIA200 = "com.touchtouch.sandbox_dance.dia200";
+    public const string DIA500 = "com.touchtouch.sandbox_dance.dia500";
+    public const string DIA1200 = "com.touchtouch.sandbox_dance.dia1200";
 
     public const string TEST = "com.touchtouch.sandbox_dance.coin500";
 
@@ -35,13 +41,17 @@ public class InAppPurchaser : MonoBehaviour, IStoreListener
     {
         if (IsInitialized()) return;
 
-        text.text = ("InAppPurchaser.cs - InitializePurchasing - START");
 
         var module = StandardPurchasingModule.Instance();
 
         ConfigurationBuilder builder = ConfigurationBuilder.Instance(module);
-        // remove ads
-        builder.AddProduct(TEST, ProductType.Consumable); //, new IDs {{ removeAds, GooglePlay.Name }});
+
+        builder.AddProduct(FRESH_MAN, ProductType.NonConsumable);
+        builder.AddProduct(GRADUATE, ProductType.NonConsumable);
+        builder.AddProduct(DIA200, ProductType.Consumable);
+        builder.AddProduct(DIA500, ProductType.Consumable);
+        builder.AddProduct(DIA1200, ProductType.Consumable);
+        builder.AddProduct(COIN10000, ProductType.Consumable);
 
 
         UnityPurchasing.Initialize(this, builder);
@@ -62,31 +72,27 @@ public class InAppPurchaser : MonoBehaviour, IStoreListener
                     {
                         if (p.definition.type == ProductType.NonConsumable && p.hasReceipt)
                         {
-                            text.text = ("이미 구매한 상품입니다.");
                             // TODO : TEST 기능 (이미 구매한 상품이면 광고 지우기)
                             //AdsManager.instance.SetRemoveAds();
                             //BackEndServerManager.instance.SetRemoveAds();
                         }
                         else
                         {
-                            text.text = (string.Format("Purchasing product asychronously: '{0}'", p.definition.id));
                             storeController.InitiatePurchase(p);
                         }
                     }
                 }
                 else
                 {
-                    text.text = ("BuyProductID: FAIL. Not purchasing product, either is not found or is not available for purchase");
                 }
             }
             else
             {
-                text.text = ("BuyProductID FAIL. Not initialized.");
             }
         }
         catch (Exception e)
         {
-            text.text = ("BuyProductID: FAIL. Exception during purchase. " + e);
+            print(e);
         }
     }
 
@@ -115,14 +121,12 @@ public class InAppPurchaser : MonoBehaviour, IStoreListener
                 Debug.Log("RestorePurchases continuing: " + result + ". If no further messages, no purchases available to restore.");
                 if (result)
                 {
-                    text.text = ("구매 복원 성공");
                     // TODO : TEST 기능 (이미 구매한 상품이면 광고 지우기)
                     //AdsManager.instance.SetRemoveAds();
                     //BackEndServerManager.instance.SetRemoveAds();
                 }
                 else
                 {
-                    text.text = ("구매 복원 실패");
                 }
             });
         }
@@ -136,14 +140,12 @@ public class InAppPurchaser : MonoBehaviour, IStoreListener
 
     public void OnInitialized(IStoreController _sc, IExtensionProvider _ep)
     {
-        text.text = ("OnInitialized: PASS");
         storeController = _sc;
         extensionProvider = _ep;
     }
 
     public void OnInitializeFailed(InitializationFailureReason reason)
     {
-        text.text = ("OnInitializeFailed : \n" + reason);
     }
 
     // ====================================================================================================
@@ -157,7 +159,6 @@ public class InAppPurchaser : MonoBehaviour, IStoreListener
         string token = string.Empty;
         Param param = new Param();
 
-        text.text = (args.purchasedProduct.availableToPurchase).ToString();
         // 뒤끝 영수증 검증 처리    
         BackendReturnObject validation = null;
 #if UNITY_ANDROID || UNITY_EDITOR
@@ -177,11 +178,9 @@ public class InAppPurchaser : MonoBehaviour, IStoreListener
         Backend.BFunc.InvokeFunction("receiptVaildate", param, callback => {
             if (callback.IsSuccess() == false)
             {
-                text.text = ("뒤끝펑션 실행 실패: " + callback);
                 return;
             }
             var result = callback.GetReturnValuetoJSON()["result"].ToString();
-            text.text = ("뒤끝펑션 실행 결과: " + result);
         });
 
         // 영수증 검증에 성공한 경우
@@ -192,7 +191,6 @@ public class InAppPurchaser : MonoBehaviour, IStoreListener
             if (String.Equals(args.purchasedProduct.definition.id, TEST, StringComparison.Ordinal))
             {
                 msg = string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id);
-                text.text = (msg);
                 Debug.Log(msg);
 
                 //AdsManager.instance.SetRemoveAds();
@@ -204,7 +202,6 @@ public class InAppPurchaser : MonoBehaviour, IStoreListener
         {
             // Or ... an unknown product has been purchased by this user. Fill in additional products here....
             msg = string.Format("ProcessPurchase: FAIL. Unrecognized product: '{0}'", args.purchasedProduct.definition.id);
-            text.text = (msg + ", " + validation);
             Debug.Log(msg);
             Debug.Log(validation);
 
@@ -223,12 +220,31 @@ public class InAppPurchaser : MonoBehaviour, IStoreListener
 
     public void OnPurchaseFailed(Product product, PurchaseFailureReason failureReason)
     {
-        text.text = ("구매 실패\n" + product.definition.storeSpecificId + "\n" + failureReason);
     }
 
     // ==================================================
-    public void BuyRemoveAds()
+    public void BuyItem(int num)
     {
-        BuyProductID(TEST);
+        switch (num)
+        {
+            case 0:
+                BuyProductID(FRESH_MAN);
+                break;
+            case 1:
+                BuyProductID(GRADUATE);
+                break;
+            case 2:
+                BuyProductID(DIA200);
+                break;
+            case 3:
+                BuyProductID(DIA500);
+                break;
+            case 4:
+                BuyProductID(DIA1200);
+                break;
+            case 5:
+                BuyProductID(COIN10000);
+                break;
+        }
     }
 }
