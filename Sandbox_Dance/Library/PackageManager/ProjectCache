@@ -13,10 +13,18 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637803922792537201
-    m_Hash: 3818412131
+      ticks: 637805057090707014
+    m_Hash: 2423596602
 m_EmbeddedPackageManifests:
-  m_ManifestsStatus: {}
+  m_ManifestsStatus:
+    C:/Users/showmethevrgr07/Desktop/newDance/Dance_0213/Sandbox_Dance/Packages/ParticleEffectForUGUI-3.3.0/package.json:
+      m_FilePath: C:/Users/showmethevrgr07/Desktop/newDance/Dance_0213/Sandbox_Dance/Packages/ParticleEffectForUGUI-3.3.0/package.json
+      m_PathExists: 1
+      m_ContentTrackingEnabled: 1
+      m_ModificationDate:
+        serializedVersion: 2
+        ticks: 637413929240000000
+      m_Hash: 1585288198
 m_PackageAssets:
   m_Packages:
     m_ResolvedPackages:
@@ -1276,14 +1284,16 @@ m_PackageAssets:
         - 1.1.27
         - 1.1.29
         - 1.1.30
+        - 1.1.31
         - 2.0.1-pre.12
         - 2.0.1-pre.18
         compatible:
         - 1.1.29
         - 1.1.30
+        - 1.1.31
         - 2.0.1-pre.12
         - 2.0.1-pre.18
-        verified: 1.1.30
+        verified: 1.1.31
       dependencies:
       - name: com.unity.ext.nunit
         version: 1.0.6
@@ -3340,6 +3350,57 @@ m_PackageAssets:
         url: 
         revision: 
         path: 
+    - packageId: com.coffee.ui-particle@file:C:\Users\showmethevrgr07\Desktop\newDance\Dance_0213\Sandbox_Dance\Packages\ParticleEffectForUGUI-3.3.0
+      testable: 1
+      isDirectDependency: 1
+      version: 3.3.0
+      source: 3
+      resolvedPath: C:\Users\showmethevrgr07\Desktop\newDance\Dance_0213\Sandbox_Dance\Packages\ParticleEffectForUGUI-3.3.0
+      assetPath: Packages/com.coffee.ui-particle
+      name: com.coffee.ui-particle
+      displayName: UI Particle
+      author:
+        name: mob-sakai
+        email: sakai861104@gmail.com
+        url: https://github.com/mob-sakai
+      category: 
+      type: 
+      description: 'This plugin provide a component to render particle effect for
+        uGUI.
+
+        The particle rendering is maskable and sortable, without Camera,
+        RenderTexture or Canvas.'
+      status: 4
+      errors: []
+      versions:
+        all: []
+        compatible: []
+        verified: 
+      dependencies: []
+      resolvedDependencies: []
+      keywords:
+      - ui
+      - particle
+      registry:
+        id: 
+        name: 
+        url: 
+        scopes: []
+        isDefault: 0
+        capabilities: 0
+      hasRegistry: 0
+      hideInEditor: 1
+      entitlements:
+        isAllowed: 1
+      isAssetStorePackage: 0
+      datePublishedTicks: 0
+      documentationUrl: 
+      hasRepository: 1
+      repository:
+        type: git
+        url: git+https://github.com/mob-sakai/ParticleEffectForUGUI.git
+        revision: 
+        path: 
     - packageId: com.unity.modules.subsystems@1.0.0
       testable: 0
       isDirectDependency: 0
@@ -3787,6 +3848,7 @@ m_PackageAssets:
         - 6.0.2
         - 7.0.0-pre.3
         - 7.0.0-pre.4
+        - 7.0.0
         compatible:
         - 4.0.4
         - 4.1.0
@@ -3861,6 +3923,7 @@ m_PackageAssets:
         - 2.0.5
         - 2.0.6
         - 2.1.0
+        - 2.1.1
         - 3.0.0
         - 3.0.1
         - 3.0.2
@@ -3870,6 +3933,7 @@ m_PackageAssets:
         - 5.0.0-pre.1
         - 5.0.0-pre.2
         - 5.0.0
+        - 5.0.1
         compatible:
         - 4.0.2
         verified: 4.0.2

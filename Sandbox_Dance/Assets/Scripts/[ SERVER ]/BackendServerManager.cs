@@ -514,41 +514,31 @@ public class BackendServerManager : MonoBehaviour
                 Param param = new Param();
 
                 param.AddCalculation("Card " + data.ToString().Split('i')[1], GameInfoOperator.addition, 1);
-                Debug.LogWarning(i);
                 int n = i;
                 Backend.GameData.UpdateWithCalculation("Option5", new Where(), param, callback =>
                 {
                     if (callback.IsSuccess())
                     {
-                        LobbyUI.GetInstance().drawCardUI.transform.GetChild(1).GetComponent<CardInverser>().OffOneUI(isOne);
                         LobbyUI.GetInstance().drawCardUI.SetActive(true);
-
                         if (isOne)
                         {
-                            print(data.ToString().Split('i')[1]);
-                            LobbyUI.GetInstance().drawCardUI.transform.GetChild(1).GetComponent<CardInverser>().cardNum = int.Parse(data.ToString().Split('i')[1]);
-                            LobbyUI.GetInstance().drawCardUI.transform.GetChild(1).GetComponent<CardInverser>().SetCard(int.Parse(data.ToString().Split('i')[1]));
+                            LobbyUI.GetInstance().drawCardUI.GetComponent<CardChanger>().maxNum = 1;
+                            LobbyUI.GetInstance().drawCardUI.GetComponent<CardChanger>().oneOrMany[1].SetActive(false);
+                            LobbyUI.GetInstance().drawCardUI.GetComponent<CardChanger>().oneOrMany[0].SetActive(true);
+                            LobbyUI.GetInstance().drawCardUI.GetComponent<CardChanger>().OneCard(int.Parse(data.ToString().Split('i')[1]));
                         }
 
                         else
                         {
-                            Debug.LogWarning(n + "n");
-                            LobbyUI.GetInstance().drawCardUI.transform.GetChild(1).GetComponent<CardInverser>().elevenCards[n].transform.GetChild(0).GetComponent<CardInverser>().cardNum = int.Parse(data.ToString().Split('i')[1]);
+                            LobbyUI.GetInstance().drawCardUI.GetComponent<CardChanger>().maxNum = 11;
+                            LobbyUI.GetInstance().drawCardUI.GetComponent<CardChanger>().oneOrMany[0].SetActive(false);
+                            LobbyUI.GetInstance().drawCardUI.GetComponent<CardChanger>().oneOrMany[1].SetActive(true);
+                            LobbyUI.GetInstance().drawCardUI.GetComponent<CardChanger>().smallCardsNum[n] = int.Parse(data.ToString().Split('i')[1]);
+                            LobbyUI.GetInstance().drawCardUI.GetComponent<CardChanger>().SmallCards(int.Parse(data.ToString().Split('i')[1]), n);
                         }
-                        Debug.Log(i);
                     }
                     else print("DrawCard() - " + callback);
                 });
-            }
-
-            if (isOne)
-            {
-                LobbyUI.GetInstance().drawCardUI.transform.GetChild(1).GetComponent<CardInverser>().CloseWindowInvoke();
-            }
-
-            else
-            {
-
             }
         });
     }
