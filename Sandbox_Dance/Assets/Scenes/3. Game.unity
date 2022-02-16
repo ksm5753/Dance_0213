@@ -3265,11 +3265,11 @@ MonoBehaviour:
   - structName: ItemPrice
     inspecter:
     - name: Fog
-      variable: 0
+      variable: 100
     - name: TimeUp
-      variable: 0
+      variable: 200
     - name: Revive
-      variable: 0
+      variable: 300
   timeBar: {fileID: 1129906263}
   actBar: {fileID: 45671796}
   students:
