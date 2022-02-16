@@ -87,7 +87,7 @@ public class StudentPos : MonoBehaviour
     {
         if (posChecker)
         {
-            if (Game.Instance.actLevel < Game.Instance.maxActLevel)
+            if (Game.Instance.typeFloat[3].inspecter[2].variable < Game.Instance.typeFloat[3].inspecter[3].variable)
             {
                 transform.position = Vector3.Lerp(currentPos, TargetPoses[1], changeTime);
             }
