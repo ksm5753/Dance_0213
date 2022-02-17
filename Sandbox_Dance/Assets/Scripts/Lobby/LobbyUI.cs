@@ -37,6 +37,8 @@ public class LobbyUI : MonoBehaviour
     public GameObject popUpUI;
     public GameObject drawCardUI;
     public GameObject detailPopUpUI;
+    public GameObject CloseAppUI;
+    public Sprite[] cardOutLine;
 
     [Space(15f)]
     [Header("DrawCard Panel")]
@@ -68,6 +70,7 @@ public class LobbyUI : MonoBehaviour
         popUpUI.SetActive(false);
         drawCardUI.SetActive(false);
         detailPopUpUI.SetActive(false);
+        CloseAppUI.SetActive(false);
 
         CheckBuyItems();
     }
@@ -90,7 +93,14 @@ public class LobbyUI : MonoBehaviour
         {
             PlayerPrefs.SetInt("isBuyOldStudent", 0);
         }
+    }
 
+    void Update()
+    {
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            CloseAppUI.SetActive(true);
+        }
     }
 
     #region 닉네임 설정
@@ -132,6 +142,11 @@ public class LobbyUI : MonoBehaviour
         BackendServerManager.GetInstance().getRank();
     }
 
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
     public void ShowRankUI()
     {
         rankPanel.SetActive(true);
@@ -139,25 +154,35 @@ public class LobbyUI : MonoBehaviour
 
     public void setCardInfo(int cardNum, string count)
     {
+        int star = 0;
+        if (cardNum > 95) star = 4;
+        else if (cardNum > 74) star = 3;
+        else if (cardNum > 54) star = 2;
+        else if (cardNum > 29) star = 1;
+        else star = 0;         
+
         if (count == "0")
         {
             Cards[cardNum].GetComponentsInChildren<Image>()[1].sprite = CardImage[0];
+            Cards[cardNum].GetComponentsInChildren<Image>()[2].enabled = false;
             Cards[cardNum].GetComponentInChildren<Text>().enabled = false;
         }
         else
         {
             Cards[cardNum].GetComponentsInChildren<Image>()[1].sprite = CardImage[cardNum + 1];
+            Cards[cardNum].GetComponentsInChildren<Image>()[2].enabled = true;
+            Cards[cardNum].GetComponentsInChildren<Image>()[2].sprite = cardOutLine[star];
             Cards[cardNum].GetComponentInChildren<Text>().enabled = true;
         }
 
         Cards[cardNum].GetComponentInChildren<Text>().text = count.ToString();
-        Cards[cardNum].GetComponent<Button>().onClick.AddListener(() => OpenCardInfo(cardNum, count));
+        Cards[cardNum].GetComponent<Button>().onClick.AddListener(() => OpenCardInfo(cardNum, count, star));
 
         GameObject.Find("Scroll View").GetComponent<ScrollRect>().velocity = new Vector2(0, 0); //스크롤 하면서 다른 창으로 넘어갈 때 스크롤 저항 생김
         GameObject.Find("Content").GetComponent<RectTransform>().position = new Vector2(GameObject.Find("Content").GetComponent<RectTransform>().position.x, 0); //다른 창으로 넘길때 맨 위로 이동
     }
 
-    public void OpenCardInfo(int cardNum, string count)
+    public void OpenCardInfo(int cardNum, string count, int star)
     {
         if (count != "0")
         {
@@ -165,6 +190,7 @@ public class LobbyUI : MonoBehaviour
 
             CardInfo.transform.GetChild(3).GetComponent<Text>().text = count;
             CardInfo.transform.GetChild(2).GetComponent<Image>().sprite = CardImage[cardNum + 1];
+            CardInfo.GetComponentsInChildren<Image>()[3].sprite = cardOutLine[star];
 
             CardInfo.transform.GetChild(5).GetComponent<Button>().onClick.AddListener(() => DiscardCard(int.Parse(count)));
         }
@@ -188,7 +214,7 @@ public class LobbyUI : MonoBehaviour
         // 이곳에 플레이어게 루비추가해주는 기능 추가
         // 플레이어 루비 += getRubyNum;
         getRubyInfo.SetActive(true);
-        getRubyInfo.transform.GetChild(2).GetComponent<Text>().text = cardCount + " 개 획득";
+        getRubyInfo.transform.GetChild(2).GetComponent<Text>().text = getRubyNum + " 개 획득";
     }
 
 

@@ -4,12 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Data;
 using UnityEngine.SceneManagement;
-//--------------게임 규칙---------------//
-// 1. 플레이어는 화면을 터치하면 딴짓을 할 수 있음
-// 2. 선생님이 뒤돌아보고 있을 때 딴짓을 할 경우 문제창이 뜸
-// 3. 간단한 문제를 짧은 시간안에 풀어야함
-// 4. 정답을 맞췄을 경우 게임을 계속해주고 아니면 게임을 그대로 끝내줘야함(문제를 푸는 동안엔 전체시간은 멈춰줌)
-// 5. 터치를 하고 있을 경우 게이지가 조금씩 차고 게이지가 풀로 차면 다음 단계로 넘어가 애니메이션이 바뀜
 
 public class Game : MonoBehaviour
 {
@@ -29,12 +23,13 @@ public class Game : MonoBehaviour
     #endregion
 
     public List<TypeFloat> typeFloat;
+    // 0 : 게임시간 (0 : 최대 시간, 1 : 현재 시간(줄어드는 시간), 2 : 줄어드는 속도, 3 : 늘어나는 속도)
+    // 1 : 무적 아이템 관련(0 : 최대시간, 1 : )
 
     [Header("줄어들 시간 관련")]
     [SerializeField] GameObject timeBar; // 크기가 바뀔 오브젝트
 
     [Header("플레이어 딴짓 레벨 관련")]
-    
     [SerializeField] GameObject actBar; // 플레이어의 딴짓 레벨 경험치 바
     [SerializeField] GameObject[] students; // 학생들 게임 오브젝트
     [SerializeField] Sprite[] studentSprite; // 학생들 사진들 (수정후 없어질것)
@@ -70,6 +65,10 @@ public class Game : MonoBehaviour
     void Update()
     {
         TimeManaging();
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            UIOBjs[2].SetActive(true);
+        }
     }
 
     public void DanceButton(bool isDance)
@@ -146,14 +145,15 @@ public class Game : MonoBehaviour
                 if (typeFloat[3].inspecter[2].variable < typeFloat[3].inspecter[3].variable)
                 {
                     typeFloat[3].inspecter[2].variable += 1;
+                    typeFloat[3].inspecter[1].variable = 0; // 현재 경험치 수치 0 으로 바꿔줌
+
                     foreach (GameObject studenObj in students)
                     {
                         studenObj.GetComponent<Image>().sprite = studentSprite[(int)typeFloat[3].inspecter[2].variable];
                     }
-                    typeFloat[3].inspecter[1].variable = 0;
                 }
 
-                // 최대 레벨에 도달했을 경우 그 이상으로 못올라가게 막아줌
+                // 최대 레벨에 도달했을 경우 그 이상으로 못올라가게 막아줌 (최대 레벨은 0 ~ 3 까지)
                 else
                 {
                     typeFloat[3].inspecter[1].variable = typeFloat[3].inspecter[0].variable;
@@ -183,11 +183,9 @@ public class Game : MonoBehaviour
             typeFloat[0].inspecter[1].variable -= typeFloat[0].inspecter[2].variable * Time.deltaTime;
             typeFloat[3].inspecter[1].variable -= Time.deltaTime;
 
-            // 만약 경험치 수치가 0보다 낮아지면
-            if (typeFloat[3].inspecter[1].variable <= 0)
+            if (typeFloat[3].inspecter[1].variable <= 0) // 만약 경험치 수치가 0보다 낮아지면
             {
-                //  현재 레벨이 0이 아니라면
-                if (typeFloat[3].inspecter[2].variable != 0)
+                if (typeFloat[3].inspecter[2].variable != 0)  //  현재 레벨이 0이 아니라면
                 {
                     // 레벨을 낮춰주고 경험치 수치를 최대로 만들어준다.
                     typeFloat[3].inspecter[1].variable = typeFloat[3].inspecter[0].variable;
@@ -206,7 +204,6 @@ public class Game : MonoBehaviour
             {
                 isPlaying = false;
                 EndGame();
-                Debug.Log("게임 오버");
             }
         }
     }
@@ -215,7 +212,10 @@ public class Game : MonoBehaviour
     {
         // 다음 바뀔 시간 체크
         float turnTime = Random.Range(typeFloat[2].inspecter[0].variable, typeFloat[2].inspecter[1].variable);
+
+        // 선생님 상태 변환
         typeFloat[2].inspecter[2].variable += 1;
+
         if (typeFloat[2].inspecter[2].variable > 2)
         {
             typeFloat[2].inspecter[2].variable = 0;
@@ -291,12 +291,24 @@ public class Game : MonoBehaviour
         // 이곳에 finalPrice 만큼의 골드를 플레이어에게 지급
     }
 
+    public void PauseBtn(bool pauseOrPlay)
+    {
+        if (pauseOrPlay)
+        {
+            Time.timeScale = 0;
+        }
+        else
+        {
+            Time.timeScale = 1;
+        }
+    }
+
     #region 아이템 관련
     public void BuyItemBtn() // 0 : 무적아이템, 1 : 시간 증가, 2 : 부활
     {
         for(int i = 0; i < itemBuyBtns.Length; i++)
         {
-            if (itemBuyBtns[i].isOn == false)
+            if (itemBuyBtns[i].isOn == true)
             {
                 ActivateItem(i);
             }
@@ -309,18 +321,15 @@ public class Game : MonoBehaviour
         {
             case 0:
                 itemBtn[0].SetActive(true);
-                print("A");
                 BackendServerManager.GetInstance().BuyInGameItem((int)typeFloat[4].inspecter[0].variable);
                 break;
             case 1:
                 typeFloat[0].inspecter[0].variable += 10;
-                print("B");
                 BackendServerManager.GetInstance().BuyInGameItem((int)typeFloat[4].inspecter[1].variable);
 
                 break;
             case 2:
                 isReviveOn = true;
-                print("C");
                 BackendServerManager.GetInstance().BuyInGameItem((int)typeFloat[4].inspecter[2].variable);
                 break;
         }
