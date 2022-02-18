@@ -3,8 +3,11 @@ ScriptsOnlyBuild:
     Assembly-CSharp.dll:
     - BackendServerManager
     - Battlehub.Dispatcher.Dispatcher
+    - CardChanger
+    - DeviceScale
     - Fixed
     - Game
+    - GameUI
     - InAppPurchaser
     - LobbyUI
     - LoginUI
@@ -13,6 +16,11 @@ ScriptsOnlyBuild:
     - SendQueueMgr
     - SoldierT
     - SoundManager
+    Coffee.UIParticle.dll:
+    - Coffee.UIExtensions.UIParticle
+    - Coffee.UIParticleExtensions.BakingCamera
+    GoogleMobileAds.Editor.dll:
+    - GoogleMobileAds.Editor.GoogleMobileAdsSettings
     TheBackendSettings.dll:
     - TheBackendSettings
     Unity.2D.Animation.Editor.dll:
@@ -36,6 +44,7 @@ ScriptsOnlyBuild:
     - UnityEditor.TestTools.TestRunner.TestRun.TestJobDataHolder
     UnityEngine.UI.dll:
     - UnityEngine.EventSystems.EventSystem
+    - UnityEngine.EventSystems.EventTrigger
     - UnityEngine.EventSystems.StandaloneInputModule
     - UnityEngine.UI.Button
     - UnityEngine.UI.CanvasScaler
@@ -58,6 +67,9 @@ ScriptsOnlyBuild:
     spine-unity.dll:
     - Spine.Unity.SkeletonDataAsset
     - Spine.Unity.SkeletonGraphic
+    - Spine.Unity.SkeletonSubmeshGraphic
+    - Spine.Unity.SkeletonUtility
+    - Spine.Unity.SkeletonUtilityBone
     - Spine.Unity.SpineAtlasAsset
   sceneClasses:
     Assets/Scenes/1. Login.unity:
@@ -86,45 +98,47 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 1658}
+      Script: {instanceID: 1606}
     - Class: 114
-      Script: {instanceID: 1660}
+      Script: {instanceID: 1608}
     - Class: 114
-      Script: {instanceID: 1664}
+      Script: {instanceID: 1612}
     - Class: 114
-      Script: {instanceID: 2912}
+      Script: {instanceID: 2216}
     - Class: 114
-      Script: {instanceID: 3224}
+      Script: {instanceID: 2520}
     - Class: 114
-      Script: {instanceID: 3396}
+      Script: {instanceID: 2690}
     - Class: 114
-      Script: {instanceID: 3442}
+      Script: {instanceID: 2736}
     - Class: 114
-      Script: {instanceID: 4290}
+      Script: {instanceID: 3538}
     - Class: 114
-      Script: {instanceID: 4740}
+      Script: {instanceID: 3982}
     - Class: 114
-      Script: {instanceID: 4912}
+      Script: {instanceID: 4150}
     - Class: 114
-      Script: {instanceID: 4972}
+      Script: {instanceID: 4210}
     - Class: 114
-      Script: {instanceID: 5336}
+      Script: {instanceID: 4432}
     - Class: 114
-      Script: {instanceID: 5660}
+      Script: {instanceID: 4572}
     - Class: 114
-      Script: {instanceID: 5928}
+      Script: {instanceID: 4888}
     - Class: 114
-      Script: {instanceID: 6074}
+      Script: {instanceID: 5148}
     - Class: 114
-      Script: {instanceID: 6384}
+      Script: {instanceID: 5286}
     - Class: 114
-      Script: {instanceID: 6392}
+      Script: {instanceID: 5598}
     - Class: 114
-      Script: {instanceID: 6610}
+      Script: {instanceID: 5606}
     - Class: 114
-      Script: {instanceID: 6784}
+      Script: {instanceID: 5812}
     - Class: 114
-      Script: {instanceID: 7982}
+      Script: {instanceID: 5984}
+    - Class: 114
+      Script: {instanceID: 7154}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -154,6 +168,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 48
       Script: {instanceID: 0}
+    - Class: 49
+      Script: {instanceID: 0}
     - Class: 74
       Script: {instanceID: 0}
     - Class: 81
@@ -169,49 +185,67 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 1658}
+      Script: {instanceID: 1606}
     - Class: 114
-      Script: {instanceID: 1660}
+      Script: {instanceID: 1608}
     - Class: 114
-      Script: {instanceID: 1662}
+      Script: {instanceID: 1610}
     - Class: 114
-      Script: {instanceID: 1664}
+      Script: {instanceID: 1612}
     - Class: 114
-      Script: {instanceID: 3224}
+      Script: {instanceID: 2232}
     - Class: 114
-      Script: {instanceID: 3396}
+      Script: {instanceID: 2520}
     - Class: 114
-      Script: {instanceID: 3402}
+      Script: {instanceID: 2590}
     - Class: 114
-      Script: {instanceID: 3560}
+      Script: {instanceID: 2690}
     - Class: 114
-      Script: {instanceID: 3610}
+      Script: {instanceID: 2696}
     - Class: 114
-      Script: {instanceID: 3758}
+      Script: {instanceID: 2848}
     - Class: 114
-      Script: {instanceID: 4290}
+      Script: {instanceID: 2894}
     - Class: 114
-      Script: {instanceID: 4592}
+      Script: {instanceID: 3034}
     - Class: 114
-      Script: {instanceID: 4912}
+      Script: {instanceID: 3442}
     - Class: 114
-      Script: {instanceID: 4986}
+      Script: {instanceID: 3538}
     - Class: 114
-      Script: {instanceID: 5090}
+      Script: {instanceID: 3840}
     - Class: 114
-      Script: {instanceID: 5336}
+      Script: {instanceID: 4150}
     - Class: 114
-      Script: {instanceID: 5660}
+      Script: {instanceID: 4224}
     - Class: 114
-      Script: {instanceID: 5928}
+      Script: {instanceID: 4328}
     - Class: 114
-      Script: {instanceID: 6074}
+      Script: {instanceID: 4572}
     - Class: 114
-      Script: {instanceID: 6384}
+      Script: {instanceID: 4888}
     - Class: 114
-      Script: {instanceID: 6706}
+      Script: {instanceID: 5148}
     - Class: 114
-      Script: {instanceID: 6784}
+      Script: {instanceID: 5242}
+    - Class: 114
+      Script: {instanceID: 5286}
+    - Class: 114
+      Script: {instanceID: 5598}
+    - Class: 114
+      Script: {instanceID: 5860}
+    - Class: 114
+      Script: {instanceID: 5908}
+    - Class: 114
+      Script: {instanceID: 5984}
+    - Class: 114
+      Script: {instanceID: 6114}
+    - Class: 114
+      Script: {instanceID: 6290}
+    - Class: 114
+      Script: {instanceID: 6578}
+    - Class: 114
+      Script: {instanceID: 299732}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -219,6 +253,10 @@ ScriptsOnlyBuild:
     - Class: 157
       Script: {instanceID: 0}
     - Class: 196
+      Script: {instanceID: 0}
+    - Class: 198
+      Script: {instanceID: 0}
+    - Class: 199
       Script: {instanceID: 0}
     - Class: 213
       Script: {instanceID: 0}
@@ -252,35 +290,47 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 1658}
+      Script: {instanceID: 1606}
     - Class: 114
-      Script: {instanceID: 1660}
+      Script: {instanceID: 1608}
     - Class: 114
-      Script: {instanceID: 3224}
+      Script: {instanceID: 1610}
     - Class: 114
-      Script: {instanceID: 3296}
+      Script: {instanceID: 2520}
     - Class: 114
-      Script: {instanceID: 3396}
+      Script: {instanceID: 2590}
     - Class: 114
-      Script: {instanceID: 4592}
+      Script: {instanceID: 2690}
     - Class: 114
-      Script: {instanceID: 4912}
+      Script: {instanceID: 3538}
     - Class: 114
-      Script: {instanceID: 5496}
+      Script: {instanceID: 3840}
     - Class: 114
-      Script: {instanceID: 5660}
+      Script: {instanceID: 4150}
     - Class: 114
-      Script: {instanceID: 5928}
+      Script: {instanceID: 4726}
     - Class: 114
-      Script: {instanceID: 6032}
+      Script: {instanceID: 4786}
     - Class: 114
-      Script: {instanceID: 6074}
+      Script: {instanceID: 4888}
     - Class: 114
-      Script: {instanceID: 6384}
+      Script: {instanceID: 5148}
     - Class: 114
-      Script: {instanceID: 6916}
+      Script: {instanceID: 5242}
     - Class: 114
-      Script: {instanceID: 7378}
+      Script: {instanceID: 5286}
+    - Class: 114
+      Script: {instanceID: 5598}
+    - Class: 114
+      Script: {instanceID: 5908}
+    - Class: 114
+      Script: {instanceID: 6114}
+    - Class: 114
+      Script: {instanceID: 6236}
+    - Class: 114
+      Script: {instanceID: 6562}
+    - Class: 114
+      Script: {instanceID: 299732}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -322,12 +372,6 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: ScrollRect
-  - hash:
-      serializedVersion: 2
-      Hash: 62b9b49eb438926ae33fdbd4ba994d3a
-    assemblyName: spine-unity-examples.dll
-    namespaceName: Spine.Unity.Examples
-    className: Rotator
   - hash:
       serializedVersion: 2
       Hash: 07fbec37e70d97ae0e2378051bdc0e8d
@@ -372,18 +416,6 @@ ScriptsOnlyBuild:
     className: Shadow
   - hash:
       serializedVersion: 2
-      Hash: cb3f6dc30b6bf460ca9a746a528924db
-    assemblyName: spine-unity-examples.dll
-    namespaceName: Spine.Unity.Prototyping
-    className: SpineEventUnityHandler
-  - hash:
-      serializedVersion: 2
-      Hash: b3a4697d03da27cbb8cf1ee4eeda029f
-    assemblyName: spine-unity-examples.dll
-    namespaceName: Spine.Unity.Examples
-    className: SpineBlinkPlayer
-  - hash:
-      serializedVersion: 2
       Hash: e92b9b3bfed11ab86c75a9b4bd07f13c
     assemblyName: spine-unity.dll
     namespaceName: Spine.Unity
@@ -394,12 +426,6 @@ ScriptsOnlyBuild:
     assemblyName: spine-unity.dll
     namespaceName: Spine.Unity
     className: AnimationReferenceAsset
-  - hash:
-      serializedVersion: 2
-      Hash: 616c801f27eb056ddeeeffac28dd4506
-    assemblyName: spine-unity-examples.dll
-    namespaceName: Spine.Unity.Examples
-    className: EquipsVisualsComponentExample
   - hash:
       serializedVersion: 2
       Hash: 800c50acba124432abb4cf0d47202e06
@@ -462,18 +488,6 @@ ScriptsOnlyBuild:
     className: SkeletonPartsRenderer
   - hash:
       serializedVersion: 2
-      Hash: 5272f47f6745839878cd82ba42113893
-    assemblyName: spine-unity-examples.dll
-    namespaceName: Spine.Unity.Examples
-    className: FootSoldierExample
-  - hash:
-      serializedVersion: 2
-      Hash: ad4579779a0ba7293b12314aca2e846b
-    assemblyName: spine-unity-examples.dll
-    namespaceName: Spine.Unity.Examples
-    className: SkeletonUtilityKinematicShadow
-  - hash:
-      serializedVersion: 2
       Hash: cc4274b586df3c02688bac01b88bd16c
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.EventSystems
@@ -516,22 +530,10 @@ ScriptsOnlyBuild:
     className: SkeletonRenderer
   - hash:
       serializedVersion: 2
-      Hash: ec788608dd4fd7e75edcfef0a25e4c14
-    assemblyName: spine-unity-examples.dll
-    namespaceName: Spine.Unity.Examples
-    className: RenderExistingMesh
-  - hash:
-      serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: UnityEngine.TestRunner.dll
     namespaceName: UnityEngine.TestRunner.Utils
     className: TestRunCallbackListener
-  - hash:
-      serializedVersion: 2
-      Hash: e08a6cca7e60ff4f532c60d3e29f6452
-    assemblyName: spine-unity-examples.dll
-    namespaceName: 
-    className: ReloadSceneOnKeyDown
   - hash:
       serializedVersion: 2
       Hash: ae83e830e7a90c0aff918c4c2e520825
@@ -576,28 +578,10 @@ ScriptsOnlyBuild:
     className: TestResultRendererCallback
   - hash:
       serializedVersion: 2
-      Hash: fde9ba55e383c9342264d588ba9c63d2
-    assemblyName: spine-unity-examples.dll
-    namespaceName: Spine.Unity.Examples
-    className: SkeletonGraphicMirror
-  - hash:
-      serializedVersion: 2
-      Hash: f83fd4067b24260ac246349ea6b351b6
-    assemblyName: spine-unity-examples.dll
-    namespaceName: Spine.Unity.Examples
-    className: MaterialPropertyBlockExample
-  - hash:
-      serializedVersion: 2
-      Hash: d6bc1134df4d5855b44632809aa3273a
-    assemblyName: spine-unity-examples.dll
-    namespaceName: Spine.Unity.Examples
-    className: TwoByTwoTransformEffectExample
-  - hash:
-      serializedVersion: 2
-      Hash: 4694681bf754a46e5ee4de2aebf30b05
-    assemblyName: spine-unity-examples.dll
-    namespaceName: Spine.Unity.Examples
-    className: RaggedySpineboy
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: GoogleMobileAds.Common.dll
+    namespaceName: GoogleMobileAds.Common
+    className: MobileAdsEventExecutor
   - hash:
       serializedVersion: 2
       Hash: 09647a63710d3c65324113052949484e
@@ -606,76 +590,16 @@ ScriptsOnlyBuild:
     className: RankPop
   - hash:
       serializedVersion: 2
-      Hash: e2956b115cc6a34c0cf3ed95218355a0
-    assemblyName: spine-unity-examples.dll
-    namespaceName: Spine.Unity.Examples
-    className: SpineboyFreeze
-  - hash:
-      serializedVersion: 2
-      Hash: 6daa5366201736d2953d56f505f26a77
-    assemblyName: spine-unity-examples.dll
-    namespaceName: Spine.Unity.Examples
-    className: RootMotionDeltaCompensation
-  - hash:
-      serializedVersion: 2
       Hash: 0fd6822f6177297bd0eb4d83cc7a9030
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: ToggleGroup
   - hash:
       serializedVersion: 2
-      Hash: c8f4fb98936488a42a618063622d6995
-    assemblyName: spine-unity-examples.dll
-    namespaceName: Spine.Unity.Examples
-    className: AtlasRegionAttacher
-  - hash:
-      serializedVersion: 2
-      Hash: 959da2b1f0d9c782564e76c28882b8cb
-    assemblyName: spine-unity-examples.dll
-    namespaceName: Spine.Unity.Examples
-    className: MaterialReplacementExample
-  - hash:
-      serializedVersion: 2
-      Hash: dc07ce8e9d997a7d9d52d1545810c46a
-    assemblyName: spine-unity-examples.dll
-    namespaceName: Spine.Unity.Examples
-    className: MixAndMatchSkinsExample
-  - hash:
-      serializedVersion: 2
-      Hash: c88cdbb4d579cd1a33fcf30eca180fd7
-    assemblyName: spine-unity-examples.dll
-    namespaceName: 
-    className: HurtFlashEffect
-  - hash:
-      serializedVersion: 2
       Hash: 8aa3d6ccbcb54ee8db6c1229854adaaa
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: ContentSizeFitter
-  - hash:
-      serializedVersion: 2
-      Hash: fd002ce50fbdb51fc26a9ad290e29e50
-    assemblyName: spine-unity-examples.dll
-    namespaceName: Spine.Unity.Examples
-    className: SpriteAttacher
-  - hash:
-      serializedVersion: 2
-      Hash: 00fa4e99144a11aca5e15cc337c7033e
-    assemblyName: spine-unity-examples.dll
-    namespaceName: Spine.Unity.Examples
-    className: AttackSpineboy
-  - hash:
-      serializedVersion: 2
-      Hash: afeaecceabc8e81037939b66f6d91671
-    assemblyName: spine-unity-examples.dll
-    namespaceName: Spine.Unity.Examples
-    className: Goblins
-  - hash:
-      serializedVersion: 2
-      Hash: 16f34339b33189a715646f8bb8fce768
-    assemblyName: spine-unity-examples.dll
-    namespaceName: Spine.Unity.Examples
-    className: BoneLocalOverride
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -702,12 +626,6 @@ ScriptsOnlyBuild:
     className: BoneFollower
   - hash:
       serializedVersion: 2
-      Hash: 8e45ac56350a2483b7c7de86b565cf18
-    assemblyName: spine-unity-examples.dll
-    namespaceName: Spine.Unity.Examples
-    className: HandleEventWithAudioExample
-  - hash:
-      serializedVersion: 2
       Hash: da4cc51a02ce84afe2cecd27cfe6997a
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
@@ -726,34 +644,10 @@ ScriptsOnlyBuild:
     className: AnimationTrack
   - hash:
       serializedVersion: 2
-      Hash: 5521d1f8c1bce1ae07245229da3e5ba3
-    assemblyName: spine-unity-examples.dll
-    namespaceName: Spine.Unity.Examples
-    className: TransitionDictionaryExample
-  - hash:
-      serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: spine-unity-examples.dll
-    namespaceName: Spine.Unity.Examples
-    className: DraggableTransform
-  - hash:
-      serializedVersion: 2
-      Hash: 601112efbb6ea9a5d557ad1b4ccf9be5
-    assemblyName: spine-unity-examples.dll
-    namespaceName: Spine.Unity.Examples
-    className: CombinedSkin
-  - hash:
-      serializedVersion: 2
       Hash: a5781dc71a671b1ad2b38de19f24b71f
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: ActivationTrack
-  - hash:
-      serializedVersion: 2
-      Hash: a9fa8b65ac4b5683de4a0779fd511cfc
-    assemblyName: spine-unity-examples.dll
-    namespaceName: Spine.Unity.Examples
-    className: SpineGauge
   - hash:
       serializedVersion: 2
       Hash: 68d39a695e8b76d141388d1ed60f2635
@@ -768,34 +662,16 @@ ScriptsOnlyBuild:
     className: PointFollower
   - hash:
       serializedVersion: 2
-      Hash: 92a5c7deb691e0c09cd7e5e0be6aadd1
-    assemblyName: spine-unity-examples.dll
-    namespaceName: Spine.Unity.Examples
-    className: SkeletonUtilityGroundConstraint
-  - hash:
-      serializedVersion: 2
       Hash: aba7b2852ef61d175dd9602e7723d5e5
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: Mask
   - hash:
       serializedVersion: 2
-      Hash: 56cbd315914b921c8d3efe2b313d3d71
-    assemblyName: spine-unity-examples.dll
-    namespaceName: Spine.Unity.Examples
-    className: SlotTintBlackFollower
-  - hash:
-      serializedVersion: 2
       Hash: 523ce309f50d9eee6a8fc0e2f86c9c97
     assemblyName: Unity.2D.SpriteShape.Runtime.dll
     namespaceName: 
     className: SpriteShapeGeometryCache
-  - hash:
-      serializedVersion: 2
-      Hash: 40624bf70c8b3d398ed86c95b4df3ca0
-    assemblyName: spine-unity-examples.dll
-    namespaceName: Spine.Unity.Examples
-    className: MixAndMatchGraphic
   - hash:
       serializedVersion: 2
       Hash: e9eb0a3732e46290c5b4bf45a554fe6e
@@ -846,46 +722,16 @@ ScriptsOnlyBuild:
     className: TMP_Settings
   - hash:
       serializedVersion: 2
-      Hash: 992bd6db0387c8ff1fe01a27728390ef
-    assemblyName: spine-unity-examples.dll
-    namespaceName: Spine.Unity.Examples
-    className: SkeletonRagdoll2D
-  - hash:
-      serializedVersion: 2
-      Hash: 90a3045e168d25fd5433b99a4916ab2f
-    assemblyName: spine-unity-examples.dll
-    namespaceName: Spine.Unity
-    className: SkeletonAnimationFixedTimestep
-  - hash:
-      serializedVersion: 2
       Hash: db27e56b0fc8fb83257cd10152e62560
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: SoundManager
   - hash:
       serializedVersion: 2
-      Hash: f1c007b825586f4f8cde382bdfcfd9ae
-    assemblyName: spine-unity-examples.dll
-    namespaceName: Spine.Unity.Examples
-    className: BasicPlatformerController
-  - hash:
-      serializedVersion: 2
       Hash: 6980e81ddc615a861309d2d659cc3760
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TMP_SubMeshUI
-  - hash:
-      serializedVersion: 2
-      Hash: 6027d1724ce006ef100f6304bac60394
-    assemblyName: spine-unity-examples.dll
-    namespaceName: 
-    className: SkeletonGraphicPlayAnimationAtEvent
-  - hash:
-      serializedVersion: 2
-      Hash: 35cd8c4a1fa392c7c05152af40f12ae9
-    assemblyName: spine-unity-examples.dll
-    namespaceName: Spine.Unity.Examples
-    className: DummyMecanimControllerExample
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -898,18 +744,6 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TMP_SpriteAsset
-  - hash:
-      serializedVersion: 2
-      Hash: 53457a83a86643df7486c9a17554adf4
-    assemblyName: spine-unity-examples.dll
-    namespaceName: Spine.Unity.Examples
-    className: SpineboyFootplanter
-  - hash:
-      serializedVersion: 2
-      Hash: 2772c0f1445dff38ab8f4318fb81225e
-    assemblyName: spine-unity-examples.dll
-    namespaceName: Spine.Unity.Examples
-    className: Raptor
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -930,7 +764,7 @@ ScriptsOnlyBuild:
     className: Dispatcher
   - hash:
       serializedVersion: 2
-      Hash: 0560980e7f7e3f36f25fd185c5a9ff70
+      Hash: 6a11ea9b49f5660a766a7f6ad01603e5
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: LobbyUI
@@ -948,34 +782,28 @@ ScriptsOnlyBuild:
     className: GridLayoutGroup
   - hash:
       serializedVersion: 2
-      Hash: e104e9108a2e305476bb18c8c73d0137
-    assemblyName: spine-unity-examples.dll
-    namespaceName: Spine.Unity.Examples
-    className: SpineboyTargetController
-  - hash:
-      serializedVersion: 2
-      Hash: d65826b6bf5eec129dd563cb5eb0287b
-    assemblyName: spine-unity-examples.dll
-    namespaceName: Spine.Unity.Examples
-    className: SpineboyBeginnerView
-  - hash:
-      serializedVersion: 2
       Hash: 5ab533713adae59372fb3e10a585c186
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: AnimationPlayableAsset
   - hash:
       serializedVersion: 2
-      Hash: 451dd7dc3ff4c554a6272a6ed7e8947d
-    assemblyName: spine-unity-examples.dll
-    namespaceName: Spine.Unity.Examples
-    className: SpineBeginnerTwo
+      Hash: bc8d0afeebc008570ffede5254e873af
+    assemblyName: GoogleMobileAds.Editor.dll
+    namespaceName: GoogleMobileAds.Editor
+    className: GoogleMobileAdsSettings
   - hash:
       serializedVersion: 2
       Hash: 77aaaaa51f7a8d8ff333a879741e47d2
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TMP_InputField
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: SeeAdForCard
   - hash:
       serializedVersion: 2
       Hash: 59ce5902048c1041729c804e2772b2ce
@@ -1008,16 +836,16 @@ ScriptsOnlyBuild:
     className: NearbyHelperObject
   - hash:
       serializedVersion: 2
-      Hash: 2dbd2a3d6c5208059381e5fff7219068
+      Hash: fa308671acaad21fe70e3a6cb14d958f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Game
   - hash:
       serializedVersion: 2
-      Hash: 6be76c5c8c880d22b6f21af8b547fc8b
-    assemblyName: spine-unity-examples.dll
-    namespaceName: Spine.Unity.Examples
-    className: SpawnFromSkeletonDataExample
+      Hash: 3be306ef6b84e14c23f20aec60799a9e
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: GameUI
   - hash:
       serializedVersion: 2
       Hash: c3d3430df9e3ea95e3e3d587961390fb
@@ -1032,12 +860,6 @@ ScriptsOnlyBuild:
     className: DispatcherTest
   - hash:
       serializedVersion: 2
-      Hash: 26d7d2bce07e4dacb1a0efc8c6b4082b
-    assemblyName: spine-unity-examples.dll
-    namespaceName: Spine.Unity.Examples
-    className: SkeletonUtilityEyeConstraint
-  - hash:
-      serializedVersion: 2
       Hash: 699619b86d9359741a4f58540298c80b
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
@@ -1048,12 +870,6 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.Purchasing.Stores.dll
     namespaceName: UnityEngine.Purchasing
     className: LifecycleNotifier
-  - hash:
-      serializedVersion: 2
-      Hash: a5fc1e5710741473ae0659f8710b5ae0
-    assemblyName: spine-unity-examples.dll
-    namespaceName: Spine.Unity
-    className: SkeletonAnimationMulti
   - hash:
       serializedVersion: 2
       Hash: e9eb0a3732e46290c5b4bf45a554fe6e
@@ -1068,46 +884,10 @@ ScriptsOnlyBuild:
     className: SpineSpriteAtlasAsset
   - hash:
       serializedVersion: 2
-      Hash: 45a19c684713d0205ed64ed000601926
-    assemblyName: spine-unity-examples.dll
-    namespaceName: Spine.Unity.Examples
-    className: SpineboyBodyTilt
-  - hash:
-      serializedVersion: 2
-      Hash: 296f8f538a294458c19d72696c3fcd09
-    assemblyName: spine-unity-examples.dll
-    namespaceName: Spine.Unity.Examples
-    className: SetRigidbodySolverIterations
-  - hash:
-      serializedVersion: 2
       Hash: a1aa98c78061c6f03a8c124cda576e67
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: CanvasScaler
-  - hash:
-      serializedVersion: 2
-      Hash: acf95b8a1582b7d5ec58788c494af70a
-    assemblyName: spine-unity-examples.dll
-    namespaceName: Spine.Unity.Examples
-    className: SpineboyPole
-  - hash:
-      serializedVersion: 2
-      Hash: a7788865e0c8bfe9c4d78534c354734a
-    assemblyName: spine-unity-examples.dll
-    namespaceName: Spine.Unity.Examples
-    className: EquipButtonExample
-  - hash:
-      serializedVersion: 2
-      Hash: d83d497f0d9a38750831f55bbefaa3ed
-    assemblyName: spine-unity-examples.dll
-    namespaceName: Spine.Unity.Examples
-    className: HeroEffectsHandlerExample
-  - hash:
-      serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: spine-unity-examples.dll
-    namespaceName: Spine.Unity.Examples
-    className: MecanimToAnimationHandleExample
   - hash:
       serializedVersion: 2
       Hash: cf9f5cf2c3145a37ac07f00e50e460f9
@@ -1146,18 +926,6 @@ ScriptsOnlyBuild:
     className: SkeletonRendererCustomMaterials
   - hash:
       serializedVersion: 2
-      Hash: 158ffb543d45ff9010f242d7a12154b7
-    assemblyName: spine-unity-examples.dll
-    namespaceName: Spine.Unity.Examples
-    className: SpineboyBeginnerModel
-  - hash:
-      serializedVersion: 2
-      Hash: d689ec8bbfe2d4f5630c49a8d463328b
-    assemblyName: spine-unity-examples.dll
-    namespaceName: Spine.Unity.Examples
-    className: RuntimeLoadFromExportsExample
-  - hash:
-      serializedVersion: 2
       Hash: c506f5de23ec0494d4d9a5df5622a99e
     assemblyName: spine-unity.dll
     namespaceName: Spine.Unity
@@ -1182,12 +950,6 @@ ScriptsOnlyBuild:
     className: TMP_SubMesh
   - hash:
       serializedVersion: 2
-      Hash: 7c07b6fe2e95fe7b187606a3b84c80b2
-    assemblyName: spine-unity-examples.dll
-    namespaceName: Spine.Unity.Examples
-    className: SpineAnimationTesterTool
-  - hash:
-      serializedVersion: 2
       Hash: c3d3430df9e3ea95e3e3d587961390fb
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
@@ -1200,28 +962,10 @@ ScriptsOnlyBuild:
     className: BeforeAfterTestCommandState
   - hash:
       serializedVersion: 2
-      Hash: 91a3ba35b1314e2deded9cdc6fbd3909
-    assemblyName: spine-unity-examples.dll
-    namespaceName: Spine.Unity.Examples
-    className: MixAndMatchSkinsButtonExample
-  - hash:
-      serializedVersion: 2
       Hash: 349d08daa6108b9a28f8c38fd40ce96f
     assemblyName: Unity.2D.SpriteShape.Runtime.dll
     namespaceName: UnityEngine.U2D
     className: SpriteShapeController
-  - hash:
-      serializedVersion: 2
-      Hash: 59d42223173237c4d6bb83ae8d770cb6
-    assemblyName: spine-unity-examples.dll
-    namespaceName: Spine.Unity.Examples
-    className: SpineboyFacialExpression
-  - hash:
-      serializedVersion: 2
-      Hash: 87e68438e38a05e0a57949896bc84e6e
-    assemblyName: spine-unity-examples.dll
-    namespaceName: Spine.Unity.Examples
-    className: OutlineSkeletonGraphic
   - hash:
       serializedVersion: 2
       Hash: 4fd8bf02e3089425d3502e26c44ba31a
@@ -1236,16 +980,10 @@ ScriptsOnlyBuild:
     className: TheBackendSettings
   - hash:
       serializedVersion: 2
-      Hash: 688818187dd08db12931405801cb8bd2
-    assemblyName: spine-unity-examples.dll
-    namespaceName: Spine.Unity.Examples
-    className: SpineboyBeginnerInput
-  - hash:
-      serializedVersion: 2
-      Hash: 8e968c6b723ee92d162d72a175bf4bed
-    assemblyName: spine-unity-examples.dll
-    namespaceName: Spine.Unity.Prototyping
-    className: SkeletonColorInitialize
+      Hash: 8de05e8d8857091d0d882ef25314e3dc
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: CardChanger
   - hash:
       serializedVersion: 2
       Hash: caa533b001ae39b864ba8425019e2268
@@ -1260,12 +998,6 @@ ScriptsOnlyBuild:
     className: IAPButton
   - hash:
       serializedVersion: 2
-      Hash: e2893154cc1df4455e1e13ef08872926
-    assemblyName: spine-unity-examples.dll
-    namespaceName: Spine.Unity.Examples
-    className: SpineboyPoleGraphic
-  - hash:
-      serializedVersion: 2
       Hash: c3d3430df9e3ea95e3e3d587961390fb
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
@@ -1276,18 +1008,6 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: VerticalLayoutGroup
-  - hash:
-      serializedVersion: 2
-      Hash: 7518ba41ece96ba51868ad93de513f8a
-    assemblyName: spine-unity-examples.dll
-    namespaceName: Spine.Unity.Examples
-    className: SpawnSkeletonGraphicExample
-  - hash:
-      serializedVersion: 2
-      Hash: cca69927d43c4d329b1519f73fdc9fe6
-    assemblyName: spine-unity-examples.dll
-    namespaceName: Spine.Unity.Examples
-    className: MixAndMatch
   - hash:
       serializedVersion: 2
       Hash: 18c222bef9ae745ce69ddde9b74337ca
@@ -1332,12 +1052,6 @@ ScriptsOnlyBuild:
     className: EventTrigger
   - hash:
       serializedVersion: 2
-      Hash: 01564abb4ec16b70f19d88b9fd41512a
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: NewBehaviourScript
-  - hash:
-      serializedVersion: 2
       Hash: 87cef3c82381dc586f6772c3e27561b6
     assemblyName: Unity.2D.Animation.Runtime.dll
     namespaceName: UnityEngine.Experimental.U2D.Animation
@@ -1374,24 +1088,6 @@ ScriptsOnlyBuild:
     className: SignalTrack
   - hash:
       serializedVersion: 2
-      Hash: b4672b813b40e30095d691cd7c29f752
-    assemblyName: spine-unity-examples.dll
-    namespaceName: Spine.Unity.Examples
-    className: ConstrainedCamera
-  - hash:
-      serializedVersion: 2
-      Hash: 152eb7d22fe3746beff0b52def884d99
-    assemblyName: spine-unity-examples.dll
-    namespaceName: Spine.Unity.Examples
-    className: SkeletonRagdoll
-  - hash:
-      serializedVersion: 2
-      Hash: f1fb891953e2bf6f29a35ea6724e2ffc
-    assemblyName: spine-unity-examples.dll
-    namespaceName: Spine.Unity.Examples
-    className: EquipAssetExample
-  - hash:
-      serializedVersion: 2
       Hash: 5df6bedfb231143ea952051c623c4281
     assemblyName: spine-unity.dll
     namespaceName: Spine.Unity
@@ -1402,12 +1098,6 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: GooglePlayGames.OurUtils
     className: PlayGamesHelperObject
-  - hash:
-      serializedVersion: 2
-      Hash: 79248edf585e679c097577487fd21eec
-    assemblyName: spine-unity-examples.dll
-    namespaceName: Spine.Unity.Examples
-    className: AnimationMatchModifierAsset
   - hash:
       serializedVersion: 2
       Hash: b424b4eeb810aecb0ff91c62639241e9
@@ -1428,6 +1118,12 @@ ScriptsOnlyBuild:
     className: SoldierT
   - hash:
       serializedVersion: 2
+      Hash: f095ac18fe20b4abb8fe229774c9d920
+    assemblyName: Coffee.UIParticle.dll
+    namespaceName: Coffee.UIExtensions
+    className: UIParticle
+  - hash:
+      serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Unity.2D.Animation.Runtime.dll
     namespaceName: UnityEngine.U2D.Animation
@@ -1446,34 +1142,16 @@ ScriptsOnlyBuild:
     className: IAPListener
   - hash:
       serializedVersion: 2
-      Hash: 8d388743d7d435e0a4021fd95826e140
-    assemblyName: spine-unity-examples.dll
-    namespaceName: Spine.Unity.Examples
-    className: EquipSystemExample
-  - hash:
-      serializedVersion: 2
       Hash: 28cfb4bd305dd11c6326cc3ee7c14138
     assemblyName: Unity.2D.Animation.Runtime.dll
     namespaceName: UnityEngine.Experimental.U2D.Animation
     className: SpriteLibraryAsset
   - hash:
       serializedVersion: 2
-      Hash: a471e6acca6ff4c5875cf3e0bc3905ff
-    assemblyName: spine-unity-examples.dll
-    namespaceName: Spine.Unity.Examples
-    className: JitterEffectExample
-  - hash:
-      serializedVersion: 2
       Hash: 63bdc2cf3273aa9bf650350f19d2af61
     assemblyName: Unity.2D.PixelPerfect.dll
     namespaceName: UnityEngine.U2D
     className: PixelPerfectCamera
-  - hash:
-      serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: spine-unity-examples.dll
-    namespaceName: Spine.Unity.Examples
-    className: Spineboy
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -1488,22 +1166,10 @@ ScriptsOnlyBuild:
     className: TMP_ScrollbarEventHandler
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: spine-unity-examples.dll
-    namespaceName: Spine.Unity.Examples
-    className: SkeletonGhostRenderer
-  - hash:
-      serializedVersion: 2
       Hash: a1a58d3057a2638663ebec29669de61d
     assemblyName: spine-unity.dll
     namespaceName: Spine.Unity
     className: BoundingBoxFollower
-  - hash:
-      serializedVersion: 2
-      Hash: f40affa7a659216a5a81c407d4ce47ac
-    assemblyName: spine-unity-examples.dll
-    namespaceName: Spine.Unity.Examples
-    className: SkeletonGhost
   - hash:
       serializedVersion: 2
       Hash: 8220b46879dc5e37db1b940c938f5744
@@ -1512,13 +1178,7 @@ ScriptsOnlyBuild:
     className: SignalEmitter
   - hash:
       serializedVersion: 2
-      Hash: d5563734ca789067dd519c17d07d623b
-    assemblyName: spine-unity-examples.dll
-    namespaceName: Spine.Unity.Examples
-    className: SkeletonAnimationHandleExample
-  - hash:
-      serializedVersion: 2
-      Hash: 50d34a27aec40879b6f46fe765661b45
+      Hash: b4319020f80bc5fcf0c3c96091b1bd06
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: BackendServerManager
@@ -1530,13 +1190,25 @@ ScriptsOnlyBuild:
     className: TouchInputModule
   - hash:
       serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Coffee.UIParticle.dll
+    namespaceName: Coffee.UIParticleExtensions
+    className: BakingCamera
+  - hash:
+      serializedVersion: 2
       Hash: 762a30c8d779b11af16ed9ce1f2d32fa
     assemblyName: Unity.2D.IK.Runtime.dll
     namespaceName: UnityEngine.U2D.IK
     className: FabrikSolver2D
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: DeviceScale
   platform: 13
   scenePathNames:
   - Assets/Scenes/1. Login.unity
   - Assets/Scenes/2. Lobby.unity
   - Assets/Scenes/3. Game.unity
-  playerPath: C:/Users/COM/Desktop/BUILD/9.aab
+  playerPath: C:/Users/showmethevrgr07/Desktop/0216.apk

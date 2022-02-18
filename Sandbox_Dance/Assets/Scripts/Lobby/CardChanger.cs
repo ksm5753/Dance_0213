@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Spine.Unity;
+using Spine;
 
 public class CardChanger : MonoBehaviour
 {
@@ -26,6 +27,17 @@ public class CardChanger : MonoBehaviour
 
     // 스킵 버튼
     [SerializeField] Button SkipButton;
+
+    public void Complete(TrackEntry te)
+    {
+        SoundManager.Instance.PlayEffect(1);
+        if (cardStar > 3) { SoundManager.Instance.Vibrate(); }
+    }
+
+    void Start()
+    {
+        OneImage[1].AnimationState.Complete += Complete;
+    }
 
     public void OneCard(int cardNum) // 하나 뽑았을 때 실행
     {
@@ -80,7 +92,8 @@ public class CardChanger : MonoBehaviour
 
     public void Skip()
     {
-        for(int i = 0; i < smallCardsImage.Length; i++)
+        SoundManager.Instance.PlayEffect(1);
+        for (int i = 0; i < smallCardsImage.Length; i++)
         {
             cardStar = smallCardsNum[i];
             CheckCardStar(cardStar);
@@ -94,6 +107,7 @@ public class CardChanger : MonoBehaviour
 
     public void SkipOne()
     {
+        SoundManager.Instance.PlayEffect(1);
         foreach (SkeletonGraphic cardSet in OneImage)
         {
             cardSet.AnimationState.SetAnimation(0, "card_" + cardStar + "-1", false);

@@ -36,6 +36,8 @@ public class BackendServerManager : MonoBehaviour
 
     public string appleToken = ""; // SignInWithApple.cs에서 토큰값을 받을 문자열
 
+    public int myMoney;
+
     string userIndate;
 
 
@@ -209,9 +211,16 @@ public class BackendServerManager : MonoBehaviour
                     return;
                 }
 
+                string ANG = "";
+                switch (callback.GetErrorCode())
+                {
+                    case "403":
+
+                        ANG = "차단 당한 유저입니다.";
+                        break;
+                }
                 Debug.LogError("GPGS 인증 실패\n" + callback.ToString());
-                func(false, string.Format(BackendError,
-                    callback.GetStatusCode(), callback.GetErrorCode(), callback.GetMessage()));
+                func(false, string.Format(BackendError, ANG));
             });
         }
 
@@ -347,8 +356,15 @@ public class BackendServerManager : MonoBehaviour
             }
 
             Debug.Log("게스트 로그인 실패\n" + callback);
-            func(false, string.Format(BackendError,
-                callback.GetStatusCode(), callback.GetErrorCode(), callback.GetMessage()));
+
+            string ANG = "";
+            switch (callback.GetErrorCode())
+            {
+                case "403":
+                    ANG = "차단 당한 아이디입니다.";
+                    break;
+            }
+            func(false, string.Format(BackendError, ANG));
         });
     }
     #endregion
@@ -612,6 +628,20 @@ public class BackendServerManager : MonoBehaviour
 
     #endregion
 
+    public void GiveMoney(int num)
+    {
+        Backend.GameData.GetMyData("User", new Where(), callback =>
+        {
+            if (callback.IsSuccess())
+            {
+                var money = callback.GetReturnValuetoJSON()["rows"][0]["Gold"]["N"].ToString();
+                Param param = new Param();
+                param.Add("Gold", int.Parse(money) + num);
+                Backend.GameData.UpdateV2("User", userIndate, Backend.UserInDate, param);
+            }
+        });
+    }
+
     #region 아이템 구매
 
     public void BuyInGameItem(int num)
@@ -621,7 +651,6 @@ public class BackendServerManager : MonoBehaviour
             if (callback.IsSuccess())
             {
                 var money = callback.GetReturnValuetoJSON()["rows"][0]["Gold"]["N"].ToString();
-
                 switch (num)
                 {
                     case 100:
@@ -631,7 +660,10 @@ public class BackendServerManager : MonoBehaviour
                             param.Add("Gold", int.Parse(money) - 100);
                             Backend.GameData.UpdateV2("User", userIndate, Backend.UserInDate, param);
                         }
-                        else print("돈 없음");
+                        else
+                        {
+                            print("돈 없음");
+                        }
                         break;
 
                     case 200:
@@ -641,7 +673,10 @@ public class BackendServerManager : MonoBehaviour
                             param.Add("Gold", int.Parse(money) - 200);
                             Backend.GameData.UpdateV2("User", userIndate, Backend.UserInDate, param);
                         }
-                        else print("돈 없음");
+                        else
+                        {
+                            print("돈 없음");
+                        }
                         break;
 
                     case 300:
@@ -654,10 +689,6 @@ public class BackendServerManager : MonoBehaviour
                         else
                         {
                             print("돈 없음");
-                            if (SceneManager.GetActiveScene().name == "2. Lobby") 
-                            { 
-                                LobbyUI.GetInstance().popUpUI.SetActive(true); 
-                            }
                         }
                         break;
                 }

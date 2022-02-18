@@ -24,7 +24,6 @@ public class Game : MonoBehaviour
 
     public List<TypeFloat> typeFloat;
     // 0 : 게임시간 (0 : 최대 시간, 1 : 현재 시간(줄어드는 시간), 2 : 줄어드는 속도, 3 : 늘어나는 속도)
-    // 1 : 무적 아이템 관련(0 : 최대시간, 1 : )
 
     [Header("줄어들 시간 관련")]
     [SerializeField] GameObject timeBar; // 크기가 바뀔 오브젝트
@@ -46,13 +45,18 @@ public class Game : MonoBehaviour
 
     [SerializeField] GameObject[] itemBtn; // 0 : 무적아이템, 1 : 부활 ...아이템 버튼들
 
+    public GameObject storeObj;
+
     public Toggle[] itemBuyBtns; // 0 : 무적아이템, 1 : 시간 증가, 2 : 부활....아이템 구매 버튼들
 
-    [SerializeField] GameObject[] UIOBjs; // 게임이 시작되면 꺼야할 OBJ
+    public GameObject[] UIOBjs; // 게임이 시작되면 꺼야할 OBJ
 
     [Header("점수")]
     public Text resultText;
+    public Text[] pricesText; // 0 : 골드 1 : 루비
     public Text currentScoreText;
+
+    public float needMoney = 0;
 
     public float score; // 현재 점수
     public int finalPrice; // 최종적으로 받는 돈
@@ -73,22 +77,27 @@ public class Game : MonoBehaviour
 
     public void DanceButton(bool isDance)
     {
-        if (isDance)
+        if (isPlaying)
         {
-            foreach (GameObject studenObj in students)
+            if (isDance)
             {
-                studenObj.GetComponent<Image>().sprite = studentSprite[(int)typeFloat[3].inspecter[2].variable];
+                foreach (GameObject studenObj in students)
+                {
+                    studenObj.GetComponent<Image>().sprite = studentSprite[(int)typeFloat[3].inspecter[2].variable];
+                }
+                SoundManager.Instance.PlayBGM(1);
+                isDancing = true;
             }
-            isDancing = true;
-        }
 
-        else
-        {
-            foreach (GameObject studenObj in students)
+            else
             {
-                studenObj.GetComponent<Image>().sprite = studentSprite[4];
+                foreach (GameObject studenObj in students)
+                {
+                    studenObj.GetComponent<Image>().sprite = studentSprite[4];
+                }
+                SoundManager.Instance.PlayBGM(0);
+                isDancing = false;
             }
-            isDancing = false;
         }
     }
 
@@ -120,7 +129,8 @@ public class Game : MonoBehaviour
             actBar.GetComponent<RectTransform>().localScale = new Vector2((typeFloat[3].inspecter[1].variable / typeFloat[3].inspecter[0].variable), 1); // 경험치 바
             currentScoreText.text = Mathf.RoundToInt(score).ToString() + "0";
 
-            score += typeFloat[3].inspecter[2].variable * Time.deltaTime;
+            if (typeFloat[3].inspecter[2].variable != 0) score += typeFloat[3].inspecter[2].variable * Time.deltaTime;
+            else score += Time.deltaTime * 10;
 
             TouchChecker();
         }
@@ -165,6 +175,7 @@ public class Game : MonoBehaviour
             {
                 // 게임을 잠시 멈춰주고 선생님의 상태변환도 멈춰준다.
                 isPlaying = false;
+                SoundManager.Instance.Vibrate();
                 CancelInvoke("TeacherChange");
 
                 Invoke("EndGame", 0.6f);
@@ -228,10 +239,13 @@ public class Game : MonoBehaviour
     // 게임 오버 결과 처리
     void EndGame()
     {
+        SoundManager.Instance.bgmSource.Pause();
         resultWin.SetActive(true);
         score = Mathf.RoundToInt(score);
         finalPrice = Mathf.RoundToInt(score / 10);
-        resultText.text = "당신의 점수 : " + score.ToString() +"0"+ '\n' + "얻은 골드 : " + finalPrice;
+        resultText.text = score.ToString() +"0";
+        pricesText[0].text = finalPrice.ToString();
+        SoundManager.Instance.PlayEffect(1);
         isPlaying = false;
         CancelInvoke("TeacherChange");
     }
@@ -240,16 +254,34 @@ public class Game : MonoBehaviour
     {
         typeFloat[0].inspecter[1].variable = typeFloat[0].inspecter[1].variable + 2f;
         ResetGame();
+        SoundManager.Instance.PlayBGM(0);
     }
 
     public void StartGame()
     {
-        BuyItemBtn();
         typeFloat[0].inspecter[1].variable = typeFloat[0].inspecter[0].variable;
-        ResetGame();
-        if (!isReviveOn)
+        for (int i = 0; i < itemBuyBtns.Length; i++)
         {
-            itemBtn[1].SetActive(false);
+            if (itemBuyBtns[i].isOn)
+            {
+                needMoney += typeFloat[4].inspecter[i].variable;
+            }
+        }
+        if (int.Parse(GameUI.GetInstance().coinText.text) >= needMoney)
+        {
+            BuyItemBtn();
+            ResetGame();
+            storeObj.SetActive(false);
+            if (!isReviveOn)
+            {
+                itemBtn[1].SetActive(false);
+            }
+        }
+
+        else
+        {
+            UIOBjs[3].SetActive(true);
+            needMoney = 0;
         }
     }
 
@@ -285,10 +317,10 @@ public class Game : MonoBehaviour
         resultWin.SetActive(false);
     }
 
-    public void HomeBtn()
+    public void SceneChange(string SceneName)
     {
-        SceneManager.LoadScene("2. Lobby");
-        // 이곳에 finalPrice 만큼의 골드를 플레이어에게 지급
+        BackendServerManager.GetInstance().GiveMoney(finalPrice);
+        SceneManager.LoadScene(SceneName);
     }
 
     public void PauseBtn(bool pauseOrPlay)
@@ -324,7 +356,7 @@ public class Game : MonoBehaviour
                 BackendServerManager.GetInstance().BuyInGameItem((int)typeFloat[4].inspecter[0].variable);
                 break;
             case 1:
-                typeFloat[0].inspecter[0].variable += 10;
+                typeFloat[0].inspecter[0].variable = typeFloat[0].inspecter[0].variable + 10;
                 BackendServerManager.GetInstance().BuyInGameItem((int)typeFloat[4].inspecter[1].variable);
 
                 break;

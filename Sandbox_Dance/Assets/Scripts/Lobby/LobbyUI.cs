@@ -81,6 +81,8 @@ public class LobbyUI : MonoBehaviour
         if (BackendServerManager.GetInstance() != null) setNickName(); //로비 들어오면 닉네임 설정
 
         settingPanel.GetComponentsInChildren<Toggle>()[0].isOn = PlayerPrefs.GetInt("BGM_Mute") == 1 ? true : false; //소리 설정
+        settingPanel.GetComponentsInChildren<Toggle>()[1].isOn = PlayerPrefs.GetInt("Effect_Mute") == 1 ? true : false; // 효과음
+        settingPanel.GetComponentsInChildren<Toggle>()[2].isOn = PlayerPrefs.GetInt("Vibrate_Mute") == 1 ? true : false; // 진동
 
         BackendServerManager.GetInstance().InitalizeGameData(); //게임데이터 초기설정
 
@@ -186,6 +188,8 @@ public class LobbyUI : MonoBehaviour
     {
         if (count != "0")
         {
+            SoundManager.Instance.Vibrate();
+
             CardInfo.SetActive(true);
 
             CardInfo.transform.GetChild(3).GetComponent<Text>().text = count;
@@ -193,11 +197,13 @@ public class LobbyUI : MonoBehaviour
             CardInfo.GetComponentsInChildren<Image>()[3].sprite = cardOutLine[star];
 
             CardInfo.transform.GetChild(5).GetComponent<Button>().onClick.AddListener(() => DiscardCard(int.Parse(count)));
+            CardInfo.transform.GetChild(5).GetComponent<Button>().onClick.AddListener(() => SoundManager.Instance.PlayEffect(0));
         }
     }
 
     void DiscardCard(int cardCount)
     {
+        SoundManager.Instance.Vibrate();
         int getRubyNum = 0;
 
         if (cardCount > 100) getRubyNum = 10;
@@ -215,6 +221,7 @@ public class LobbyUI : MonoBehaviour
         // 플레이어 루비 += getRubyNum;
         getRubyInfo.SetActive(true);
         getRubyInfo.transform.GetChild(2).GetComponent<Text>().text = getRubyNum + " 개 획득";
+        CardInfo.transform.GetChild(5).GetComponent<Button>().onClick.AddListener(() => CardInfo.transform.GetChild(5).GetComponent<Button>().onClick.RemoveAllListeners());
     }
 
 

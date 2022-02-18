@@ -257,6 +257,7 @@ public class LoginUI : MonoBehaviour
             {
                 if (!result)
                 {
+
                     loadingObject.SetActive(false);
                     errorObject.GetComponentInChildren<Text>().text = "로그인 에러\n\n" + error;
                     errorObject.SetActive(true);
