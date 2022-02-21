@@ -78,6 +78,7 @@ public class LobbyUI : MonoBehaviour
 
     void Start()
     {
+        Time.timeScale = 1;
         if (BackendServerManager.GetInstance() != null) setNickName(); //로비 들어오면 닉네임 설정
 
         settingPanel.GetComponentsInChildren<Toggle>()[0].isOn = PlayerPrefs.GetInt("BGM_Mute") == 1 ? true : false; //소리 설정
@@ -188,8 +189,6 @@ public class LobbyUI : MonoBehaviour
     {
         if (count != "0")
         {
-            SoundManager.Instance.Vibrate();
-
             CardInfo.SetActive(true);
 
             CardInfo.transform.GetChild(3).GetComponent<Text>().text = count;
@@ -203,7 +202,6 @@ public class LobbyUI : MonoBehaviour
 
     void DiscardCard(int cardCount)
     {
-        SoundManager.Instance.Vibrate();
         int getRubyNum = 0;
 
         if (cardCount > 100) getRubyNum = 10;

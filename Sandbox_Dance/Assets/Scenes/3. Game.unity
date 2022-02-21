@@ -267,6 +267,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 51282303}
+        m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
+        m_MethodName: Vibrate
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &45671796
 GameObject:
   m_ObjectHideFlags: 0
@@ -392,9 +404,10 @@ MonoBehaviour:
   effectSounds:
   - {fileID: 8300000, guid: b0e08c7c18fa15641a991c94bd7472a7, type: 3}
   - {fileID: 8300000, guid: 63cfa260c5ee77446a3d2e89b08bd918, type: 3}
+  - {fileID: 8300000, guid: fc8fd0a00a47cd1408e861e1fb8ef4c3, type: 3}
   bgmClips:
   - {fileID: 8300000, guid: 63d26957374094149aa8e0cb2882efcd, type: 3}
-  - {fileID: 8300000, guid: 63cfa260c5ee77446a3d2e89b08bd918, type: 3}
+  - {fileID: 8300000, guid: 167a9cb95e4cb914bbff7b6163978cfb, type: 3}
 --- !u!1 &52070020
 GameObject:
   m_ObjectHideFlags: 0
@@ -1331,6 +1344,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 51282303}
+        m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
+        m_MethodName: Vibrate
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 353020656}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
@@ -2129,11 +2154,11 @@ RectTransform:
   m_Father: {fileID: 1978656497}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0.5}
-  m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -66, y: -3}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -5, y: -2}
   m_SizeDelta: {x: 216, y: 80}
-  m_Pivot: {x: 1, y: 0.5}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &555310412
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2147,7 +2172,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 0, a: 1}
+  m_Color: {r: 1, g: 0.4575472, b: 0.4575472, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2156,12 +2181,12 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 78e04f22af2982a4d8264ab2f8c720d5, type: 3}
-    m_FontSize: 45
+    m_FontSize: 32
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 4
+    m_MinSize: 3
     m_MaxSize: 50
-    m_Alignment: 4
+    m_Alignment: 5
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -2691,11 +2716,11 @@ RectTransform:
   m_Father: {fileID: 204903431}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0.5}
-  m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -66, y: -3}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -5, y: -2}
   m_SizeDelta: {x: 216, y: 80}
-  m_Pivot: {x: 1, y: 0.5}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &693901298
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2718,12 +2743,12 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 78e04f22af2982a4d8264ab2f8c720d5, type: 3}
-    m_FontSize: 45
+    m_FontSize: 32
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 4
+    m_MinSize: 3
     m_MaxSize: 50
-    m_Alignment: 4
+    m_Alignment: 5
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -4218,6 +4243,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 51282303}
+        m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
+        m_MethodName: Vibrate
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1090383184
 GameObject:
   m_ObjectHideFlags: 0
@@ -5125,7 +5162,7 @@ MonoBehaviour:
     - name: MaxLevel
       variable: 3
     - name: GainSpeed
-      variable: 1
+      variable: 5
   - structName: ItemPrice
     inspecter:
     - name: Fog
@@ -5134,6 +5171,56 @@ MonoBehaviour:
       variable: 200
     - name: Revive
       variable: 300
+  studentImages:
+  - studentName: student1
+    image:
+    - imagePosName: phone
+      studentPosImage: {fileID: 21300000, guid: 98d60bce8fca2004fa1dc77d785f6825, type: 3}
+    - imagePosName: snack
+      studentPosImage: {fileID: 21300000, guid: fa52dc6dfb48b2849903543466b88860, type: 3}
+    - imagePosName: ramen
+      studentPosImage: {fileID: 21300000, guid: 5e2bc982f8cafaf4297413185c7198c0, type: 3}
+    - imagePosName: dance
+      studentPosImage: {fileID: 21300000, guid: ecbaa8bb6da3d3f43b651bce13c887ef, type: 3}
+    - imagePosName: study
+      studentPosImage: {fileID: 21300000, guid: d7b122b463b44f94fb51196fec6f946e, type: 3}
+  - studentName: student1
+    image:
+    - imagePosName: phone
+      studentPosImage: {fileID: 21300000, guid: 1c8a96f1d6553e34091d9b7e7d99e92b, type: 3}
+    - imagePosName: snack
+      studentPosImage: {fileID: 21300000, guid: e47000f8d4a264d4e90d24e369f96b79, type: 3}
+    - imagePosName: ramen
+      studentPosImage: {fileID: 21300000, guid: 2f98afc382dc7174ab77e6bb4b9a0bb7, type: 3}
+    - imagePosName: dance
+      studentPosImage: {fileID: 21300000, guid: 409e763e925e6f7499399b2225842c1e, type: 3}
+    - imagePosName: study
+      studentPosImage: {fileID: 21300000, guid: d7b122b463b44f94fb51196fec6f946e, type: 3}
+  - studentName: student1
+    image:
+    - imagePosName: phone
+      studentPosImage: {fileID: 21300000, guid: d1ad5fc3c2819884d957ba69a6d569e2, type: 3}
+    - imagePosName: snack
+      studentPosImage: {fileID: 21300000, guid: d88411904826d60459bc5ee61b9274cd, type: 3}
+    - imagePosName: ramen
+      studentPosImage: {fileID: 21300000, guid: 733302ba1c816a24f8b579b9daa9e23d, type: 3}
+    - imagePosName: dance
+      studentPosImage: {fileID: 21300000, guid: dc573f995bfd11b4782ccef99d2a2f29, type: 3}
+    - imagePosName: study
+      studentPosImage: {fileID: 21300000, guid: d7b122b463b44f94fb51196fec6f946e, type: 3}
+  - studentName: student1
+    image:
+    - imagePosName: phone
+      studentPosImage: {fileID: 21300000, guid: e3c48605d05f8b54ca187adac171935e, type: 3}
+    - imagePosName: snack
+      studentPosImage: {fileID: 21300000, guid: e5821cad5d7397442b02780e8b580168, type: 3}
+    - imagePosName: ramen
+      studentPosImage: {fileID: 21300000, guid: 79a427ed6d4cc434f981e6fdeb673f41, type: 3}
+    - imagePosName: dance
+      studentPosImage: {fileID: 21300000, guid: c002aafa472f9e04eaa0b00ba94c804d, type: 3}
+    - imagePosName: study
+      studentPosImage: {fileID: 21300000, guid: d7b122b463b44f94fb51196fec6f946e, type: 3}
+  setStudentNum: 
   timeBar: {fileID: 1129906263}
   actBar: {fileID: 45671796}
   students:
@@ -5516,7 +5603,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 347, y: 100}
+  m_SizeDelta: {x: 255, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1422600706
 MonoBehaviour:
@@ -5540,7 +5627,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 78e04f22af2982a4d8264ab2f8c720d5, type: 3}
-    m_FontSize: 70
+    m_FontSize: 40
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -5551,7 +5638,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 550
+  m_Text: 0
 --- !u!222 &1422600707
 CanvasRenderer:
   m_ObjectHideFlags: 0

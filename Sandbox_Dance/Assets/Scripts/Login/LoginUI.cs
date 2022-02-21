@@ -300,4 +300,13 @@ public class LoginUI : MonoBehaviour
         SceneManager.LoadScene("2. Lobby");
     }
     //==========================================================================
+
+    public void CancelLogin()
+    {
+        for (int i = 0; i < Steps.Length; i++)
+        {
+            Steps[i].SetActive(false);
+        }
+        Steps[1].SetActive(true); //·Î±×ÀÎ
+    }
 }

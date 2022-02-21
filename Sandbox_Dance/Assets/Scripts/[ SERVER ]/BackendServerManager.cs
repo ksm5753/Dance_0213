@@ -630,16 +630,26 @@ public class BackendServerManager : MonoBehaviour
 
     public void GiveMoney(int num)
     {
-        Backend.GameData.GetMyData("User", new Where(), callback =>
+        var bro = Backend.GameData.GetMyData("User", new Where());
+        if (bro.IsSuccess())
         {
-            if (callback.IsSuccess())
-            {
-                var money = callback.GetReturnValuetoJSON()["rows"][0]["Gold"]["N"].ToString();
-                Param param = new Param();
-                param.Add("Gold", int.Parse(money) + num);
-                Backend.GameData.UpdateV2("User", userIndate, Backend.UserInDate, param);
-            }
-        });
+            var money = bro.GetReturnValuetoJSON()["rows"][0]["Gold"]["N"].ToString();
+            Param param = new Param();
+            param.Add("Gold", int.Parse(money) + num);
+            Backend.GameData.UpdateV2("User", userIndate, Backend.UserInDate, param);
+        }
+
+
+        //Backend.GameData.GetMyData("User", new Where(), callback =>
+        //{
+        //    if (callback.IsSuccess())
+        //    {
+        //        var money = callback.GetReturnValuetoJSON()["rows"][0]["Gold"]["N"].ToString();
+        //        Param param = new Param();
+        //        param.Add("Gold", int.Parse(money) + num);
+        //        Backend.GameData.UpdateV2("User", userIndate, Backend.UserInDate, param);
+        //    }
+        //});
     }
 
     #region 아이템 구매

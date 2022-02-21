@@ -22,7 +22,26 @@ public class Game : MonoBehaviour
     }
     #endregion
 
+    #region 학생들 스프라이트 변경
+    [System.Serializable]
+    public struct StudentImageSet
+    {
+        public string studentName;
+        public StudentImageList[] image;
+    }
+
+    [System.Serializable]
+    public struct StudentImageList
+    {
+        public string imagePosName;
+        public Sprite studentPosImage;
+    }
+    #endregion
+
     public List<TypeFloat> typeFloat;
+    public List<StudentImageSet> studentImages;
+
+    public List<int> setStudentNum;
     // 0 : 게임시간 (0 : 최대 시간, 1 : 현재 시간(줄어드는 시간), 2 : 줄어드는 속도, 3 : 늘어나는 속도)
 
     [Header("줄어들 시간 관련")]
@@ -75,15 +94,30 @@ public class Game : MonoBehaviour
         }
     }
 
+    void MakeStudentNum()
+    {
+        int randomNum = Random.Range(0, studentImages.Count);
+        if (setStudentNum.Contains(randomNum))
+        {
+            MakeStudentNum();
+        }
+
+        else
+        {
+            setStudentNum.Add(randomNum);
+        }
+    }
+
     public void DanceButton(bool isDance)
     {
         if (isPlaying)
         {
             if (isDance)
             {
-                foreach (GameObject studenObj in students)
+                for(int i = 0; i < students.Length; i++)
                 {
-                    studenObj.GetComponent<Image>().sprite = studentSprite[(int)typeFloat[3].inspecter[2].variable];
+                    students[i].GetComponent<Image>().sprite = studentImages[setStudentNum[i]].image[(int)typeFloat[3].inspecter[2].variable].studentPosImage;
+                    students[i].transform.SetSiblingIndex(2);
                 }
                 SoundManager.Instance.PlayBGM(1);
                 isDancing = true;
@@ -91,13 +125,24 @@ public class Game : MonoBehaviour
 
             else
             {
-                foreach (GameObject studenObj in students)
+                for (int i = 0; i < students.Length; i++)
                 {
-                    studenObj.GetComponent<Image>().sprite = studentSprite[4];
+                    students[i].GetComponent<Image>().sprite = studentImages[setStudentNum[i]].image[4].studentPosImage;
+                    students[i].transform.SetSiblingIndex(1);
                 }
                 SoundManager.Instance.PlayBGM(0);
                 isDancing = false;
             }
+        }
+
+        if (!isDance && !isPlaying)
+        {
+            for (int i = 0; i < students.Length; i++)
+            {
+                students[i].GetComponent<Image>().sprite = studentImages[setStudentNum[i]].image[4].studentPosImage;
+                students[i].transform.SetSiblingIndex(1);
+            }
+            isDancing = false;
         }
     }
 
@@ -118,9 +163,9 @@ public class Game : MonoBehaviour
                     float turnTime = Random.Range(typeFloat[2].inspecter[0].variable, typeFloat[2].inspecter[1].variable);
                     Invoke("TeacherChange", turnTime);
 
-                    foreach (GameObject studenObj in students)
+                    for (int i = 0; i < students.Length; i++)
                     {
-                        studenObj.GetComponent<Image>().sprite = studentSprite[4];
+                        students[i].GetComponent<Image>().sprite = studentImages[setStudentNum[i]].image[4].studentPosImage;
                     }
                 }
             }
@@ -130,7 +175,7 @@ public class Game : MonoBehaviour
             currentScoreText.text = Mathf.RoundToInt(score).ToString() + "0";
 
             if (typeFloat[3].inspecter[2].variable != 0) score += typeFloat[3].inspecter[2].variable * Time.deltaTime;
-            else score += Time.deltaTime * 10;
+            else score += Time.deltaTime;
 
             TouchChecker();
         }
@@ -146,7 +191,7 @@ public class Game : MonoBehaviour
 
             // 점수 오르기 딴짓 레벨에 따라 경험치 얻는 속도 달라짐
             if (typeFloat[3].inspecter[2].variable != 0) score += typeFloat[3].inspecter[2].variable * Time.deltaTime;
-            else score += Time.deltaTime * 10;
+            else score += Time.deltaTime;
 
             // 딴짓 경험치가 필요 수치를 초과할 경우
             if (typeFloat[3].inspecter[1].variable > typeFloat[3].inspecter[0].variable)
@@ -157,9 +202,9 @@ public class Game : MonoBehaviour
                     typeFloat[3].inspecter[2].variable += 1;
                     typeFloat[3].inspecter[1].variable = 0; // 현재 경험치 수치 0 으로 바꿔줌
 
-                    foreach (GameObject studenObj in students)
+                    for (int i = 0; i < students.Length; i++)
                     {
-                        studenObj.GetComponent<Image>().sprite = studentSprite[(int)typeFloat[3].inspecter[2].variable];
+                        students[i].GetComponent<Image>().sprite = studentImages[setStudentNum[i]].image[(int)typeFloat[3].inspecter[2].variable].studentPosImage;
                     }
                 }
 
@@ -392,6 +437,11 @@ public class Game : MonoBehaviour
         if (instance == null)
         {
             instance = this.GetComponent<Game>();
+        }
+
+        for(int i = 0; i < students.Length; i++)
+        {
+            MakeStudentNum();
         }
     }
 }
