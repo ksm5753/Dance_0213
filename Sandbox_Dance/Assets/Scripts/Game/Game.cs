@@ -50,7 +50,6 @@ public class Game : MonoBehaviour
     [Header("플레이어 딴짓 레벨 관련")]
     [SerializeField] GameObject actBar; // 플레이어의 딴짓 레벨 경험치 바
     [SerializeField] GameObject[] students; // 학생들 게임 오브젝트
-    [SerializeField] Sprite[] studentSprite; // 학생들 사진들 (수정후 없어질것)
     bool isDancing = false;
 
     [Header("선생님 관련")]
@@ -287,6 +286,9 @@ public class Game : MonoBehaviour
         SoundManager.Instance.bgmSource.Pause();
         resultWin.SetActive(true);
         score = Mathf.RoundToInt(score);
+        BackendServerManager.GetInstance().UpdateScore((int)score * 10);
+        BackendServerManager.GetInstance().GiveMoney(finalPrice);
+
         finalPrice = Mathf.RoundToInt(score / 10);
         resultText.text = score.ToString() +"0";
         pricesText[0].text = finalPrice.ToString();
@@ -339,9 +341,9 @@ public class Game : MonoBehaviour
             typeFloat[2].inspecter[2].variable = 0;
             isItemFog = true;
             isDancing = true;
-            foreach (GameObject studenObj in students)
+            for (int i =0; i < students.Length; i++)
             {
-                studenObj.GetComponent<Image>().sprite = studentSprite[(int)typeFloat[3].inspecter[2].variable];
+                students[i].GetComponent<Image>().sprite = studentImages[setStudentNum[i]].image[(int)typeFloat[3].inspecter[2].variable].studentPosImage;
             }
 
             if (typeFloat[1].inspecter[3].variable <= typeFloat[1].inspecter[2].variable)
@@ -364,7 +366,7 @@ public class Game : MonoBehaviour
 
     public void SceneChange(string SceneName)
     {
-        BackendServerManager.GetInstance().GiveMoney(finalPrice);
+        print(finalPrice);
         SceneManager.LoadScene(SceneName);
     }
 
@@ -415,15 +417,18 @@ public class Game : MonoBehaviour
 
     public static Game Instance
     {
+        
         get
         {
-            if (null == instance)
+            if (instance == null)
             {
                 return null;
             }
             return instance;
         }
     }
+
+    //해상도 초기화
     public void Initialize()
     {
         foreach (GameObject i in UIOBjs)
@@ -432,12 +437,13 @@ public class Game : MonoBehaviour
         }
     }
 
-    private void Start()
+    void Awake()
     {
-        if (instance == null)
-        {
-            instance = this.GetComponent<Game>();
-        }
+        if (instance == null) instance = this;
+    }
+
+    void Start()
+    {
 
         for(int i = 0; i < students.Length; i++)
         {

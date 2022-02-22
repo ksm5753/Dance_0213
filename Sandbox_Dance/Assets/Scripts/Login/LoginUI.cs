@@ -278,8 +278,10 @@ public class LoginUI : MonoBehaviour
         }
 
         loadingObject.SetActive(true);
+        print("DF");
         BackendServerManager.GetInstance().GuestLogin((bool result, string error) =>
         {
+            print("DF");
             Dispatcher.Current.BeginInvoke(() =>
             {
                 if (!result)

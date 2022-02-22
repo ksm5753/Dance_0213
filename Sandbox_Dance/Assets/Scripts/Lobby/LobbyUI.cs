@@ -32,13 +32,14 @@ public class LobbyUI : MonoBehaviour
     public Sprite[] CardImage;
 
     // 내가 추가한거(이태호)
-    public GameObject CardInfo;
+    public GameObject cardInfo;
     public GameObject getRubyInfo;
     public GameObject popUpUI;
     public GameObject drawCardUI;
     public GameObject detailPopUpUI;
-    public GameObject CloseAppUI;
+    public GameObject closeAppUI;
     public Sprite[] cardOutLine;
+    public Text adCount;
 
     [Space(15f)]
     [Header("DrawCard Panel")]
@@ -53,6 +54,8 @@ public class LobbyUI : MonoBehaviour
 
     private static LobbyUI instance;
 
+    private int currentDay = 0;
+
 
     #region 초기화 (ScaleCtrl -> Initialize)
     public void Initialize()
@@ -65,12 +68,12 @@ public class LobbyUI : MonoBehaviour
         rankPanel.SetActive(false);
         collectionPanel.SetActive(false);
         drawCardPanel.SetActive(false);
-        CardInfo.SetActive(false);
+        cardInfo.SetActive(false);
         getRubyInfo.SetActive(false);
         popUpUI.SetActive(false);
         drawCardUI.SetActive(false);
         detailPopUpUI.SetActive(false);
-        CloseAppUI.SetActive(false);
+        closeAppUI.SetActive(false);
 
         CheckBuyItems();
     }
@@ -87,6 +90,7 @@ public class LobbyUI : MonoBehaviour
 
         BackendServerManager.GetInstance().InitalizeGameData(); //게임데이터 초기설정
 
+
         if (!PlayerPrefs.HasKey("isBuyNewStudent"))
         {
             PlayerPrefs.SetInt("isBuyNewStudent", 0);
@@ -102,8 +106,13 @@ public class LobbyUI : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Escape))
         {
-            CloseAppUI.SetActive(true);
+            closeAppUI.SetActive(true);
         }
+    }
+
+    public void SetAdCount()
+    {
+        adCount.text = (5 - BackendServerManager.GetInstance().getAdviceCount()).ToString();
     }
 
     #region 닉네임 설정
@@ -120,39 +129,49 @@ public class LobbyUI : MonoBehaviour
     }
     #endregion
 
-    public void getInfoMoney()
-    {
-        BackendServerManager.GetInstance().GetMyMoney();
-    }
+    public void getInfoMoney() => BackendServerManager.GetInstance().GetMyMoney();
 
-    public void BuyWithGold(int num)
-    {
-        BackendServerManager.GetInstance().BuyItems(num, true);
-    }
+    public void BuyWithGold(int num) => BackendServerManager.GetInstance().BuyItems(num, true);
 
-    public void BuyWithDiamond(int num)
-    {
-        BackendServerManager.GetInstance().BuyItems(num, false);
-    }
+    public void BuyWithDiamond(int num) => BackendServerManager.GetInstance().BuyItems(num, false);
 
-    public void GameStart()
-    {
-        SceneManager.LoadScene("3. Game");
-    }
+    public void GameStart() => SceneManager.LoadScene("3. Game");
 
-    public void getRankInfo()
-    {
-        BackendServerManager.GetInstance().getRank();
-    }
+    public void getRankInfo() => BackendServerManager.GetInstance().getRank();
 
-    public void QuitGame()
-    {
-        Application.Quit();
-    }
+    public void QuitGame() => Application.Quit();
 
-    public void ShowRankUI()
+    public void ShowRankUI() => rankPanel.SetActive(true);
+
+    public void DailyUser()
     {
-        rankPanel.SetActive(true);
+        switch (System.DateTime.Now.DayOfWeek)
+        {
+            case System.DayOfWeek.Monday:
+                currentDay = 0;
+                break;
+            case System.DayOfWeek.Tuesday:
+                currentDay = 1;
+                break;
+            case System.DayOfWeek.Wednesday:
+                currentDay = 2;
+                break;
+            case System.DayOfWeek.Thursday:
+                currentDay = 3;
+                break;
+            case System.DayOfWeek.Friday:
+                currentDay = 4;
+                break;
+            case System.DayOfWeek.Saturday:
+                currentDay = 5;
+                break;
+            case System.DayOfWeek.Sunday:
+                currentDay = 6;
+                break;
+        }
+        BackendServerManager.GetInstance().setAdviceReset(currentDay);
+        if (currentDay != BackendServerManager.GetInstance().getAdviceReset())
+            BackendServerManager.GetInstance().setAdviceCount(5);
     }
 
     public void setCardInfo(int cardNum, string count)
@@ -189,14 +208,14 @@ public class LobbyUI : MonoBehaviour
     {
         if (count != "0")
         {
-            CardInfo.SetActive(true);
+            cardInfo.SetActive(true);
 
-            CardInfo.transform.GetChild(3).GetComponent<Text>().text = count;
-            CardInfo.transform.GetChild(2).GetComponent<Image>().sprite = CardImage[cardNum + 1];
-            CardInfo.GetComponentsInChildren<Image>()[3].sprite = cardOutLine[star];
+            cardInfo.transform.GetChild(3).GetComponent<Text>().text = count;
+            cardInfo.transform.GetChild(2).GetComponent<Image>().sprite = CardImage[cardNum + 1];
+            cardInfo.GetComponentsInChildren<Image>()[3].sprite = cardOutLine[star];
 
-            CardInfo.transform.GetChild(5).GetComponent<Button>().onClick.AddListener(() => DiscardCard(int.Parse(count)));
-            CardInfo.transform.GetChild(5).GetComponent<Button>().onClick.AddListener(() => SoundManager.Instance.PlayEffect(0));
+            cardInfo.transform.GetChild(5).GetComponent<Button>().onClick.AddListener(() => DiscardCard(int.Parse(count)));
+            cardInfo.transform.GetChild(5).GetComponent<Button>().onClick.AddListener(() => SoundManager.Instance.PlayEffect(0));
         }
     }
 
@@ -219,7 +238,7 @@ public class LobbyUI : MonoBehaviour
         // 플레이어 루비 += getRubyNum;
         getRubyInfo.SetActive(true);
         getRubyInfo.transform.GetChild(2).GetComponent<Text>().text = getRubyNum + " 개 획득";
-        CardInfo.transform.GetChild(5).GetComponent<Button>().onClick.AddListener(() => CardInfo.transform.GetChild(5).GetComponent<Button>().onClick.RemoveAllListeners());
+        cardInfo.transform.GetChild(5).GetComponent<Button>().onClick.AddListener(() => cardInfo.transform.GetChild(5).GetComponent<Button>().onClick.RemoveAllListeners());
     }
 
 

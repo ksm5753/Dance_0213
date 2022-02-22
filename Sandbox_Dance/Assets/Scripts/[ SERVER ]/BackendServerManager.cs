@@ -364,6 +364,7 @@ public class BackendServerManager : MonoBehaviour
                     ANG = "차단 당한 아이디입니다.";
                     break;
             }
+            print("ERROR" + ANG);
             func(false, string.Format(BackendError, ANG));
         });
     }
@@ -401,21 +402,57 @@ public class BackendServerManager : MonoBehaviour
     #endregion
 
     //=================================================================================================
-    #region 랭크 시스템
+    #region 광고
+    public int getAdviceReset()
+    {
+        string ad = "";
+        var bro = Backend.GameData.GetMyData("User", new Where());
+        if (bro.IsSuccess())
+        {
+            ad = bro.GetReturnValuetoJSON()["rows"][0]["ADReset"]["N"].ToString();
+        }
+        return int.Parse(ad);
+    }
 
-
-    #region 점수 등록
-    public void UpdateScore()
+    public void setAdviceReset(int num)
     {
         Param param = new Param();
-        param.Add("Point", 10);
+        param.Add("ADReset", num);
+        Backend.GameData.UpdateV2("User", userIndate, Backend.UserInDate, param);
+    }
+    public int getAdviceCount()
+    {
+        string ad = "";
+        var bro = Backend.GameData.GetMyData("User", new Where());
+        if (bro.IsSuccess())
+        {
+            ad = bro.GetReturnValuetoJSON()["rows"][0]["AD"]["N"].ToString();
+        }
+        return int.Parse(ad);
+    }
 
-        Enqueue(Backend.GameData.Insert, "Score", param, insertScoreBro =>
+    public void setAdviceCount(int num)
+    {
+        Param param = new Param();
+        param.Add("AD", num);
+        Backend.GameData.UpdateV2("User", userIndate, Backend.UserInDate, param);
+    }
+    #endregion
+    //=================================================================================================
+    #region 랭크 시스템
+
+    #region 점수 등록
+    public void UpdateScore(int point)
+    {
+        Param param = new Param();
+        param.Add("score", point);
+
+        Enqueue(Backend.GameData.Insert, "score", param, insertScoreBro =>
         {
             Debug.Log("InsertScore - " + insertScoreBro);
             userIndate = insertScoreBro.GetInDate();
 
-            Enqueue(Backend.URank.User.UpdateUserScore, rankUuid, "Score", userIndate, param, updateScoreBro =>
+            Enqueue(Backend.URank.User.UpdateUserScore, rankUuid, "score", userIndate, param, updateScoreBro =>
             {
                 if (updateScoreBro.IsSuccess())
                     Debug.Log("UpdateUserScore - " + updateScoreBro);
@@ -630,26 +667,15 @@ public class BackendServerManager : MonoBehaviour
 
     public void GiveMoney(int num)
     {
-        var bro = Backend.GameData.GetMyData("User", new Where());
-        if (bro.IsSuccess())
+        Enqueue(Backend.GameData.GetMyData, "User", new Where(), callback =>
         {
-            var money = bro.GetReturnValuetoJSON()["rows"][0]["Gold"]["N"].ToString();
+            var money = callback.GetReturnValuetoJSON()["rows"][0]["Gold"]["N"].ToString();
+
             Param param = new Param();
             param.Add("Gold", int.Parse(money) + num);
+            print(int.Parse(money) + num);
             Backend.GameData.UpdateV2("User", userIndate, Backend.UserInDate, param);
-        }
-
-
-        //Backend.GameData.GetMyData("User", new Where(), callback =>
-        //{
-        //    if (callback.IsSuccess())
-        //    {
-        //        var money = callback.GetReturnValuetoJSON()["rows"][0]["Gold"]["N"].ToString();
-        //        Param param = new Param();
-        //        param.Add("Gold", int.Parse(money) + num);
-        //        Backend.GameData.UpdateV2("User", userIndate, Backend.UserInDate, param);
-        //    }
-        //});
+        });
     }
 
     #region 아이템 구매
@@ -664,7 +690,7 @@ public class BackendServerManager : MonoBehaviour
                 switch (num)
                 {
                     case 100:
-                        if (int.Parse(money) > 100)
+                        if (int.Parse(money) >= 100)
                         {
                             Param param = new Param();
                             param.Add("Gold", int.Parse(money) - 100);
@@ -677,7 +703,7 @@ public class BackendServerManager : MonoBehaviour
                         break;
 
                     case 200:
-                        if (int.Parse(money) > 200)
+                        if (int.Parse(money) >= 200)
                         {
                             Param param = new Param();
                             param.Add("Gold", int.Parse(money) - 200);
@@ -690,7 +716,7 @@ public class BackendServerManager : MonoBehaviour
                         break;
 
                     case 300:
-                        if (int.Parse(money) > 300)
+                        if (int.Parse(money) >= 300)
                         {
                             Param param = new Param();
                             param.Add("Gold", int.Parse(money) - 300);
@@ -715,7 +741,7 @@ public class BackendServerManager : MonoBehaviour
             {
                 var money = callback.GetReturnValuetoJSON()["rows"][0][isGold ? "Gold" : "Diamond"]["N"].ToString();
 
-                if (int.Parse(money) > num)
+                if (int.Parse(money) >= num)
                 {
                     print("구매하였습니다.");
 
@@ -772,7 +798,8 @@ public class BackendServerManager : MonoBehaviour
                     param.Add("Gold", 0);
                     param.Add("Diamond", 0);
 
-                    param.Add("AD", 5);
+                    param.Add("AD", 0);
+                    param.Add("ADReset", 0);
 
                     Enqueue(Backend.GameData.Insert, "User", param, (callback) =>
                     {

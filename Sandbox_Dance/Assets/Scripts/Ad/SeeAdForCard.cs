@@ -8,6 +8,7 @@ using System.Collections.Generic;
 
 public class SeeAdForCard : MonoBehaviour
 {
+    public static SeeAdForCard instance;
     private RewardedAd rewardedAd;
     // Start is called before the first frame update
     void Start()
@@ -74,6 +75,7 @@ public class SeeAdForCard : MonoBehaviour
         AdRequest request = new AdRequest.Builder().Build();
         // Load the rewarded ad with the request.
         this.rewardedAd.LoadAd(request);
+        LobbyUI.GetInstance().SetAdCount();
         BackendServerManager.GetInstance().DrawCard(true);
     }
 
@@ -88,13 +90,13 @@ public class SeeAdForCard : MonoBehaviour
 
     public void UserChoseToWatchAd()
     {
-        int adNum = 0; // 플레이어의 광고 본 횟수)
+        int adNum = BackendServerManager.GetInstance().getAdviceCount(); // 플레이어의 광고 본 횟수)
         if (adNum < 5)
         {
             if (this.rewardedAd.IsLoaded())
             {
                 this.rewardedAd.Show();
-                //플레이어가 광고 본 횟수  + 1
+                BackendServerManager.GetInstance().setAdviceCount(adNum + 1);
             }
         
         }
@@ -103,4 +105,10 @@ public class SeeAdForCard : MonoBehaviour
           
         }
     }
+
+    void Awake()
+    {
+        if (instance == null) instance = this;
+    }
+
 }

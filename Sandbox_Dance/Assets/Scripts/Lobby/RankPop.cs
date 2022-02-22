@@ -16,7 +16,7 @@ public class RankPop : MonoBehaviour
 	private RankRow[] topRankRows = new RankRow[10];
 	public GameObject rankList;
 	public RankRow myRankRow;
-	private Color32 topRankcolor = new Color32(255, 0, 249, 255);
+	private Color32 topRankcolor = new Color32(85, 76, 76, 255);
 	private Color32 normalRankcolor = new Color32(100, 108, 224, 255);
 
 	void Awake()
