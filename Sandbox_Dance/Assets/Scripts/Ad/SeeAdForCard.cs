@@ -78,7 +78,11 @@ public class SeeAdForCard : MonoBehaviour
         this.rewardedAd.LoadAd(request);
         if (!isStartGame) BackendServerManager.GetInstance().DrawCard(true);
 
-        else LobbyUI.GetInstance().GameStart();
+        else 
+        { 
+            LobbyUI.GetInstance().GameStart();
+            isStartGame = false;
+        }
     }
 
     public void HandleUserEarnedReward(object sender, Reward args)
@@ -92,7 +96,7 @@ public class SeeAdForCard : MonoBehaviour
 
     public void UserChoseToWatchAd()
     {
-        if (isStartGame)
+        if (!isStartGame)
         {
             int adNum = BackendServerManager.GetInstance().getAdviceCount(); // ÇÃ·¹ÀÌ¾îÀÇ ±¤°í º» È½¼ö)
             if (adNum < 5)
@@ -108,7 +112,10 @@ public class SeeAdForCard : MonoBehaviour
 
         else
         {
-            
+            if (this.rewardedAd.IsLoaded())
+            {
+                this.rewardedAd.Show();
+            }
         }
     }
 

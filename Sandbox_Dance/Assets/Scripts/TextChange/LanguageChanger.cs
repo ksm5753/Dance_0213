@@ -2,16 +2,47 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Spine;
+using Spine.Unity;
 using static LanguageParse;
 
 public class LanguageChanger : MonoBehaviour
 {
-    public string textKey;
-    public string[] dropdownKey;
+    public static LanguageChanger instance_;
+    private void Awake()
+    {
+        if (instance_ == null)
+        {
+            instance_ = this;
+        }
+
+        else Destroy(this);
+    }
+
+    public struct ImageChanger 
+    {
+        public Image targetImage;
+        public Image[] images;
+    }
+    [System.Serializable]
+    public struct TextChanger 
+    {
+        public Text targetText;
+        public string textKey;
+    }
+    public struct SpineChanger
+    {
+        public SkeletonGraphic targetImage;
+        public SkeletonDataAsset []images;
+    }
+
+    public TextChanger[] textChanger;
+    public ImageChanger[] imageChanger;
+    public SpineChanger[] spineChanger;
+
     // Start is called before the first frame update
     void Start()
     {
-        LocalizeChanged();
         instance.LocalizeChnaged += LocalizeChanged;
     }
 
@@ -26,21 +57,21 @@ public class LanguageChanger : MonoBehaviour
         return instance.Languages[instance.curLangIndex].value[keyIndex];
     }
 
-    void LocalizeChanged()
+    public void LocalizeChanged()
     {
-        if(GetComponent<Text>().text != null)
+        for (int i = 0; i < textChanger.Length; i++)
         {
-            GetComponent<Text>().text = Localize(textKey);
+            textChanger[i].targetText.text = Localize(textChanger[i].textKey);
         }
-        else if(GetComponent<Dropdown>() != null)
-        {
-            Dropdown dropdown = GetComponent<Dropdown>();
-            dropdown.captionText.text = Localize(dropdownKey[dropdown.value]);
+        
+        //for(int i =0; i<imageChanger.Length; i++)
+        //{
+        //    imageChanger[i].targetImage.sprite = imageChanger[i].images[PlayerPrefs.GetInt("LangIndex")].sprite;
+        //}
 
-            for(int i = 0; i <dropdown.options.Count; i++)
-            {
-                dropdown.options[i].text = Localize(dropdownKey[i]);
-            }
-        }
+        //for (int i = 0; i < spineChanger.Length; i++)
+        //{
+        //    spineChanger[i].targetImage.skeletonDataAsset = spineChanger[i].images[PlayerPrefs.GetInt("LangIndex")];
+        //}
     }
 }

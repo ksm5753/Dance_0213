@@ -40,6 +40,7 @@ public class LobbyUI : MonoBehaviour
     public Sprite[] cardOutLine;
     public Text adCount;
     public int testBOmb = 40; // 임시 확률
+    bool isCanWatchAd;
 
     [Space(15f)]
     [Header("DrawCard Panel")]
@@ -122,12 +123,18 @@ public class LobbyUI : MonoBehaviour
     public void GameStart()
     {
         int randomNum = Random.Range(1, 101);
-        if(randomNum <= testBOmb)
+        if(randomNum < 41 && isCanWatchAd)
         {
-
+            SeeAdForCard.instance.isStartGame = true;
+            SeeAdForCard.instance.UserChoseToWatchAd();
+            isCanWatchAd = false;
         }
 
-        else SceneManager.LoadScene("3. Game");
+        else
+        {
+            loadingObject.SetActive(true);
+            SceneManager.LoadScene("3. Game");
+        }
     }
 
     public void LogOut()
@@ -240,7 +247,6 @@ public class LobbyUI : MonoBehaviour
 
     void DiscardCard(int cardNum, int cardCount, int reward)
     {
-        print(reward);
         int getRubyNum = 0;
 
         if(cardCount >= 100)
@@ -279,12 +285,14 @@ public class LobbyUI : MonoBehaviour
 
 
         // 이곳에 플레이어게 루비추가해주는 기능 추가
-        // 플레이어 루비 += getRubyNum;
-        getRubyInfo.SetActive(true);
-        getRubyInfo.transform.GetChild(2).GetComponent<Text>().text = getRubyNum + " 개 획득";
-        BackendServerManager.GetInstance().GetDiamond(getRubyNum);
-        BackendServerManager.GetInstance().SetCard(cardNum + 1, string.Format("{0:D3}", cardCount) + "+" + reward);
-        cardInfo.transform.GetChild(5).GetComponent<Button>().onClick.RemoveAllListeners();
+        if(getRubyNum != 0)
+        {
+            getRubyInfo.SetActive(true);
+            getRubyInfo.transform.GetChild(2).GetComponent<Text>().text = getRubyNum.ToString();
+            BackendServerManager.GetInstance().GetDiamond(getRubyNum);
+            BackendServerManager.GetInstance().SetCard(cardNum + 1, string.Format("{0:D3}", cardCount) + "+" + reward);
+            cardInfo.transform.GetChild(5).GetComponent<Button>().onClick.RemoveAllListeners();
+        }
     }
 
 
@@ -295,22 +303,42 @@ public class LobbyUI : MonoBehaviour
         {
             case "MenuToggle_0":
                 gameNameText.text = "급식왕";
+                if(PlayerPrefs.GetInt("LangIndex") == 1)
+                {
+                    gameNameText.text = LanguageParse.instance.Languages[1].value[3];
+                }
                 BackendServerManager.GetInstance().GetUserCards(1);
                 break;
             case "MenuToggle_1":
                 gameNameText.text = "급식왕2";
+                if (PlayerPrefs.GetInt("LangIndex") == 1)
+                {
+                    gameNameText.text = LanguageParse.instance.Languages[1].value[4];
+                }
                 BackendServerManager.GetInstance().GetUserCards(2);
                 break;
             case "MenuToggle_2":
                 gameNameText.text = "급식왕3";
+                if (PlayerPrefs.GetInt("LangIndex") == 1)
+                {
+                    gameNameText.text = LanguageParse.instance.Languages[1].value[5];
+                }
                 BackendServerManager.GetInstance().GetUserCards(3);
                 break;
             case "MenuToggle_3":
                 gameNameText.text = "급식왕4";
+                if (PlayerPrefs.GetInt("LangIndex") == 1)
+                {
+                    gameNameText.text = LanguageParse.instance.Languages[1].value[6];
+                }
                 BackendServerManager.GetInstance().GetUserCards(4);
                 break;
             case "MenuToggle_4":
                 gameNameText.text = "선생님 몰래";
+                if (PlayerPrefs.GetInt("LangIndex") == 1)
+                {
+                    gameNameText.text = LanguageParse.instance.Languages[1].value[7];
+                }
                 BackendServerManager.GetInstance().GetUserCards(5);
                 break;
             default:
@@ -341,6 +369,7 @@ public class LobbyUI : MonoBehaviour
 
     void Awake()
     {
+        isCanWatchAd = true;
         if (!instance) instance = this;
     }
 }

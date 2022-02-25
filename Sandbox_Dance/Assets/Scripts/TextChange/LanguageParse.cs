@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class Language
@@ -13,6 +14,7 @@ public class Language
 public class LanguageParse : MonoBehaviour
 {
     public static LanguageParse instance;
+    public bool isLoaded;
 
     private void Awake()
     {
@@ -24,8 +26,25 @@ public class LanguageParse : MonoBehaviour
 
         else Destroy(this);
 
-        InitLanguage();
         GetLanguage();
+    }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (isLoaded)
+        {
+            LanguageChanger.instance_.LocalizeChanged();
+        }
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     const string googleURL = "https://docs.google.com/spreadsheets/d/1SOdETy7oZp6srpdxWKozUDfdutU2rOOTdfBK568Oo08/export?format=tsv";
@@ -67,6 +86,13 @@ public class LanguageParse : MonoBehaviour
         UnityWebRequest www = UnityWebRequest.Get(googleURL);
         yield return www.SendWebRequest();
         SetLangList(www.downloadHandler.text);
+        InitLanguage();
+        if (!isLoaded)
+        {
+            LanguageChanger.instance_.LocalizeChanged();
+            isLoaded = true;
+        }
+        //LanguageChanger.instance_.LocalizeChanged();
     }
 
     void SetLangList(string tsv)

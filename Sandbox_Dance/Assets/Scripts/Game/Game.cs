@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Data;
 using UnityEngine.SceneManagement;
+using Spine;
+using Spine.Unity;
 
 public class Game : MonoBehaviour
 {
@@ -22,24 +24,16 @@ public class Game : MonoBehaviour
     }
     #endregion
 
-    #region 학생들 스프라이트 변경
     [System.Serializable]
-    public struct StudentImageSet
+    public struct StudentsSpine 
     {
-        public string studentName;
-        public StudentImageList[] image;
+        public SkeletonDataAsset sit;
+        public SkeletonDataAsset cheating;
+        public SkeletonDataAsset dance;
     }
-
-    [System.Serializable]
-    public struct StudentImageList
-    {
-        public string imagePosName;
-        public Sprite studentPosImage;
-    }
-    #endregion
 
     public List<TypeFloat> typeFloat;
-    public List<StudentImageSet> studentImages;
+    public List<StudentsSpine> studentSpines;
 
     public List<int> setStudentNum;
     // 0 : 게임시간 (0 : 최대 시간, 1 : 현재 시간(줄어드는 시간), 2 : 줄어드는 속도, 3 : 늘어나는 속도)
@@ -87,18 +81,99 @@ public class Game : MonoBehaviour
 
     public static Game instance;
 
-    void Update()
+    #region 게임 시작 부터 끝까지
+    public void StartGame()
     {
-        TimeManaging();
-        if (Input.GetKey(KeyCode.Escape))
+        typeFloat[0].inspecter[1].variable = typeFloat[0].inspecter[0].variable;
+        for (int i = 0; i < itemBuyBtns.Length; i++)
         {
-            UIOBjs[2].SetActive(true);
+            if (itemBuyBtns[i].isOn)
+            {
+                needMoney += typeFloat[4].inspecter[i].variable;
+            }
+        }
+        if (int.Parse(GameUI.GetInstance().coinText.text) >= needMoney)
+        {
+            BuyItemBtn();
+            ResetGame();
+            storeObj.SetActive(false);
+            if (!isReviveOn)
+            {
+                itemBtn[1].SetActive(false);
+            }
+        }
+
+        else
+        {
+            UIOBjs[3].SetActive(true);
+            needMoney = 0;
+        }
+    }
+    void EndGame()
+    {
+        SoundManager.Instance.bgmSource.Pause();
+        resultWin.SetActive(true);
+
+        score = Mathf.RoundToInt(score);
+        finalPrice = Mathf.RoundToInt(score * 0.1f);
+
+        resultText.text = score.ToString() + "0";
+
+        pricesText[0].text = finalPrice.ToString();
+
+        SoundManager.Instance.PlayEffect(1);
+
+        if (!itemBtn[1].activeSelf)
+        {
+            resultMenuBtn[0].SetActive(true);
+            resultMenuBtn[1].SetActive(true);
+        }
+
+        else
+        {
+            resultMenuBtn[0].SetActive(false);
+            resultMenuBtn[1].SetActive(false);
+        }
+    }
+    void ResetGame()
+    {
+        float turnTime = Random.Range(typeFloat[2].inspecter[0].variable, typeFloat[2].inspecter[1].variable);
+        Invoke("TeacherChange", turnTime);
+        isPlaying = true;
+        typeFloat[2].inspecter[2].variable = 0;
+        SpineTeacher.GetComponent<TeacherMove>().Move(0);
+        resultWin.SetActive(false);
+        ChangeStudentAct(false);
+        isDancing = false;
+    }
+
+    public void PauseBtn(bool pauseOrPlay)
+    {
+        if (pauseOrPlay)
+        {
+            Time.timeScale = 0;
+        }
+        else
+        {
+            Time.timeScale = 1;
         }
     }
 
+    public void ContinueGame()
+    {
+        typeFloat[0].inspecter[1].variable = typeFloat[0].inspecter[1].variable + 2f;
+
+        ResetGame();
+        SoundManager.Instance.PlayBGM(0);
+
+        itemBtn[1].SetActive(false);
+    }
+    #endregion
+
+    #region 학생과 선생님 애니메이션 조정
     void MakeStudentNum()
     {
-        int randomNum = Random.Range(0, studentImages.Count);
+        int randomNum = Random.Range(0, studentSpines.Count);
         if (setStudentNum.Contains(randomNum))
         {
             MakeStudentNum();
@@ -110,35 +185,97 @@ public class Game : MonoBehaviour
         }
     }
 
-    public void DanceButton(bool isDance)
+    void SetStudentAnime()
     {
-        if (isPlaying)
+        for(int i= 0; i < setStudentNum.Count; i++)
         {
-            if (isDance)
+            students[i].GetComponentsInChildren<RectTransform>()[1].gameObject.AddComponent<SkeletonGraphic>().skeletonDataAsset = studentSpines[setStudentNum[i]].sit;
+            students[i].GetComponentsInChildren<RectTransform>()[2].gameObject.AddComponent<SkeletonGraphic>().skeletonDataAsset = studentSpines[setStudentNum[i]].cheating;
+            students[i].GetComponentsInChildren<RectTransform>()[3].gameObject.AddComponent<SkeletonGraphic>().skeletonDataAsset = studentSpines[setStudentNum[i]].dance;
+
+            students[i].GetComponentsInChildren<SkeletonGraphic>()[0].AnimationState.SetAnimation(0, "sit_b", true);
+            students[i].GetComponentsInChildren<SkeletonGraphic>()[1].AnimationState.SetAnimation(0, "phone", true);
+            students[i].GetComponentsInChildren<SkeletonGraphic>()[2].AnimationState.SetAnimation(0, "dance", true);
+
+            students[i].GetComponentsInChildren<SkeletonGraphic>()[2].enabled = false;
+            students[i].GetComponentsInChildren<SkeletonGraphic>()[1].enabled = false;
+        }
+    }
+
+    void ChangeStudentAct(bool isDance)
+    {
+        if (isDance)
+        {
+            if (typeFloat[3].inspecter[2].variable == 3)
             {
-                for(int i = 0; i < students.Length; i++)
+                for (int i = 0; i < students.Length; i++)
                 {
-                    students[i].GetComponent<Image>().sprite = studentImages[setStudentNum[i]].image[(int)typeFloat[3].inspecter[2].variable].studentPosImage;
+                    students[i].GetComponentsInChildren<SkeletonGraphic>()[0].enabled = false;
+                    students[i].GetComponentsInChildren<SkeletonGraphic>()[1].enabled = false;
+                    students[i].GetComponentsInChildren<SkeletonGraphic>()[2].enabled = true;
                     students[i].transform.SetSiblingIndex(2);
+                    students[i].transform.localPosition = new Vector3(0, -395, 0);
                 }
-                SoundManager.Instance.PlayBGM(1);
-                isDancing = true;
             }
 
             else
             {
                 for (int i = 0; i < students.Length; i++)
                 {
-                    students[i].GetComponent<Image>().sprite = studentImages[setStudentNum[i]].image[4].studentPosImage;
-                    students[i].transform.SetSiblingIndex(1);
+                    students[i].GetComponentsInChildren<SkeletonGraphic>()[0].enabled = false;
+                    students[i].GetComponentsInChildren<SkeletonGraphic>()[1].enabled = true;
+                    switch (typeFloat[3].inspecter[2].variable)
+                    {
+                        case 0:
+                            students[i].GetComponentsInChildren<SkeletonGraphic>()[1].AnimationState.SetAnimation(0, "phone", true);
+                            break;
+                        case 1:
+                            students[i].GetComponentsInChildren<SkeletonGraphic>()[1].AnimationState.SetAnimation(0, "eat 1", true);
+                            break;
+                        case 2:
+                            students[i].GetComponentsInChildren<SkeletonGraphic>()[1].AnimationState.SetAnimation(0, "eat 2", true);
+                            break;
+                    }
+                    students[i].GetComponentsInChildren<SkeletonGraphic>()[2].enabled = false;
+                    students[i].transform.SetSiblingIndex(2);
+                    students[i].transform.localPosition = new Vector3(0, -195, 0);
                 }
-                SoundManager.Instance.PlayBGM(0);
-                isDancing = false;
+            }
+        }
+
+        else
+        {
+            for (int i = 0; i < students.Length; i++)
+            {
+                students[i].GetComponentsInChildren<SkeletonGraphic>()[0].enabled = true;
+                students[i].GetComponentsInChildren<SkeletonGraphic>()[1].enabled = false;
+                students[i].GetComponentsInChildren<SkeletonGraphic>()[2].enabled = false;
+                students[i].transform.SetSiblingIndex(1);
+                students[i].transform.localPosition = new Vector3(0, -150, 0);
             }
         }
     }
 
-    // 게임 전반적인 매니징
+    void TeacherChange() // 선생님의 상태변경{Invoke 로 계속 실행 시켜줌} 
+    {
+        // 다음 바뀔 시간 체크
+        float turnTime = Random.Range(typeFloat[2].inspecter[0].variable, typeFloat[2].inspecter[1].variable);
+
+        // 선생님 상태 변환
+        typeFloat[2].inspecter[2].variable += 1;
+
+        if (typeFloat[2].inspecter[2].variable > 2)
+        {
+            typeFloat[2].inspecter[2].variable = 0;
+        }
+        SpineTeacher.GetComponent<TeacherMove>().Move((byte)typeFloat[2].inspecter[2].variable);
+        // turnTime 이후 다시 이 함수 실행
+        Invoke("TeacherChange", turnTime);
+    }
+    #endregion
+
+    #region 게임 매니져
+    // 게임의 시간의 지남체크
     void TimeManaging()
     {
         if (isPlaying)
@@ -155,10 +292,7 @@ public class Game : MonoBehaviour
                     float turnTime = Random.Range(typeFloat[2].inspecter[0].variable, typeFloat[2].inspecter[1].variable);
                     Invoke("TeacherChange", turnTime);
 
-                    for (int i = 0; i < students.Length; i++)
-                    {
-                        students[i].GetComponent<Image>().sprite = studentImages[setStudentNum[i]].image[4].studentPosImage;
-                    }
+                    ChangeStudentAct(false);
                 }
             }
 
@@ -194,10 +328,7 @@ public class Game : MonoBehaviour
                     typeFloat[3].inspecter[2].variable += 1;
                     typeFloat[3].inspecter[1].variable = 0; // 현재 경험치 수치 0 으로 바꿔줌
 
-                    for (int i = 0; i < students.Length; i++)
-                    {
-                        students[i].GetComponent<Image>().sprite = studentImages[setStudentNum[i]].image[(int)typeFloat[3].inspecter[2].variable].studentPosImage;
-                    }
+                    ChangeStudentAct(true);
                 }
 
                 // 최대 레벨에 도달했을 경우 그 이상으로 못올라가게 막아줌 (최대 레벨은 0 ~ 3 까지)
@@ -259,52 +390,6 @@ public class Game : MonoBehaviour
             }
         }
     }
-
-    void TeacherChange() // 선생님의 상태변경{Invoke 로 계속 실행 시켜줌} 
-    {
-        // 다음 바뀔 시간 체크
-        float turnTime = Random.Range(typeFloat[2].inspecter[0].variable, typeFloat[2].inspecter[1].variable);
-
-        // 선생님 상태 변환
-        typeFloat[2].inspecter[2].variable += 1;
-
-        if (typeFloat[2].inspecter[2].variable > 2)
-        {
-            typeFloat[2].inspecter[2].variable = 0;
-        }
-        SpineTeacher.GetComponent<TeacherMove>().Move((byte)typeFloat[2].inspecter[2].variable);
-        // turnTime 이후 다시 이 함수 실행
-        Invoke("TeacherChange", turnTime);
-    }
-
-    // 게임 오버 결과 처리
-    void EndGame()
-    {
-        SoundManager.Instance.bgmSource.Pause();
-        resultWin.SetActive(true);
-
-        score = Mathf.RoundToInt(score);
-        finalPrice = Mathf.RoundToInt(score * 0.1f);
-
-        resultText.text = score.ToString() +"0";
-
-        pricesText[0].text = finalPrice.ToString();
-
-        SoundManager.Instance.PlayEffect(1);
-
-        if (!itemBtn[1].activeSelf)
-        {
-            resultMenuBtn[0].SetActive(true);
-            resultMenuBtn[1].SetActive(true);
-        }
-
-        else
-        {
-            resultMenuBtn[0].SetActive(false);
-            resultMenuBtn[1].SetActive(false);
-        }
-    }
-
     void MakeResult()
     {
         if (!itemBtn[1].activeSelf)
@@ -312,106 +397,14 @@ public class Game : MonoBehaviour
             score = Mathf.RoundToInt(score);
             finalPrice = Mathf.RoundToInt(score * 0.1f);
             BackendServerManager.GetInstance().GiveMoeny(finalPrice);
-            if(score > bestScore)
+            if (score > bestScore)
             {
                 bestScore = (int)score * 10;
                 BackendServerManager.GetInstance().UpdateScore2((int)score * 10);
             }
         }
     }
-
-    public void SceneChange(string SceneName)
-    {
-        SceneManager.LoadScene(SceneName);
-    }
-
-    public void ContinueGame()
-    {
-        typeFloat[0].inspecter[1].variable = typeFloat[0].inspecter[1].variable + 2f;
-
-        ResetGame();
-        SoundManager.Instance.PlayBGM(0);
-
-        itemBtn[1].SetActive(false);
-    }
-
-    public void StartGame()
-    {
-        typeFloat[0].inspecter[1].variable = typeFloat[0].inspecter[0].variable;
-        for (int i = 0; i < itemBuyBtns.Length; i++)
-        {
-            if (itemBuyBtns[i].isOn)
-            {
-                needMoney += typeFloat[4].inspecter[i].variable;
-            }
-        }
-        if (int.Parse(GameUI.GetInstance().coinText.text) >= needMoney)
-        {
-            BuyItemBtn();
-            ResetGame();
-            storeObj.SetActive(false);
-            if (!isReviveOn)
-            {
-                itemBtn[1].SetActive(false);
-            }
-        }
-
-        else
-        {
-            UIOBjs[3].SetActive(true);
-            needMoney = 0;
-        }
-    }
-
-    public void ItemBtn()
-    {
-        if (!isItemFog && typeFloat[1].inspecter[2].variable < typeFloat[1].inspecter[3].variable)
-        {
-            SpineTeacher.GetComponent<TeacherMove>().Move(0);
-            typeFloat[1].inspecter[2].variable ++;
-            typeFloat[2].inspecter[2].variable = 0;
-            isItemFog = true;
-            isDancing = true;
-            for (int i =0; i < students.Length; i++)
-            {
-                students[i].GetComponent<Image>().sprite = studentImages[setStudentNum[i]].image[(int)typeFloat[3].inspecter[2].variable].studentPosImage;
-            }
-
-            if (typeFloat[1].inspecter[3].variable <= typeFloat[1].inspecter[2].variable)
-            {
-                itemBtn[0].SetActive(false);
-            }
-            CancelInvoke("TeacherChange");
-        }
-    }
-
-    void ResetGame()
-    {
-        float turnTime = Random.Range(typeFloat[2].inspecter[0].variable, typeFloat[2].inspecter[1].variable);
-        Invoke("TeacherChange", turnTime);
-        isPlaying = true;
-        typeFloat[2].inspecter[2].variable = 0;
-        SpineTeacher.GetComponent<TeacherMove>().Move(0);
-        resultWin.SetActive(false);
-        for (int i = 0; i < students.Length; i++)
-        {
-            students[i].GetComponent<Image>().sprite = studentImages[setStudentNum[i]].image[4].studentPosImage;
-            students[i].transform.SetSiblingIndex(1);
-        }
-        isDancing = false;
-    }
-
-    public void PauseBtn(bool pauseOrPlay)
-    {
-        if (pauseOrPlay)
-        {
-            Time.timeScale = 0;
-        }
-        else
-        {
-            Time.timeScale = 1;
-        }
-    }
+    #endregion
 
     #region 아이템 관련
     public void BuyItemBtn() // 0 : 무적아이템, 1 : 시간 증가, 2 : 부활
@@ -424,7 +417,6 @@ public class Game : MonoBehaviour
             }
         }
     }
-
     public void ActivateItem(int itemNum)
     {
         switch (itemNum)
@@ -444,15 +436,49 @@ public class Game : MonoBehaviour
                 break;
         }
     }
-    #endregion
-
-    public static Game Instance()
+    public void ItemBtn()
     {
-        if (instance == null) return null;
+        if (!isItemFog && typeFloat[1].inspecter[2].variable < typeFloat[1].inspecter[3].variable)
+        {
+            SpineTeacher.GetComponent<TeacherMove>().Move(0);
+            typeFloat[1].inspecter[2].variable++;
+            typeFloat[2].inspecter[2].variable = 0;
+            isItemFog = true;
+            isDancing = true;
+            ChangeStudentAct(true);
 
-        return instance;
+            if (typeFloat[1].inspecter[3].variable <= typeFloat[1].inspecter[2].variable)
+            {
+                itemBtn[0].SetActive(false);
+            }
+            CancelInvoke("TeacherChange");
+        }
     }
 
+    #endregion
+    public void SceneChange(string SceneName)
+    {
+        SceneManager.LoadScene(SceneName);
+    }
+    public void DanceButton(bool isDance)
+    {
+        if (isPlaying)
+        {
+            if (isDance)
+            {
+                ChangeStudentAct(true);
+                SoundManager.Instance.PlayBGM(1);
+                isDancing = true;
+            }
+
+            else
+            {
+                ChangeStudentAct(false);
+                SoundManager.Instance.PlayBGM(0);
+                isDancing = false;
+            }
+        }
+    }
     //해상도 초기화
     public void Initialize()
     {
@@ -460,6 +486,12 @@ public class Game : MonoBehaviour
         {
             i.SetActive(false);
         }
+    }
+    public static Game Instance()
+    {
+        if (instance == null) return null;
+
+        return instance;
     }
 
     void Awake()
@@ -472,6 +504,16 @@ public class Game : MonoBehaviour
         for(int i = 0; i < students.Length; i++)
         {
             MakeStudentNum();
+        }
+        SetStudentAnime();
+    }
+
+    void Update()
+    {
+        TimeManaging();
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            UIOBjs[2].SetActive(true);
         }
     }
 }
