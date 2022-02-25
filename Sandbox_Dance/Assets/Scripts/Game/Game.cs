@@ -78,12 +78,14 @@ public class Game : MonoBehaviour
     public float needMoney = 0;
 
     public float score; // 현재 점수
+    public int bestScore;
     public int finalPrice; // 최종적으로 받는 돈
 
     // 게임 진행 관련
     [SerializeField] bool isPlaying = true; // 현재 게임이 진행중인지 {true = 진행중, false = 일시정지}
 
-    private static Game instance;
+
+    public static Game instance;
 
     void Update()
     {
@@ -310,7 +312,11 @@ public class Game : MonoBehaviour
             score = Mathf.RoundToInt(score);
             finalPrice = Mathf.RoundToInt(score * 0.1f);
             BackendServerManager.GetInstance().GiveMoeny(finalPrice);
-            BackendServerManager.GetInstance().UpdateScore((int)score * 10);
+            if(score > bestScore)
+            {
+                bestScore = (int)score * 10;
+                BackendServerManager.GetInstance().UpdateScore2((int)score * 10);
+            }
         }
     }
 

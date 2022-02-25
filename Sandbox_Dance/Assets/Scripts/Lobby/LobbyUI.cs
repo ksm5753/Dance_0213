@@ -56,6 +56,11 @@ public class LobbyUI : MonoBehaviour
 
     private int currentDay = 0;
 
+    public void ANG()
+    {
+        BackendServerManager.GetInstance().ANG();
+    }
+
 
     #region 초기화 (ScaleCtrl -> Initialize)
     public void Initialize()
@@ -125,6 +130,12 @@ public class LobbyUI : MonoBehaviour
         else SceneManager.LoadScene("3. Game");
     }
 
+    public void LogOut()
+    {
+        BackendServerManager.GetInstance().LogOut();
+        SceneManager.LoadScene("1. Login");
+    }
+
     #region 닉네임 설정
     private void setNickName()
     {
@@ -182,7 +193,7 @@ public class LobbyUI : MonoBehaviour
             BackendServerManager.GetInstance().setAdviceCount(5);
     }
 
-    public void setCardInfo(int cardNum, string count)
+    public void setCardInfo(int cardNum, int count, int reward)
     {
         int star = 0;
         if (cardNum > 95) star = 4;
@@ -191,7 +202,7 @@ public class LobbyUI : MonoBehaviour
         else if (cardNum > 29) star = 1;
         else star = 0;         
 
-        if (count == "0")
+        if (count == 0)
         {
             Cards[cardNum].GetComponentsInChildren<Image>()[1].sprite = CardImage[0];
             Cards[cardNum].GetComponentsInChildren<Image>()[2].enabled = false;
@@ -206,13 +217,13 @@ public class LobbyUI : MonoBehaviour
         }
 
         Cards[cardNum].GetComponentInChildren<Text>().text = count.ToString();
-        Cards[cardNum].GetComponent<Button>().onClick.AddListener(() => OpenCardInfo(cardNum, count, star));
+        Cards[cardNum].GetComponent<Button>().onClick.AddListener(() => OpenCardInfo(cardNum, count.ToString(), reward, star));
 
         GameObject.Find("Scroll View").GetComponent<ScrollRect>().velocity = new Vector2(0, 0); //스크롤 하면서 다른 창으로 넘어갈 때 스크롤 저항 생김
         GameObject.Find("Content").GetComponent<RectTransform>().position = new Vector2(GameObject.Find("Content").GetComponent<RectTransform>().position.x, 0); //다른 창으로 넘길때 맨 위로 이동
     }
 
-    public void OpenCardInfo(int cardNum, string count, int star)
+    public void OpenCardInfo(int cardNum, string count, int reward, int star)
     {
         if (count != "0")
         {
@@ -222,33 +233,58 @@ public class LobbyUI : MonoBehaviour
             cardInfo.transform.GetChild(2).GetComponent<Image>().sprite = CardImage[cardNum + 1];
             cardInfo.GetComponentsInChildren<Image>()[3].sprite = cardOutLine[star];
 
-            cardInfo.transform.GetChild(5).GetComponent<Button>().onClick.AddListener(() => DiscardCard(int.Parse(count)));
+            cardInfo.transform.GetChild(5).GetComponent<Button>().onClick.AddListener(() => DiscardCard(cardNum, int.Parse(count), reward));
             cardInfo.transform.GetChild(5).GetComponent<Button>().onClick.AddListener(() => SoundManager.Instance.PlayEffect(0));
         }
     }
 
-    void DiscardCard(int cardCount)
+    void DiscardCard(int cardNum, int cardCount, int reward)
     {
-        //if(이곳에 현재 바꿀수 있는 자격? 이 있는지 확인하는 코드)
-        //{
+        print(reward);
         int getRubyNum = 0;
 
-        if (cardCount > 100) getRubyNum = 10;
+        if(cardCount >= 100)
+        {
+                if (reward == 0) getRubyNum = 19;
+                else if (reward == 1) getRubyNum = 18;
+                else if (reward == 2) getRubyNum = 15;
+                else if (reward == 3) getRubyNum = 10;
+                else if (reward == 4) getRubyNum = 0;
+            reward = 4;
+        }
 
-        else if (cardCount > 50) getRubyNum = 5;
+        else if(cardCount >= 50 && cardCount < 100)
+        {
+                if (reward == 0) getRubyNum = 9;
+                else if (reward == 1) getRubyNum = 8;
+                else if (reward == 2) getRubyNum = 5;
+                else if (reward == 3) getRubyNum = 0;
+            reward = 3;
+        }
 
+        else if (cardCount >= 30 && cardCount < 50)
+        {
+                if (reward == 0) getRubyNum = 4;
+                else if (reward == 1) getRubyNum = 1;
+                else if (reward == 2) getRubyNum = 0;
+            reward = 2;
+        }
 
-        else if (cardCount > 30) getRubyNum = 3;
-
-
-        else if (cardCount > 10) getRubyNum = 1;
+        else if (cardCount >= 10 && cardCount < 30)
+        {
+                if (reward == 0) getRubyNum = 1;
+                else if (reward == 1) getRubyNum = 0;
+            reward = 1;
+        }
 
 
         // 이곳에 플레이어게 루비추가해주는 기능 추가
         // 플레이어 루비 += getRubyNum;
         getRubyInfo.SetActive(true);
         getRubyInfo.transform.GetChild(2).GetComponent<Text>().text = getRubyNum + " 개 획득";
-        //}
+        BackendServerManager.GetInstance().GetDiamond(getRubyNum);
+        BackendServerManager.GetInstance().SetCard(cardNum + 1, string.Format("{0:D3}", cardCount) + "+" + reward);
+        cardInfo.transform.GetChild(5).GetComponent<Button>().onClick.RemoveAllListeners();
     }
 
 

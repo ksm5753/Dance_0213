@@ -15,11 +15,11 @@ C:/Users/showmethevrgr07/Desktop/newDance/Dance_0213/Sandbox_Dance
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-9780
+14789
 Successfully changed project path to: C:/Users/showmethevrgr07/Desktop/newDance/Dance_0213/Sandbox_Dance
 C:/Users/showmethevrgr07/Desktop/newDance/Dance_0213/Sandbox_Dance
 Using Asset Import Pipeline V2.
-Refreshing native plugins compatible for Editor in 103.69 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 81.39 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2020.3.27f1 (e759542391ea)
 [Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2020.3.27f1/Editor/Data/Resources/UnitySubsystems
@@ -35,48 +35,48 @@ Initialize mono
 Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2020.3.27f1/Editor/Data/Managed'
 Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2020.3.27f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
 Mono config path = 'C:/Program Files/Unity/Hub/Editor/2020.3.27f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56536
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56284
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2020.3.27f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.001898 seconds.
+Registered in 0.001859 seconds.
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 75.26 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 53.27 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  0.780 seconds
+- Completed reload, in  0.585 seconds
 Domain Reload Profiling:
-	ReloadAssembly (780ms)
-		BeginReloadAssembly (120ms)
+	ReloadAssembly (585ms)
+		BeginReloadAssembly (61ms)
 			ExecutionOrderSort (0ms)
 			DisableScriptedObjects (0ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
 			CreateAndSetChildDomain (1ms)
-		EndReloadAssembly (526ms)
-			LoadAssemblies (117ms)
+		EndReloadAssembly (453ms)
+			LoadAssemblies (60ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (160ms)
+			SetupTypeCache (137ms)
 			ReleaseScriptCaches (0ms)
-			RebuildScriptCaches (33ms)
-			SetupLoadedEditorAssemblies (221ms)
+			RebuildScriptCaches (32ms)
+			SetupLoadedEditorAssemblies (176ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (5ms)
+				InitializePlatformSupportModulesInManaged (4ms)
 				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (75ms)
+				RefreshPlugins (53ms)
 				BeforeProcessingInitializeOnLoad (16ms)
-				ProcessInitializeOnLoadAttributes (92ms)
-				ProcessInitializeOnLoadMethodAttributes (32ms)
+				ProcessInitializeOnLoadAttributes (74ms)
+				ProcessInitializeOnLoadMethodAttributes (29ms)
 				AfterProcessingInitializeOnLoad (0ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
 			AwakeInstancesAfterBackupRestoration (0ms)
 Platform modules already initialized, skipping
 Registering precompiled user dll's ...
-Registered in 0.013664 seconds.
+Registered in 0.012654 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 62.07 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 65.66 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 GPGSUpgrader start
 UnityEngine.StackTraceUtility:ExtractStackTrace ()
@@ -101,45 +101,45 @@ UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
 (Filename: Assets/GooglePlayGames/Editor/GPGSUpgrader.cs Line: 57)
 
 Mono: successfully reloaded assembly
-- Completed reload, in  1.403 seconds
+- Completed reload, in  1.583 seconds
 Domain Reload Profiling:
-	ReloadAssembly (1404ms)
+	ReloadAssembly (1584ms)
 		BeginReloadAssembly (152ms)
 			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (5ms)
+			DisableScriptedObjects (6ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (17ms)
-		EndReloadAssembly (1195ms)
-			LoadAssemblies (118ms)
+			CreateAndSetChildDomain (18ms)
+		EndReloadAssembly (1373ms)
+			LoadAssemblies (115ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (349ms)
+			SetupTypeCache (382ms)
 			ReleaseScriptCaches (0ms)
-			RebuildScriptCaches (58ms)
-			SetupLoadedEditorAssemblies (495ms)
+			RebuildScriptCaches (59ms)
+			SetupLoadedEditorAssemblies (618ms)
 				LogAssemblyErrors (0ms)
 				InitializePlatformSupportModulesInManaged (3ms)
 				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (62ms)
-				BeforeProcessingInitializeOnLoad (142ms)
-				ProcessInitializeOnLoadAttributes (213ms)
-				ProcessInitializeOnLoadMethodAttributes (67ms)
+				RefreshPlugins (66ms)
+				BeforeProcessingInitializeOnLoad (123ms)
+				ProcessInitializeOnLoadAttributes (321ms)
+				ProcessInitializeOnLoadMethodAttributes (98ms)
 				AfterProcessingInitializeOnLoad (6ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (7ms)
+			AwakeInstancesAfterBackupRestoration (6ms)
 Platform modules already initialized, skipping
 ========================================================================
 Worker process is ready to serve import requests
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.07 seconds
-Refreshing native plugins compatible for Editor in 0.95 ms, found 3 plugins.
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.08 seconds
+Refreshing native plugins compatible for Editor in 1.01 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 2894 Unused Serialized files (Serialized files now loaded: 0)
 System memory in use before: 126.6 MB.
 System memory in use after: 125.6 MB.
 
 Unloading 124 unused Assets to reduce memory usage. Loaded Objects now: 3281.
-Total: 6.684400 ms (FindLiveObjects: 0.208700 ms CreateObjectMapping: 0.140500 ms MarkObjects: 5.604800 ms  DeleteObjects: 0.729500 ms)
+Total: 7.808100 ms (FindLiveObjects: 0.338600 ms CreateObjectMapping: 0.218900 ms MarkObjects: 6.399500 ms  DeleteObjects: 0.849400 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
@@ -153,26 +153,172 @@ AssetImportParameters requested are different than current active one (requested
   custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
 ========================================================================
 Received Import Request.
-  path: Assets/Scripts/TextChange/LanguageChanger.cs
-  artifactKey: Guid(6cef39695522adb469bdce6e34d4dcff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/TextChange/LanguageChanger.cs using Guid(6cef39695522adb469bdce6e34d4dcff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '08f3f1c5cba5bb9d34706d8a4d013a0a') in 0.034043 seconds 
-  Import took 0.038639 seconds .
+  path: Assets/Scripts/TextChange/LanguageParse.cs
+  artifactKey: Guid(4bedc0466a01bfe49b138401b2b8769e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/TextChange/LanguageParse.cs using Guid(4bedc0466a01bfe49b138401b2b8769e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cf8f597b58810f077aca28c261163bda') in 0.064296 seconds 
+  Import took 0.070101 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 15082.948098 seconds.
-  path: Assets/Font/SB L.ttf
-  artifactKey: Guid(d38b452bfff9a214a8c07cdabc750f97) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Font/SB L.ttf using Guid(d38b452bfff9a214a8c07cdabc750f97) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '20ff435dcd78bdf566b463e241f90367') in 0.119654 seconds 
-  Import took 0.126509 seconds .
+  Time since last request: 55.046824 seconds.
+  path: Assets/Scripts/TextChange/LanguageChanger.cs
+  artifactKey: Guid(6cef39695522adb469bdce6e34d4dcff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/TextChange/LanguageChanger.cs using Guid(6cef39695522adb469bdce6e34d4dcff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4e780feebad8ebde45958efe0f8072ef') in 0.007184 seconds 
+  Import took 0.011866 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 60.203179 seconds.
+  path: Assets/Scripts/TextChange/LanguageChanger.cs
+  artifactKey: Guid(6cef39695522adb469bdce6e34d4dcff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/TextChange/LanguageChanger.cs using Guid(6cef39695522adb469bdce6e34d4dcff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a50079948f4e0432ca3d79a1f986b68f') in 0.004372 seconds 
+  Import took 0.009960 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 15.820478 seconds.
+  path: Assets/Scripts/TextChange/LanguageChanger.cs
+  artifactKey: Guid(6cef39695522adb469bdce6e34d4dcff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/TextChange/LanguageChanger.cs using Guid(6cef39695522adb469bdce6e34d4dcff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '644bfafba96c2a4c4575cb865816f887') in 0.004687 seconds 
+  Import took 0.009865 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.150858 seconds.
+  path: Assets/Scripts/TextChange/LanguageChanger.cs
+  artifactKey: Guid(6cef39695522adb469bdce6e34d4dcff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/TextChange/LanguageChanger.cs using Guid(6cef39695522adb469bdce6e34d4dcff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '603a1e5375be320a46a25a7367d58e9f') in 0.003957 seconds 
+  Import took 0.008999 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 9.932821 seconds.
+  path: Assets/Scripts/TextChange/LanguageChanger.cs
+  artifactKey: Guid(6cef39695522adb469bdce6e34d4dcff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/TextChange/LanguageChanger.cs using Guid(6cef39695522adb469bdce6e34d4dcff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7441e23fc9dd707da8af653e433c23ba') in 0.004130 seconds 
+  Import took 0.008887 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.448636 seconds.
+  path: Assets/Scripts/TextChange/LanguageChanger.cs
+  artifactKey: Guid(6cef39695522adb469bdce6e34d4dcff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/TextChange/LanguageChanger.cs using Guid(6cef39695522adb469bdce6e34d4dcff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4aa8f5acb9e16bfd09c756b40b78def0') in 0.003364 seconds 
+  Import took 0.008390 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 3.302513 seconds.
+  path: Assets/Scripts/TextChange/LanguageChanger.cs
+  artifactKey: Guid(6cef39695522adb469bdce6e34d4dcff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/TextChange/LanguageChanger.cs using Guid(6cef39695522adb469bdce6e34d4dcff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '93c6383f2ce2a1582a3ae92723dc4a78') in 0.003226 seconds 
+  Import took 0.007499 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 508.493193 seconds.
+  path: Assets/Scripts/TextChange/LanguageChanger.cs
+  artifactKey: Guid(6cef39695522adb469bdce6e34d4dcff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/TextChange/LanguageChanger.cs using Guid(6cef39695522adb469bdce6e34d4dcff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '236a35ec4bce1d26837d5c476e3654ba') in 0.006374 seconds 
+  Import took 0.015021 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 13.592427 seconds.
+  path: Assets/Scripts/TextChange/LanguageChanger.cs
+  artifactKey: Guid(6cef39695522adb469bdce6e34d4dcff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/TextChange/LanguageChanger.cs using Guid(6cef39695522adb469bdce6e34d4dcff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9ece935ac700a0083b411aaf75e86602') in 0.004176 seconds 
+  Import took 0.009581 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 14.473148 seconds.
+  path: Assets/Scripts/TextChange/LanguageChanger.cs
+  artifactKey: Guid(6cef39695522adb469bdce6e34d4dcff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/TextChange/LanguageChanger.cs using Guid(6cef39695522adb469bdce6e34d4dcff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '54b7be79631dc8adde174f2365428a06') in 0.004149 seconds 
+  Import took 0.009554 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 21.853425 seconds.
+  path: Assets/Scripts/TextChange/LanguageChanger.cs
+  artifactKey: Guid(6cef39695522adb469bdce6e34d4dcff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/TextChange/LanguageChanger.cs using Guid(6cef39695522adb469bdce6e34d4dcff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7e7753711d8ed3dcb6571de3819c88a5') in 0.003874 seconds 
+  Import took 0.009405 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 202.519124 seconds.
+  path: Assets/Scripts/TextChange/LanguageChanger.cs
+  artifactKey: Guid(6cef39695522adb469bdce6e34d4dcff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/TextChange/LanguageChanger.cs using Guid(6cef39695522adb469bdce6e34d4dcff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cad212f8ff240a86cf8a3d31c62aa005') in 0.004614 seconds 
+  Import took 0.009455 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 32.524723 seconds.
+  path: Assets/Scripts/TextChange/LanguageChanger.cs
+  artifactKey: Guid(6cef39695522adb469bdce6e34d4dcff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/TextChange/LanguageChanger.cs using Guid(6cef39695522adb469bdce6e34d4dcff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '69613dbe6874055b2b70edb1d03b1e39') in 0.003956 seconds 
+  Import took 0.008224 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 228.388199 seconds.
+  path: Assets/Scripts/TextChange/LanguageChanger.cs
+  artifactKey: Guid(6cef39695522adb469bdce6e34d4dcff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/TextChange/LanguageChanger.cs using Guid(6cef39695522adb469bdce6e34d4dcff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000451 seconds  code(4) message(Build asset version error: assets/scripts/textchange/languagechanger.cs in SourceAssetDB has modification time of '2022-02-25T00:20:26.176834Z' while content on disk has modification time of '2022-02-25T00:20:26.3832819Z')
+  ERROR: Build asset version error: assets/scripts/textchange/languagechanger.cs in SourceAssetDB has modification time of '2022-02-25T00:20:26.176834Z' while content on disk has modification time of '2022-02-25T00:20:26.3832819Z'
+  Import took 0.004926 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 29.385611 seconds.
+  path: Assets/Scripts/TextChange/LanguageChanger.cs
+  artifactKey: Guid(6cef39695522adb469bdce6e34d4dcff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/TextChange/LanguageChanger.cs using Guid(6cef39695522adb469bdce6e34d4dcff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6d69fc56a07c1f8952a677baa43728a1') in 0.004367 seconds 
+  Import took 0.009923 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 35.385120 seconds.
+  path: Assets/Scripts/TextChange/LanguageChanger.cs
+  artifactKey: Guid(6cef39695522adb469bdce6e34d4dcff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/TextChange/LanguageChanger.cs using Guid(6cef39695522adb469bdce6e34d4dcff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000389 seconds  code(4) message(Build asset version error: assets/scripts/textchange/languagechanger.cs in SourceAssetDB has modification time of '2022-02-25T00:21:30.9760379Z' while content on disk has modification time of '2022-02-25T00:21:31.18448Z')
+  ERROR: Build asset version error: assets/scripts/textchange/languagechanger.cs in SourceAssetDB has modification time of '2022-02-25T00:21:30.9760379Z' while content on disk has modification time of '2022-02-25T00:21:31.18448Z'
+  Import took 0.004820 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 3.941278 seconds.
+  path: Assets/Scripts/TextChange/LanguageChanger.cs
+  artifactKey: Guid(6cef39695522adb469bdce6e34d4dcff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/TextChange/LanguageChanger.cs using Guid(6cef39695522adb469bdce6e34d4dcff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '489f89ff80d137ef90fb4beb22617d0f') in 0.003826 seconds 
+  Import took 0.008362 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 18.043559 seconds.
+  path: Assets/Scripts/TextChange/LanguageChanger.cs
+  artifactKey: Guid(6cef39695522adb469bdce6e34d4dcff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/TextChange/LanguageChanger.cs using Guid(6cef39695522adb469bdce6e34d4dcff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '197f7b87db710141c9c96d3a2e5060d0') in 0.003616 seconds 
+  Import took 0.008624 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 37.628371 seconds.
+  path: Assets/Scripts/TextChange/LanguageChanger.cs
+  artifactKey: Guid(6cef39695522adb469bdce6e34d4dcff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/TextChange/LanguageChanger.cs using Guid(6cef39695522adb469bdce6e34d4dcff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd6a3719b766e0c4a1e13a3a439d8eb09') in 0.003526 seconds 
+  Import took 0.008242 seconds .
 
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
-Registered in 0.266828 seconds.
+Registered in 0.013189 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 1.03 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 1.01 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 GPGSUpgrader start
 UnityEngine.StackTraceUtility:ExtractStackTrace ()
@@ -197,43 +343,43 @@ UnityEditor.EditorAssemblies:ProcessInitializeOnLoadAttributes (System.Type[])
 (Filename: Assets/GooglePlayGames/Editor/GPGSUpgrader.cs Line: 57)
 
 Mono: successfully reloaded assembly
-- Completed reload, in  1.165 seconds
+- Completed reload, in  1.225 seconds
 Domain Reload Profiling:
-	ReloadAssembly (1166ms)
-		BeginReloadAssembly (118ms)
+	ReloadAssembly (1225ms)
+		BeginReloadAssembly (124ms)
 			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (5ms)
+			DisableScriptedObjects (7ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (40ms)
-		EndReloadAssembly (992ms)
-			LoadAssemblies (99ms)
+			CreateAndSetChildDomain (42ms)
+		EndReloadAssembly (1040ms)
+			LoadAssemblies (110ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (304ms)
+			SetupTypeCache (323ms)
 			ReleaseScriptCaches (1ms)
 			RebuildScriptCaches (49ms)
-			SetupLoadedEditorAssemblies (425ms)
+			SetupLoadedEditorAssemblies (456ms)
 				LogAssemblyErrors (0ms)
 				InitializePlatformSupportModulesInManaged (4ms)
 				SetLoadedEditorAssemblies (0ms)
 				RefreshPlugins (1ms)
-				BeforeProcessingInitializeOnLoad (98ms)
+				BeforeProcessingInitializeOnLoad (124ms)
 				ProcessInitializeOnLoadAttributes (259ms)
-				ProcessInitializeOnLoadMethodAttributes (56ms)
+				ProcessInitializeOnLoadMethodAttributes (61ms)
 				AfterProcessingInitializeOnLoad (6ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
 			AwakeInstancesAfterBackupRestoration (9ms)
 Platform modules already initialized, skipping
 Switching build target platform(19) subTarget(0) extendedPlatform(0) -> platform(13) subTarget(537395200) extendedPlatform(0)
-Refreshing native plugins compatible for Editor in 0.98 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 1.00 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 2857 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 125.6 MB.
-System memory in use after: 124.6 MB.
+System memory in use before: 122.3 MB.
+System memory in use after: 121.3 MB.
 
-Unloading 113 unused Assets to reduce memory usage. Loaded Objects now: 3359.
-Total: 7.162300 ms (FindLiveObjects: 0.221100 ms CreateObjectMapping: 0.126000 ms MarkObjects: 6.026300 ms  DeleteObjects: 0.788100 ms)
+Unloading 113 unused Assets to reduce memory usage. Loaded Objects now: 3315.
+Total: 8.100500 ms (FindLiveObjects: 0.354200 ms CreateObjectMapping: 0.158300 ms MarkObjects: 6.795100 ms  DeleteObjects: 0.791700 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 

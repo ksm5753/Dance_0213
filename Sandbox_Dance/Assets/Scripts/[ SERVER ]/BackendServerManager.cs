@@ -41,6 +41,8 @@ public class BackendServerManager : MonoBehaviour
     [SerializeField]string userIndate;
     string scoreIndate;
 
+    string userInDateScore;
+
 
     public string rankUuid = "";
 
@@ -402,6 +404,12 @@ public class BackendServerManager : MonoBehaviour
     }
     #endregion
 
+    #region 로그아웃
+    public void LogOut()
+    {
+        Backend.BMember.Logout();
+    }
+    #endregion
     //=================================================================================================
     #region 광고
     public int getAdviceReset()
@@ -443,22 +451,105 @@ public class BackendServerManager : MonoBehaviour
     #region 랭크 시스템
 
     #region 점수 등록
-    public void UpdateScore(int point)
+    internal void InsertScore(int _score)
     {
         Param param = new Param();
-        param.Add("score", point);
+        param.Add("score", _score);
 
-        Enqueue(Backend.GameData.Insert, "score", param, insertScoreBro =>
+        Backend.GameData.Insert("score", param, insertScoreBro =>
         {
             Debug.Log("InsertScore - " + insertScoreBro);
-            scoreIndate = insertScoreBro.GetInDate();
+            userInDateScore = insertScoreBro.GetInDate();
 
-            Enqueue(Backend.URank.User.UpdateUserScore, rankUuid, "score", scoreIndate, param, updateScoreBro =>
+            Enqueue(Backend.URank.User.UpdateUserScore, rankUuid, "score", userInDateScore, param, updateScoreBro =>
             {
-                if (updateScoreBro.IsSuccess())
-                    Debug.Log("UpdateUserScore - " + updateScoreBro);
+                Debug.Log("UpdateUserScore - " + updateScoreBro);
             });
         });
+    }
+
+    private void UpdateScore(int _score)
+    {
+
+        // 서버로 삽입할 데이터 생성
+        Param param = new Param();
+        param.Add("score", _score);
+
+        Backend.URank.User.UpdateUserScore(rankUuid, "score", userInDateScore, param, updateScoreBro =>
+        {
+            Debug.Log("UpdateUserScore - " + updateScoreBro);
+            if (updateScoreBro.IsSuccess())
+            {
+            }
+            else
+            {
+            }
+        });
+    }
+    public void UpdateScore2(int _score)
+    {
+        // 유저 스코어 조회해보지 않은 경우
+        if (string.IsNullOrEmpty(userInDateScore))
+        {
+            Backend.GameData.Get("score", new Where(), myScoreBro =>
+            {
+                Debug.Log("플레이어 점수 정보 - " + myScoreBro.ToString());
+                if (myScoreBro.IsSuccess())
+                {
+                    JsonData userData = myScoreBro.GetReturnValuetoJSON()["rows"];
+                    // 유저 스코어가 존재하는 경우
+                    if (userData.Count > 0)
+                    {
+                        userInDateScore = userData[0]["inDate"]["S"].ToString();
+
+                        // 유저 스코어 update
+                        if (Game.Instance().bestScore < _score)
+                            UpdateScore(_score);
+                    }
+                    // 유저 스코어가 존재하지 않는 경우
+                    else
+                    {
+                        // 유저 스코어 insert
+                        InsertScore(_score);
+                    }
+                }
+                else
+                {
+                    InsertScore(_score);
+                }
+            });
+        }
+        else
+        {
+            UpdateScore(_score);
+        }
+    }
+    public void UpdateScores(int point)
+    {
+        var bro = Backend.GameData.GetMyData("score", new Where());
+        //bro.GetReturnValuetoJSON["rows"][0]["score"]["N"]
+        string myScore = "0";
+        print(myRankData.score == null);
+        myScore = myRankData.score == null ? myRankData.score : "0";
+
+        if (point > int.Parse(myScore))
+        {
+            Param param = new Param();
+            param.Add("score", point);
+
+            Enqueue(Backend.GameData.Insert, "score", param, insertScoreBro =>
+            {
+                Debug.Log("InsertScore - " + insertScoreBro);
+                scoreIndate = insertScoreBro.GetInDate();
+
+                Enqueue(Backend.URank.User.UpdateUserScore, rankUuid, "score", scoreIndate, param, updateScoreBro =>
+                {
+                    if (updateScoreBro.IsSuccess())
+                        Debug.Log("UpdateUserScore - " + updateScoreBro);
+                });
+            });
+        }
+        
     }
     #endregion
 
@@ -556,8 +647,105 @@ public class BackendServerManager : MonoBehaviour
     //=================================================================================================
     #region 카드 시스템
 
+    public void SetCard(int cardNum, string cardReward)
+    {
+        Param param = new Param();
+        param.Add("Card " + string.Format("{0:D3}", cardNum), cardReward);
+        Backend.GameData.Update("Option5", new Where(), param);
+    }
+
     #region 카드 뽑기
+
+    public void ANG()
+    {
+        //Enqueue(Backend.GameData.GetMyData, "Option5", new Where(), callback =>
+        //{
+        //    if (callback.IsSuccess())
+        //    {
+        //        foreach (JsonData row in BackendReturnObject.Flatten(callback.Rows()))
+        //        {
+        //            print("B");
+        //            string[] ANG = row["Card " + string.Format("{0:D3}", 1)].ToString().Split('+');
+        //            var cardNum = row[0]["Card 001"]["N"];
+        //            print("ANG" + ANG[0].ToString());
+        //        }
+        //    }
+        //    else print("A : " + callback);
+        //});
+
+        Enqueue(Backend.GameData.GetMyData, "Option5", new Where(), callback =>
+        {
+            if (callback.IsSuccess())
+            {
+                foreach (JsonData row in BackendReturnObject.Flatten(callback.Rows()))
+                {
+                        string[] ANG = row["Card " + string.Format("{0:D3}", 1)].ToString().Split('+');
+                        print(int.Parse(ANG[0]));
+                }
+
+            }
+            else print("GetUserCards() - " + callback);
+        });
+    }
     public void DrawCard(bool isOne)
+    {
+        Enqueue(Backend.Probability.GetProbabilitys, "4044", isOne ? 1 : 11, callback =>
+        {
+            for (int i = 0; i < (isOne ? 1 : 11); i++)
+            {
+                string data = callback.GetReturnValuetoJSON()["elements"][i]["itemID"]["S"].ToString().Split('i')[1];
+                print("Card " + data);
+                string cardNum = "";
+                string cardNum2 = "";
+
+                int n = i;
+
+                var bro = Backend.GameData.GetMyData("Option5", new Where());
+                if (bro.IsSuccess())
+                {
+                    foreach (JsonData row in BackendReturnObject.Flatten(bro.Rows()))
+                    {
+                        string[] ANG = row["Card " + string.Format("{0:D3}", data)].ToString().Split('+');
+                        print(int.Parse(ANG[0]));
+                        cardNum = string.Format("{0:D3}", (int.Parse(ANG[0]) + 1));
+                        cardNum2 = int.Parse(ANG[1]).ToString();
+                    }
+                }
+                else print("A : " + callback);
+
+                print("Card " + data + ", " + cardNum + "+" + cardNum2);
+                Param param = new Param();
+                param.Add("Card " + data, cardNum + "+" + cardNum2);
+
+
+                Enqueue(Backend.GameData.Update, "Option5", new Where(), param, callback =>
+                {
+                    if (callback.IsSuccess())
+                    {
+                        LobbyUI.GetInstance().drawCardUI.SetActive(true);
+                        if (isOne)
+                        {
+                            LobbyUI.GetInstance().drawCardUI.GetComponent<CardChanger>().maxNum = 1;
+                            LobbyUI.GetInstance().drawCardUI.GetComponent<CardChanger>().oneOrMany[1].SetActive(false);
+                            LobbyUI.GetInstance().drawCardUI.GetComponent<CardChanger>().oneOrMany[0].SetActive(true);
+                            LobbyUI.GetInstance().drawCardUI.GetComponent<CardChanger>().OneCard(int.Parse(data.ToString()));
+                        }
+
+                        else
+                        {
+                            LobbyUI.GetInstance().drawCardUI.GetComponent<CardChanger>().maxNum = 11;
+                            LobbyUI.GetInstance().drawCardUI.GetComponent<CardChanger>().oneOrMany[0].SetActive(false);
+                            LobbyUI.GetInstance().drawCardUI.GetComponent<CardChanger>().oneOrMany[1].SetActive(true);
+                            LobbyUI.GetInstance().drawCardUI.GetComponent<CardChanger>().smallCardsNum[n] = int.Parse(data);
+                            LobbyUI.GetInstance().drawCardUI.GetComponent<CardChanger>().SmallCards(int.Parse(data), n);
+                        }
+                    }
+                    else print("DrawCard() - " + callback);
+                });
+            }
+        });
+    }
+    public void DrawCards(bool isOne)
     {
 
         Enqueue(Backend.Probability.GetProbabilitys, "4044", isOne ? 1 : 11, callback =>
@@ -609,7 +797,9 @@ public class BackendServerManager : MonoBehaviour
                 {
                     for (int i = 0; i < 100; i++)
                     {
-                        LobbyUI.GetInstance().setCardInfo(i, row["Card " + string.Format("{0:D3}", (i + 1))].ToString());
+                        string[] ANG = row["Card " + string.Format("{0:D3}", i + 1)].ToString().Split('+');
+
+                        LobbyUI.GetInstance().setCardInfo(i, int.Parse(string.Format("{0:#,0}", ANG[0])), int.Parse(ANG[1]));
                     }
                 }
 
@@ -626,7 +816,6 @@ public class BackendServerManager : MonoBehaviour
     #region 상점 요소
 
     #region 현재 가지고 있는 재화 정보
-
     public void GetMyMoney()
     {
         Backend.GameData.GetMyData("User", new Where(), callback =>
@@ -783,13 +972,29 @@ public class BackendServerManager : MonoBehaviour
     }
     #endregion
 
+    #region 다이아 획득
+    public void GetDiamond(int num)
+    {
+        var bro = Backend.GameData.GetMyData("User", new Where());
+            if (bro.IsSuccess())
+            {
+                var money = bro.GetReturnValuetoJSON()["rows"][0]["Diamond"]["N"].ToString();
+
+                Param param = new Param();
+                param.Add("Diamond", int.Parse(money) + num);
+
+                Backend.GameData.Update("User", new Where(), param);
+            }
+    }
     #endregion
 
-    //=================================================================================================
+            #endregion
+
+            //=================================================================================================
 
 
-    #region 게임 처음 초기화
-    public void InitalizeGameData()
+            #region 게임 처음 초기화
+            public void InitalizeGameData()
     {
         Enqueue(Backend.GameData.Get, "User", new Where(), callback =>
         {
@@ -815,7 +1020,7 @@ public class BackendServerManager : MonoBehaviour
                     Param param2 = new Param();
                     for (int i = 0; i < 100; i++)
                     {
-                        param2.Add("Card " + string.Format("{0:D3}", (i + 1)), 0);
+                        param2.Add("Card " + string.Format("{0:D3}", (i + 1)), "000+0");
                     }
 
                     for (int i = 1; i <= 5; i++)
