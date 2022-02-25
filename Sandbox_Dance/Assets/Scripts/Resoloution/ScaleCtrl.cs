@@ -49,7 +49,7 @@ public class ScaleCtrl : MonoBehaviour
                 LobbyUI.GetInstance().Initialize();
                 break;
             case "3. Game":
-                Game.Instance.Initialize();
+                Game.Instance().Initialize();
                 break;
         }
     }

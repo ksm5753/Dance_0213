@@ -10,6 +10,7 @@ public class SeeAdForCard : MonoBehaviour
 {
     public static SeeAdForCard instance;
     private RewardedAd rewardedAd;
+    public bool isStartGame;
     // Start is called before the first frame update
     void Start()
     {
@@ -75,8 +76,9 @@ public class SeeAdForCard : MonoBehaviour
         AdRequest request = new AdRequest.Builder().Build();
         // Load the rewarded ad with the request.
         this.rewardedAd.LoadAd(request);
-        LobbyUI.GetInstance().SetAdCount();
-        BackendServerManager.GetInstance().DrawCard(true);
+        if (!isStartGame) BackendServerManager.GetInstance().DrawCard(true);
+
+        else LobbyUI.GetInstance().GameStart();
     }
 
     public void HandleUserEarnedReward(object sender, Reward args)
@@ -90,19 +92,23 @@ public class SeeAdForCard : MonoBehaviour
 
     public void UserChoseToWatchAd()
     {
-        int adNum = BackendServerManager.GetInstance().getAdviceCount(); // ÇÃ·¹ÀÌ¾îÀÇ ±¤°í º» È½¼ö)
-        if (adNum < 5)
+        if (isStartGame)
         {
-            if (this.rewardedAd.IsLoaded())
+            int adNum = BackendServerManager.GetInstance().getAdviceCount(); // ÇÃ·¹ÀÌ¾îÀÇ ±¤°í º» È½¼ö)
+            if (adNum < 5)
             {
-                this.rewardedAd.Show();
-                BackendServerManager.GetInstance().setAdviceCount(adNum + 1);
+                if (this.rewardedAd.IsLoaded())
+                {
+                    this.rewardedAd.Show();
+                    BackendServerManager.GetInstance().setAdviceCount(adNum + 1);
+                    LobbyUI.GetInstance().SetAdCount();
+                }
             }
-        
         }
+
         else
         {
-          
+            
         }
     }
 

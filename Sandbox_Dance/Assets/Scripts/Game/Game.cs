@@ -68,6 +68,7 @@ public class Game : MonoBehaviour
     public Toggle[] itemBuyBtns; // 0 : 무적아이템, 1 : 시간 증가, 2 : 부활....아이템 구매 버튼들
 
     public GameObject[] UIOBjs; // 게임이 시작되면 꺼야할 OBJ
+    public GameObject[] resultMenuBtn;
 
     [Header("점수")]
     public Text resultText;
@@ -82,7 +83,7 @@ public class Game : MonoBehaviour
     // 게임 진행 관련
     [SerializeField] bool isPlaying = true; // 현재 게임이 진행중인지 {true = 진행중, false = 일시정지}
 
-    private static Game instance = null;
+    private static Game instance;
 
     void Update()
     {
@@ -132,16 +133,6 @@ public class Game : MonoBehaviour
                 SoundManager.Instance.PlayBGM(0);
                 isDancing = false;
             }
-        }
-
-        if (!isDance && !isPlaying)
-        {
-            for (int i = 0; i < students.Length; i++)
-            {
-                students[i].GetComponent<Image>().sprite = studentImages[setStudentNum[i]].image[4].studentPosImage;
-                students[i].transform.SetSiblingIndex(1);
-            }
-            isDancing = false;
         }
     }
 
@@ -221,8 +212,9 @@ public class Game : MonoBehaviour
                 isPlaying = false;
                 SoundManager.Instance.Vibrate();
                 CancelInvoke("TeacherChange");
-
-                Invoke("EndGame", 0.6f);
+                SpineTeacher.GetComponent<TeacherMove>().Move(3);
+                MakeResult();
+                Invoke("EndGame", 0.3f);
             }
 
             // 남은 시간이 최대시간을 초과할경우 그이상로 올라가지 못하도록 막아준다.
@@ -258,7 +250,10 @@ public class Game : MonoBehaviour
             if (typeFloat[0].inspecter[1].variable < 0 && isPlaying)
             {
                 isPlaying = false;
-                EndGame();
+                SoundManager.Instance.Vibrate();
+                CancelInvoke("TeacherChange");
+                MakeResult();
+                Invoke("EndGame", 0.3f);
             }
         }
     }
@@ -275,7 +270,7 @@ public class Game : MonoBehaviour
         {
             typeFloat[2].inspecter[2].variable = 0;
         }
-        SpineTeacher.GetComponent<SoldierT>().Move((byte)typeFloat[2].inspecter[2].variable);
+        SpineTeacher.GetComponent<TeacherMove>().Move((byte)typeFloat[2].inspecter[2].variable);
         // turnTime 이후 다시 이 함수 실행
         Invoke("TeacherChange", turnTime);
     }
@@ -285,23 +280,53 @@ public class Game : MonoBehaviour
     {
         SoundManager.Instance.bgmSource.Pause();
         resultWin.SetActive(true);
-        score = Mathf.RoundToInt(score);
-        BackendServerManager.GetInstance().UpdateScore((int)score * 10);
-        BackendServerManager.GetInstance().GiveMoney(finalPrice);
 
-        finalPrice = Mathf.RoundToInt(score / 10);
+        score = Mathf.RoundToInt(score);
+        finalPrice = Mathf.RoundToInt(score * 0.1f);
+
         resultText.text = score.ToString() +"0";
+
         pricesText[0].text = finalPrice.ToString();
+
         SoundManager.Instance.PlayEffect(1);
-        isPlaying = false;
-        CancelInvoke("TeacherChange");
+
+        if (!itemBtn[1].activeSelf)
+        {
+            resultMenuBtn[0].SetActive(true);
+            resultMenuBtn[1].SetActive(true);
+        }
+
+        else
+        {
+            resultMenuBtn[0].SetActive(false);
+            resultMenuBtn[1].SetActive(false);
+        }
+    }
+
+    void MakeResult()
+    {
+        if (!itemBtn[1].activeSelf)
+        {
+            score = Mathf.RoundToInt(score);
+            finalPrice = Mathf.RoundToInt(score * 0.1f);
+            BackendServerManager.GetInstance().GiveMoeny(finalPrice);
+            BackendServerManager.GetInstance().UpdateScore((int)score * 10);
+        }
+    }
+
+    public void SceneChange(string SceneName)
+    {
+        SceneManager.LoadScene(SceneName);
     }
 
     public void ContinueGame()
     {
         typeFloat[0].inspecter[1].variable = typeFloat[0].inspecter[1].variable + 2f;
+
         ResetGame();
         SoundManager.Instance.PlayBGM(0);
+
+        itemBtn[1].SetActive(false);
     }
 
     public void StartGame()
@@ -336,7 +361,7 @@ public class Game : MonoBehaviour
     {
         if (!isItemFog && typeFloat[1].inspecter[2].variable < typeFloat[1].inspecter[3].variable)
         {
-            SpineTeacher.GetComponent<SoldierT>().Move(0);
+            SpineTeacher.GetComponent<TeacherMove>().Move(0);
             typeFloat[1].inspecter[2].variable ++;
             typeFloat[2].inspecter[2].variable = 0;
             isItemFog = true;
@@ -360,14 +385,14 @@ public class Game : MonoBehaviour
         Invoke("TeacherChange", turnTime);
         isPlaying = true;
         typeFloat[2].inspecter[2].variable = 0;
-        SpineTeacher.GetComponent<SoldierT>().Move(0);
+        SpineTeacher.GetComponent<TeacherMove>().Move(0);
         resultWin.SetActive(false);
-    }
-
-    public void SceneChange(string SceneName)
-    {
-        print(finalPrice);
-        SceneManager.LoadScene(SceneName);
+        for (int i = 0; i < students.Length; i++)
+        {
+            students[i].GetComponent<Image>().sprite = studentImages[setStudentNum[i]].image[4].studentPosImage;
+            students[i].transform.SetSiblingIndex(1);
+        }
+        isDancing = false;
     }
 
     public void PauseBtn(bool pauseOrPlay)
@@ -415,17 +440,11 @@ public class Game : MonoBehaviour
     }
     #endregion
 
-    public static Game Instance
+    public static Game Instance()
     {
-        
-        get
-        {
-            if (instance == null)
-            {
-                return null;
-            }
-            return instance;
-        }
+        if (instance == null) return null;
+
+        return instance;
     }
 
     //해상도 초기화
@@ -444,7 +463,6 @@ public class Game : MonoBehaviour
 
     void Start()
     {
-
         for(int i = 0; i < students.Length; i++)
         {
             MakeStudentNum();

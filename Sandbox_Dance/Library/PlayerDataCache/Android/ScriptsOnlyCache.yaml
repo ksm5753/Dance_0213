@@ -15,8 +15,8 @@ ScriptsOnlyBuild:
     - ScaleCtrl
     - SeeAdForCard
     - SendQueueMgr
-    - SoldierT
     - SoundManager
+    - TeacherMove
     Coffee.UIParticle.dll:
     - Coffee.UIExtensions.UIParticle
     - Coffee.UIParticleExtensions.BakingCamera
@@ -41,8 +41,6 @@ ScriptsOnlyBuild:
     - UnityEditor.Tilemaps.TilemapPrefabStageHelper
     Unity.Rider.Editor.dll:
     - Packages.Rider.Editor.UnitTesting.CallbackData
-    Unity.Timeline.Editor.dll:
-    - TimelineProjectSettings
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
     - UnityEditor.TestTools.TestRunner.TestListCacheData
@@ -343,7 +341,7 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 6426}
     - Class: 114
-      Script: {instanceID: 6758}
+      Script: {instanceID: 73862}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -843,7 +841,7 @@ ScriptsOnlyBuild:
     className: NearbyHelperObject
   - hash:
       serializedVersion: 2
-      Hash: 3c693664b023a1e49c2ed6c5892dd468
+      Hash: 41c14b149fc56779c792aeec09239c4f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Game
@@ -1083,12 +1081,6 @@ ScriptsOnlyBuild:
     className: SkeletonUtilityBone
   - hash:
       serializedVersion: 2
-      Hash: e54bc656a266829e6fee8ed039403247
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: StudentPos
-  - hash:
-      serializedVersion: 2
       Hash: 0edeba255bdbade25edc357f1412ba38
     assemblyName: Unity.2D.SpriteShape.Runtime.dll
     namespaceName: UnityEngine.U2D
@@ -1129,12 +1121,6 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: ScrollRect
-  - hash:
-      serializedVersion: 2
-      Hash: add6223cabf6dacf7118dca91348965c
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: SoldierT
   - hash:
       serializedVersion: 2
       Hash: f095ac18fe20b4abb8fe229774c9d920
@@ -1197,7 +1183,7 @@ ScriptsOnlyBuild:
     className: SignalEmitter
   - hash:
       serializedVersion: 2
-      Hash: b4319020f80bc5fcf0c3c96091b1bd06
+      Hash: c34571c7c5fb2d4d7ea5a22fdf285ed1
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: BackendServerManager
@@ -1219,9 +1205,15 @@ ScriptsOnlyBuild:
     assemblyName: Unity.2D.IK.Runtime.dll
     namespaceName: UnityEngine.U2D.IK
     className: FabrikSolver2D
+  - hash:
+      serializedVersion: 2
+      Hash: 412819600718079385f7b1cff4ec3f60
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: TeacherMove
   platform: 13
   scenePathNames:
   - Assets/Scenes/1. Login.unity
   - Assets/Scenes/2. Lobby.unity
   - Assets/Scenes/3. Game.unity
-  playerPath: C:/Users/COM/Desktop/NewGit/Dance_0213/Sandbox_Dance/1.apk
+  playerPath: C:/Users/showmethevrgr07/Desktop/0223.apk

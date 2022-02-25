@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using Spine.Unity;
 using Spine;
+using Spine.Unity;
 
 public class CardChanger : MonoBehaviour
 {

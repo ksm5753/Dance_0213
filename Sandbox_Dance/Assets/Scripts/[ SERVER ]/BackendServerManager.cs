@@ -38,7 +38,8 @@ public class BackendServerManager : MonoBehaviour
 
     public int myMoney;
 
-    string userIndate;
+    [SerializeField]string userIndate;
+    string scoreIndate;
 
 
     public string rankUuid = "";
@@ -450,9 +451,9 @@ public class BackendServerManager : MonoBehaviour
         Enqueue(Backend.GameData.Insert, "score", param, insertScoreBro =>
         {
             Debug.Log("InsertScore - " + insertScoreBro);
-            userIndate = insertScoreBro.GetInDate();
+            scoreIndate = insertScoreBro.GetInDate();
 
-            Enqueue(Backend.URank.User.UpdateUserScore, rankUuid, "score", userIndate, param, updateScoreBro =>
+            Enqueue(Backend.URank.User.UpdateUserScore, rankUuid, "score", scoreIndate, param, updateScoreBro =>
             {
                 if (updateScoreBro.IsSuccess())
                     Debug.Log("UpdateUserScore - " + updateScoreBro);
@@ -665,16 +666,20 @@ public class BackendServerManager : MonoBehaviour
 
     #endregion
 
-    public void GiveMoney(int num)
+    public void GiveMoeny(int num)
     {
-        Enqueue(Backend.GameData.GetMyData, "User", new Where(), callback =>
+        Backend.GameData.GetMyData("User", new Where(),bro => 
         {
-            var money = callback.GetReturnValuetoJSON()["rows"][0]["Gold"]["N"].ToString();
+            if (bro.IsSuccess())
+            {
+                var money = bro.GetReturnValuetoJSON()["rows"][0]["Gold"]["N"].ToString();
 
-            Param param = new Param();
-            param.Add("Gold", int.Parse(money) + num);
-            print(int.Parse(money) + num);
-            Backend.GameData.UpdateV2("User", userIndate, Backend.UserInDate, param);
+                Param param = new Param();
+
+                param.Add("Gold", int.Parse(money) + num);
+
+                Backend.GameData.UpdateV2("User", userIndate, Backend.UserInDate, param);
+            }
         });
     }
 

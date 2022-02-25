@@ -1,5 +1,4 @@
 using BackEnd;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -40,6 +39,7 @@ public class LobbyUI : MonoBehaviour
     public GameObject closeAppUI;
     public Sprite[] cardOutLine;
     public Text adCount;
+    public int testBOmb = 40; // 임시 확률
 
     [Space(15f)]
     [Header("DrawCard Panel")]
@@ -114,6 +114,16 @@ public class LobbyUI : MonoBehaviour
     {
         adCount.text = (5 - BackendServerManager.GetInstance().getAdviceCount()).ToString();
     }
+    public void GameStart()
+    {
+        int randomNum = Random.Range(1, 101);
+        if(randomNum <= testBOmb)
+        {
+
+        }
+
+        else SceneManager.LoadScene("3. Game");
+    }
 
     #region 닉네임 설정
     private void setNickName()
@@ -134,8 +144,6 @@ public class LobbyUI : MonoBehaviour
     public void BuyWithGold(int num) => BackendServerManager.GetInstance().BuyItems(num, true);
 
     public void BuyWithDiamond(int num) => BackendServerManager.GetInstance().BuyItems(num, false);
-
-    public void GameStart() => SceneManager.LoadScene("3. Game");
 
     public void getRankInfo() => BackendServerManager.GetInstance().getRank();
 
@@ -221,6 +229,8 @@ public class LobbyUI : MonoBehaviour
 
     void DiscardCard(int cardCount)
     {
+        //if(이곳에 현재 바꿀수 있는 자격? 이 있는지 확인하는 코드)
+        //{
         int getRubyNum = 0;
 
         if (cardCount > 100) getRubyNum = 10;
@@ -238,7 +248,7 @@ public class LobbyUI : MonoBehaviour
         // 플레이어 루비 += getRubyNum;
         getRubyInfo.SetActive(true);
         getRubyInfo.transform.GetChild(2).GetComponent<Text>().text = getRubyNum + " 개 획득";
-        cardInfo.transform.GetChild(5).GetComponent<Button>().onClick.AddListener(() => cardInfo.transform.GetChild(5).GetComponent<Button>().onClick.RemoveAllListeners());
+        //}
     }
 
 
