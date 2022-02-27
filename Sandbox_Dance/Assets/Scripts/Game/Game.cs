@@ -63,6 +63,7 @@ public class Game : MonoBehaviour
 
     public GameObject[] UIOBjs; // 게임이 시작되면 꺼야할 OBJ
     public GameObject[] resultMenuBtn;
+    public GameObject tutoObj;
 
     [Header("점수")]
     public Text resultText;
@@ -77,7 +78,6 @@ public class Game : MonoBehaviour
 
     // 게임 진행 관련
     [SerializeField] bool isPlaying = true; // 현재 게임이 진행중인지 {true = 진행중, false = 일시정지}
-
 
     public static Game instance;
 
@@ -108,10 +108,12 @@ public class Game : MonoBehaviour
             UIOBjs[3].SetActive(true);
             needMoney = 0;
         }
+        Tuto();
     }
     void EndGame()
     {
         SoundManager.Instance.bgmSource.Pause();
+        SoundManager.Instance.gameBgm_2.Pause();
         resultWin.SetActive(true);
 
         score = Mathf.RoundToInt(score);
@@ -238,7 +240,7 @@ public class Game : MonoBehaviour
                     }
                     students[i].GetComponentsInChildren<SkeletonGraphic>()[2].enabled = false;
                     students[i].transform.SetSiblingIndex(2);
-                    students[i].transform.localPosition = new Vector3(0, -195, 0);
+                    students[i].transform.localPosition = new Vector3(0, -150, 0);
                 }
             }
         }
@@ -291,13 +293,13 @@ public class Game : MonoBehaviour
 
                     float turnTime = Random.Range(typeFloat[2].inspecter[0].variable, typeFloat[2].inspecter[1].variable);
                     Invoke("TeacherChange", turnTime);
-
+                    BgmManage(false);
                     ChangeStudentAct(false);
                 }
             }
 
             timeBar.GetComponent<RectTransform>().localScale = new Vector2((typeFloat[0].inspecter[1].variable / typeFloat[0].inspecter[0].variable), 1); // 남은시간 바
-            actBar.GetComponent<RectTransform>().localScale = new Vector2((typeFloat[3].inspecter[1].variable / typeFloat[3].inspecter[0].variable), 1); // 경험치 바
+            actBar.GetComponent<RectTransform>().localScale = new Vector2((typeFloat[3].inspecter[1].variable / typeFloat[3].inspecter[0].variable), 1); // 경험치 
             currentScoreText.text = Mathf.RoundToInt(score).ToString() + "0";
 
             if (typeFloat[3].inspecter[2].variable != 0) score += typeFloat[3].inspecter[2].variable * Time.deltaTime;
@@ -446,7 +448,7 @@ public class Game : MonoBehaviour
             isItemFog = true;
             isDancing = true;
             ChangeStudentAct(true);
-
+            BgmManage(isDancing);
             if (typeFloat[1].inspecter[3].variable <= typeFloat[1].inspecter[2].variable)
             {
                 itemBtn[0].SetActive(false);
@@ -456,29 +458,56 @@ public class Game : MonoBehaviour
     }
 
     #endregion
+
+    public void Tuto()
+    {
+        if (!PlayerPrefs.HasKey("Tutocheck"))
+        {
+            Time.timeScale = 0;
+            PlayerPrefs.SetInt("Tutocheck", 1);
+            tutoObj.SetActive(true);
+        }
+    }
+
     public void SceneChange(string SceneName)
     {
         SceneManager.LoadScene(SceneName);
     }
     public void DanceButton(bool isDance)
     {
-        if (isPlaying)
+        if (isPlaying && !isItemFog)
         {
+            BgmManage(isDance);
             if (isDance)
             {
                 ChangeStudentAct(true);
-                SoundManager.Instance.PlayBGM(1);
                 isDancing = true;
             }
 
             else
             {
                 ChangeStudentAct(false);
-                SoundManager.Instance.PlayBGM(0);
                 isDancing = false;
             }
         }
     }
+
+    void BgmManage(bool isDance)
+    {
+        switch (isDance)
+        {
+            case false:
+                SoundManager.Instance.bgmSource.Play();
+                SoundManager.Instance.gameBgm_2.Pause();
+                break;
+
+            case true:
+                SoundManager.Instance.bgmSource.Pause();
+                SoundManager.Instance.gameBgm_2.Play();
+                break;
+        }
+    }
+
     //해상도 초기화
     public void Initialize()
     {
@@ -486,6 +515,7 @@ public class Game : MonoBehaviour
         {
             i.SetActive(false);
         }
+        tutoObj.SetActive(false);
     }
     public static Game Instance()
     {

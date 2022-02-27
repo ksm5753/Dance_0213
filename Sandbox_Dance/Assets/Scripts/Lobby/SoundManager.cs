@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SoundManager : MonoBehaviour
 {
@@ -47,6 +48,7 @@ public class SoundManager : MonoBehaviour
     }
     public AudioSource bgmSource;
     public AudioSource effectAudio;
+    public AudioSource gameBgm_2;
 
     public AudioClip[] effectSounds;
     public AudioClip[] bgmClips;
@@ -78,6 +80,10 @@ public class SoundManager : MonoBehaviour
     void Update()
     {
         bgmSource.mute = PlayerPrefs.GetInt("BGM_Mute") == 1 ? false : true;
+        if(SceneManager.GetActiveScene().name == "3. Game")
+        {
+            gameBgm_2.mute = PlayerPrefs.GetInt("BGM_Mute") == 1 ? false : true;
+        }
         effectAudio.mute = PlayerPrefs.GetInt("Effect_Mute") == 1 ? false : true;
         viveOn = PlayerPrefs.GetInt("Vibrate_Mute") == 1 ? false : true;
     }
