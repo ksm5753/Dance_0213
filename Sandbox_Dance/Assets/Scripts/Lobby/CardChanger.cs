@@ -136,9 +136,27 @@ public class CardChanger : MonoBehaviour
         else cardStar = 1;
     }
 
+    public void SetBackEffectOnOff(bool isOn)
+    {
+        foreach (GameObject effecOn in smallCardsEffects)
+        {
+            if (isOn)
+            {
+                effecOn.SetActive(true);
+            }
+
+            else
+            {
+                effecOn.SetActive(false);
+            }
+        }
+    }
+
     public void SetBackEffect(GameObject targetCard)
     {
-        for(int i = 0; i < 4; i++)
+        SetBackEffectOnOff(true);
+
+        for (int i = 0; i < 4; i++)
         {
             targetCard.transform.GetComponentsInChildren<ParticleSystem>()[i].Stop();
         }

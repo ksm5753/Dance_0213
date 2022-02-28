@@ -729,6 +729,7 @@ public class BackendServerManager : MonoBehaviour
                             LobbyUI.GetInstance().drawCardUI.GetComponent<CardChanger>().oneOrMany[1].SetActive(false);
                             LobbyUI.GetInstance().drawCardUI.GetComponent<CardChanger>().oneOrMany[0].SetActive(true);
                             LobbyUI.GetInstance().drawCardUI.GetComponent<CardChanger>().OneCard(int.Parse(data.ToString()));
+                            LobbyUI.GetInstance().drawCardUI.GetComponent<CardChanger>().SetBackEffectOnOff(false);
                         }
 
                         else
