@@ -64,14 +64,20 @@ public class LanguageChanger : MonoBehaviour
             textChanger[i].targetText.text = Localize(textChanger[i].textKey);
         }
         
-        //for(int i =0; i<imageChanger.Length; i++)
-        //{
-        //    imageChanger[i].targetImage.sprite = imageChanger[i].images[PlayerPrefs.GetInt("LangIndex")].sprite;
-        //}
-
-        //for (int i = 0; i < spineChanger.Length; i++)
-        //{
-        //    spineChanger[i].targetImage.skeletonDataAsset = spineChanger[i].images[PlayerPrefs.GetInt("LangIndex")];
-        //}
+        if(imageChanger.Length > 0)
+        {
+            for (int i = 0; i < imageChanger.Length; i++)
+            {
+                imageChanger[i].targetImage.sprite = imageChanger[i].images[PlayerPrefs.GetInt("LangIndex")].sprite;
+            }
+        }
+        
+        if(spineChanger.Length > 0)
+        {
+            for (int i = 0; i < spineChanger.Length; i++)
+            {
+                spineChanger[i].targetImage.skeletonDataAsset = spineChanger[i].images[PlayerPrefs.GetInt("LangIndex")];
+            }
+        }
     }
 }
