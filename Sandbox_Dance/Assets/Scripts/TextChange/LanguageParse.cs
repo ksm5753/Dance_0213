@@ -47,7 +47,7 @@ public class LanguageParse : MonoBehaviour
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
-    const string googleURL = "https://docs.google.com/spreadsheets/d/1SOdETy7oZp6srpdxWKozUDfdutU2rOOTdfBK568Oo08/export?format=tsv";
+    const string googleURL = "https://docs.google.com/spreadsheets/d/1EqPPDrsSqoxyCojzLEEi8BAV1cfIv1o9X15DdUpqT9Q/export?format=tsv";
     public event System.Action LocalizeChnaged = () => { };
     public event System.Action LocalizeSettingChanged = () => { };
 

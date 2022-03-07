@@ -6915,8 +6915,8 @@ MonoBehaviour:
     textKey: "\uBD80\uD65C"
   - targetText: {fileID: 8225588464856146786}
     textKey: "\uC7AC\uD654\uAC00 \uBD80\uC871\uD569\uB2C8\uB2E4"
-  - targetText: {fileID: 0}
-    textKey: "\uC77C\uC2DC\uC815\uC9C0"
+  imageChanger: []
+  spineChanger: []
 --- !u!4 &1655788360
 Transform:
   m_ObjectHideFlags: 0

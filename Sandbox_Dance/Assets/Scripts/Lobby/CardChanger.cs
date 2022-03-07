@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.UI;
 using Spine;
 using Spine.Unity;
@@ -36,11 +37,13 @@ public class CardChanger : MonoBehaviour
 
     void Start()
     {
-        OneImage[1].AnimationState.Complete += Complete;
+        //OneImage[1].AnimationState.Complete += Complete;
     }
 
     public void OneCard(int cardNum) // 하나 뽑았을 때 실행
     {
+        SingleCard.GetComponent<PlayableDirector>().Play();
+        Debug.LogWarning(SingleCard.name);
         maxNum -= 1;
         oneOrMany[0].SetActive(true); // 하나 까기 켜주기
         CheckCardStar(cardNum);
@@ -73,6 +76,8 @@ public class CardChanger : MonoBehaviour
         smallCardsImage[cardIndex].GetComponent<Button>().onClick.AddListener(() => OneCard(cardNum));
         smallCardsImage[cardIndex].GetComponent<Button>().onClick.AddListener(() => SetCardIndex(cardIndex));
         smallCardsImage[cardIndex].GetComponent<Button>().onClick.AddListener(() => StartCoroutine(ActiveFalseSmallBack(cardIndex, 3.5f)));
+        smallCardsImage[cardIndex].GetComponent<Button>().onClick.AddListener(() => SingleCard.GetComponent<PlayableDirector>().Play());
+        smallCardsImage[cardIndex].GetComponent<Button>().onClick.AddListener(() => SoundManager.Instance.PlayEffect(3));
     }
 
     void SetCardIndex(int cardIndex)
@@ -92,7 +97,8 @@ public class CardChanger : MonoBehaviour
 
     public void Skip()
     {
-        SoundManager.Instance.PlayEffect(1);
+        SingleCard.GetComponent<PlayableDirector>().Stop();
+        SoundManager.Instance.PlayEffect(2);
         for (int i = 0; i < smallCardsImage.Length; i++)
         {
             cardStar = smallCardsNum[i];
@@ -107,7 +113,8 @@ public class CardChanger : MonoBehaviour
 
     public void SkipOne()
     {
-        SoundManager.Instance.PlayEffect(1);
+        SingleCard.GetComponent<PlayableDirector>().Stop();
+        SoundManager.Instance.PlayEffect(2);
         foreach (SkeletonGraphic cardSet in OneImage)
         {
             cardSet.AnimationState.SetAnimation(0, "card_" + cardStar + "-1", false);
