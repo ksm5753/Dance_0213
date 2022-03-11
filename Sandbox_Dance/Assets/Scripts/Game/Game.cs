@@ -6,6 +6,8 @@ using System.Data;
 using UnityEngine.SceneManagement;
 using Spine;
 using Spine.Unity;
+using UnityEngine.Timeline;
+using UnityEngine.Playables;
 
 public class Game : MonoBehaviour
 {
@@ -82,6 +84,12 @@ public class Game : MonoBehaviour
     public static Game instance;
 
     #region 게임 시작 부터 끝까지
+
+    public void TeacherMover()
+    {
+        SpineTeacher.GetComponent<PlayableDirector>().Play();
+    }
+
     public void StartGame()
     {
         typeFloat[0].inspecter[1].variable = typeFloat[0].inspecter[0].variable;
@@ -240,7 +248,7 @@ public class Game : MonoBehaviour
                     }
                     students[i].GetComponentsInChildren<SkeletonGraphic>()[2].enabled = false;
                     students[i].transform.SetSiblingIndex(2);
-                    students[i].transform.localPosition = new Vector3(0, -150, 0);
+                    students[i].transform.localPosition = new Vector3(0, -140, 0);
                 }
             }
         }
@@ -253,7 +261,7 @@ public class Game : MonoBehaviour
                 students[i].GetComponentsInChildren<SkeletonGraphic>()[1].enabled = false;
                 students[i].GetComponentsInChildren<SkeletonGraphic>()[2].enabled = false;
                 students[i].transform.SetSiblingIndex(1);
-                students[i].transform.localPosition = new Vector3(0, -150, 0);
+                students[i].transform.localPosition = new Vector3(0, -140, 0);
             }
         }
     }
@@ -264,7 +272,23 @@ public class Game : MonoBehaviour
         float turnTime = Random.Range(typeFloat[2].inspecter[0].variable, typeFloat[2].inspecter[1].variable);
 
         // 선생님 상태 변환
-        typeFloat[2].inspecter[2].variable += 1;
+        if(typeFloat[2].inspecter[2].variable == 1)
+        {
+            int randomNum = Random.Range(0, 2);
+            if (randomNum == 1)
+            {
+                typeFloat[2].inspecter[2].variable += 1;
+            }
+            else
+            {
+                typeFloat[2].inspecter[2].variable = 0;
+            }
+        }
+
+        else
+        {
+            typeFloat[2].inspecter[2].variable += 1;
+        }
 
         if (typeFloat[2].inspecter[2].variable > 2)
         {
