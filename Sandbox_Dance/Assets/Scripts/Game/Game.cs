@@ -224,7 +224,7 @@ public class Game : MonoBehaviour
                     students[i].GetComponentsInChildren<SkeletonGraphic>()[1].enabled = false;
                     students[i].GetComponentsInChildren<SkeletonGraphic>()[2].enabled = true;
                     students[i].transform.SetSiblingIndex(2);
-                    students[i].transform.localPosition = new Vector3(0, -395, 0);
+                    students[i].transform.localPosition = new Vector3(0, -500, 0);
                 }
             }
 
@@ -248,7 +248,7 @@ public class Game : MonoBehaviour
                     }
                     students[i].GetComponentsInChildren<SkeletonGraphic>()[2].enabled = false;
                     students[i].transform.SetSiblingIndex(2);
-                    students[i].transform.localPosition = new Vector3(0, -140, 0);
+                    students[i].transform.localPosition = new Vector3(0, -190, 0);
                 }
             }
         }
@@ -261,7 +261,7 @@ public class Game : MonoBehaviour
                 students[i].GetComponentsInChildren<SkeletonGraphic>()[1].enabled = false;
                 students[i].GetComponentsInChildren<SkeletonGraphic>()[2].enabled = false;
                 students[i].transform.SetSiblingIndex(1);
-                students[i].transform.localPosition = new Vector3(0, -140, 0);
+                students[i].transform.localPosition = new Vector3(0, -190, 0);
             }
         }
     }

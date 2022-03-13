@@ -2514,7 +2514,7 @@ GameObject:
   - component: {fileID: 676302813}
   m_Layer: 5
   m_Name: ItemSumuryText
-  m_TagString: Untagged
+  m_TagString: Element
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3426,7 +3426,7 @@ GameObject:
   - component: {fileID: 786048176}
   m_Layer: 5
   m_Name: ItemSumuryText
-  m_TagString: Untagged
+  m_TagString: Element
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5141,7 +5141,7 @@ GameObject:
   - component: {fileID: 1255242412}
   m_Layer: 5
   m_Name: ItemSumuryText
-  m_TagString: Untagged
+  m_TagString: Element
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
