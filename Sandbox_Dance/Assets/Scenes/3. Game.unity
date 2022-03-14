@@ -398,6 +398,7 @@ MonoBehaviour:
   bgmClips:
   - {fileID: 8300000, guid: 63d26957374094149aa8e0cb2882efcd, type: 3}
   - {fileID: 8300000, guid: 167a9cb95e4cb914bbff7b6163978cfb, type: 3}
+  - {fileID: 8300000, guid: 3394e73548a4bd24abcb20a9f2fe7275, type: 3}
 --- !u!1 &52070020
 GameObject:
   m_ObjectHideFlags: 0
@@ -3364,6 +3365,8 @@ PlayableDirector:
     value: {fileID: 778421779}
   - key: {fileID: -8048149149161308974, guid: a905c37bdf133e143bb9ca57cb2a608b, type: 2}
     value: {fileID: 778421780}
+  - key: {fileID: 8856589972325058004, guid: a905c37bdf133e143bb9ca57cb2a608b, type: 2}
+    value: {fileID: 1905525225}
   m_ExposedReferences:
     m_References:
     - 3613f43284070c04d9896e4edf108085: {fileID: 778421774}

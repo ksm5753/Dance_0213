@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 997
   m_ShowMode: 4
-  m_Title: Hierarchy
+  m_Title: Game
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 492}
   m_MaxSize: {x: 10000, y: 10000}
@@ -121,10 +121,10 @@ MonoBehaviour:
     y: 30
     width: 1920
     height: 947
-  m_MinSize: {x: 909, y: 442}
-  m_MaxSize: {x: 22004, y: 10000}
+  m_MinSize: {x: 911, y: 442}
+  m_MaxSize: {x: 22006, y: 10021}
   vertical: 0
-  controlID: 2343
+  controlID: 3933
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -149,7 +149,7 @@ MonoBehaviour:
   m_MinSize: {x: 201, y: 442}
   m_MaxSize: {x: 4001, y: 8042}
   vertical: 1
-  controlID: 2430
+  controlID: 4015
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -408,9 +408,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 420.61523, y: 1349.1604, z: -81.83505}
+    m_Target: {x: 572.5198, y: 1523.3059, z: -115.433014}
     speed: 2
-    m_Value: {x: 471.39978, y: 1333.1727, z: -77.20593}
+    m_Value: {x: 572.5198, y: 1523.3059, z: -115.433014}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -461,9 +461,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 1074.9846
+    m_Target: 1399.9095
     speed: 2
-    m_Value: 1028.6934
+    m_Value: 1399.9095
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -604,7 +604,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 72dcffff18deffffece1ffff16e3ffff5ee6fffffce9ffffd8f3fffff6f3fffffef4ffff94f6ffff9cf6ffff24fbffffd88a0000b68c0000128d00009ee7000046eb00004eeb000028ec00009cf0000040f90000983101009c310100d2710100d6710100
+      m_ExpandedIDs: a8b9ffff0ebdffff96c0ffff98c7ffff1ec8ffff32c9ffffd682000066870000108a0000148a0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -666,22 +666,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scenes
+    - Assets/Anim/dance/banhee_dance
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scenes
+  - Assets/Anim/dance/banhee_dance
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\showmethevrgr07\Desktop\newDance\Dance_0213\Sandbox_Dance
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 104d0000
-    m_LastClickedID: 19728
-    m_ExpandedIDs: 00000000804c0000824c0000844c0000864c0000884c00008a4c00008c4c00008e4c0000904c000000ca9a3b
+    m_SelectedIDs: fe830000
+    m_LastClickedID: 33790
+    m_ExpandedIDs: 00000000de830000e0830000e2830000e4830000e6830000e8830000ea830000ec830000ee83000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -709,7 +709,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000804c0000824c0000844c0000864c0000884c00008a4c00008c4c00008e4c0000904c000000ca9a3b
+    m_ExpandedIDs: 00000000de830000e0830000e2830000e4830000e6830000e8830000ea830000ec830000ee83000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -736,7 +736,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 1
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: cc5f00005a5200007a7b00004c660000000000004c7e0000f0630000ca640000
     m_RenameOverlay:
       m_UserAcceptedRename: 0

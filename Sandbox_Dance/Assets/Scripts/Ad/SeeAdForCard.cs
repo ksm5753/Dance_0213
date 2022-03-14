@@ -108,12 +108,12 @@ public class SeeAdForCard : MonoBehaviour
         if (!isStartGame)
         {
             int adNum = BackendServerManager.GetInstance().getAdviceCount(); // ÇÃ·¹ÀÌ¾îÀÇ ±¤°í º» È½¼ö)
-            if (adNum < 5)
+            if (adNum > 0)
             {
                 if (this.rewardedAd.IsLoaded())
                 {
                     this.rewardedAd.Show();
-                    BackendServerManager.GetInstance().setAdviceCount(adNum + 1);
+                    BackendServerManager.GetInstance().setAdviceCount(adNum - 1);
                     LobbyUI.GetInstance().SetAdCount();
                 }
             }

@@ -118,7 +118,7 @@ public class LobbyUI : MonoBehaviour
 
     public void SetAdCount()
     {
-        adCount.text = (5 - BackendServerManager.GetInstance().getAdviceCount()).ToString();
+        adCount.text = BackendServerManager.GetInstance().getAdviceCount().ToString();
     }
     public void GameStart()
     {

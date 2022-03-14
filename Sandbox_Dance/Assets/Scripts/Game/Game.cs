@@ -87,6 +87,7 @@ public class Game : MonoBehaviour
 
     public void TeacherMover()
     {
+        SoundManager.Instance.bgmSource.Stop();
         typeFloat[0].inspecter[1].variable = typeFloat[0].inspecter[0].variable;
         for (int i = 0; i < itemBuyBtns.Length; i++)
         {
@@ -115,6 +116,7 @@ public class Game : MonoBehaviour
 
     public void StartGame()
     {
+        SoundManager.Instance.PlayBGM(2);
         ResetGame();
         Tuto();
     }
