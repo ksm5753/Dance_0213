@@ -5,6 +5,7 @@ using GoogleMobileAds.Common;
 using UnityEngine.UI;
 using System;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class SeeAdForCard : MonoBehaviour
 {
@@ -79,9 +80,17 @@ public class SeeAdForCard : MonoBehaviour
         if (!isStartGame) BackendServerManager.GetInstance().DrawCard(true);
 
         else 
-        { 
-            LobbyUI.GetInstance().GameStart();
-            isStartGame = false;
+        {
+            if (SceneManager.GetActiveScene().name == "2. Lobby")
+            {
+                LobbyUI.GetInstance().GameStart();
+                isStartGame = false;
+            }
+
+            else
+            {
+                Game.instance.SceneChange("3. Game");
+            }
         }
     }
 

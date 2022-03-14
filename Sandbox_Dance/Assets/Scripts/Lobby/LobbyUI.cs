@@ -245,6 +245,11 @@ public class LobbyUI : MonoBehaviour
         }
     }
 
+    public void CloseCardInfo()
+    {
+        cardInfo.transform.GetChild(5).GetComponent<Button>().onClick.RemoveAllListeners();
+    }
+
     void DiscardCard(int cardNum, int cardCount, int reward)
     {
         int getRubyNum = 0;

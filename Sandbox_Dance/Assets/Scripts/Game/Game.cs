@@ -87,11 +87,6 @@ public class Game : MonoBehaviour
 
     public void TeacherMover()
     {
-        SpineTeacher.GetComponent<PlayableDirector>().Play();
-    }
-
-    public void StartGame()
-    {
         typeFloat[0].inspecter[1].variable = typeFloat[0].inspecter[0].variable;
         for (int i = 0; i < itemBuyBtns.Length; i++)
         {
@@ -103,12 +98,12 @@ public class Game : MonoBehaviour
         if (int.Parse(GameUI.GetInstance().coinText.text) >= needMoney)
         {
             BuyItemBtn();
-            ResetGame();
-            storeObj.SetActive(false);
             if (!isReviveOn)
             {
                 itemBtn[1].SetActive(false);
             }
+            storeObj.SetActive(false);
+            SpineTeacher.GetComponent<PlayableDirector>().Play();
         }
 
         else
@@ -116,6 +111,11 @@ public class Game : MonoBehaviour
             UIOBjs[3].SetActive(true);
             needMoney = 0;
         }
+    }
+
+    public void StartGame()
+    {
+        ResetGame();
         Tuto();
     }
     void EndGame()

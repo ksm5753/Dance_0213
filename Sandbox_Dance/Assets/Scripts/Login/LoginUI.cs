@@ -78,6 +78,7 @@ public class LoginUI : MonoBehaviour
                 if (result)
                 {
                     ChangeLobbyScene();
+                    Debug.Log("AAA");
                     return;
                 }
                 loadingObject.SetActive(false);

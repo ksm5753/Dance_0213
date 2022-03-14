@@ -74,6 +74,7 @@ public class BackendServerManager : MonoBehaviour
 #if !UNITY_EDITOR //안드로이드, iOS 환경에서만 작동
             GetVersionInfo();
 #endif
+            LoginUI.GetInstance().TouchStart();
         }
         else Debug.LogError("뒤끝 초기화 실패 : " + bro);
     }
@@ -399,7 +400,9 @@ public class BackendServerManager : MonoBehaviour
             myIndate = info["inDate"].ToString();
 
             if (loginSuccessFunc != null) //로그인 성공했으므로 매칭 리스트 값 불러옴
+            {
                 LoginUI.GetInstance().SuccessLogin(loginSuccessFunc);
+            }
         });
     }
     #endregion
