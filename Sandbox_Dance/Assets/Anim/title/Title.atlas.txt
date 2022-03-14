@@ -1,6 +1,6 @@
 Title.png
-size:598,618
+size:1734,1198
 filter:Linear,Linear
 pma:true
 Layer 0
-bounds:2,2,594,614
+bounds:2,2,1730,1194
