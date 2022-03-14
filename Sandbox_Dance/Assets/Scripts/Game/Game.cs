@@ -52,6 +52,7 @@ public class Game : MonoBehaviour
     [SerializeField] GameObject SpineTeacher; // 선생님 스파인 오브젝트
 
     [SerializeField] GameObject resultWin; // 결과창
+    bool isNeedWatch = false; // 선생님 뒤돌아보고있는거 체크
 
     [Header("아이템 관련")]
     public bool isItemFog; // 아이템이 사용중인가
@@ -226,7 +227,7 @@ public class Game : MonoBehaviour
                     students[i].GetComponentsInChildren<SkeletonGraphic>()[1].enabled = false;
                     students[i].GetComponentsInChildren<SkeletonGraphic>()[2].enabled = true;
                     students[i].transform.SetSiblingIndex(2);
-                    students[i].transform.localPosition = new Vector3(0, -500, 0);
+                    students[i].transform.localPosition = new Vector3(0, -300, 0);
                 }
             }
 
@@ -250,7 +251,7 @@ public class Game : MonoBehaviour
                     }
                     students[i].GetComponentsInChildren<SkeletonGraphic>()[2].enabled = false;
                     students[i].transform.SetSiblingIndex(2);
-                    students[i].transform.localPosition = new Vector3(0, -190, 0);
+                    students[i].transform.localPosition = new Vector3(0, -142.5f, 0);
                 }
             }
         }
@@ -263,7 +264,7 @@ public class Game : MonoBehaviour
                 students[i].GetComponentsInChildren<SkeletonGraphic>()[1].enabled = false;
                 students[i].GetComponentsInChildren<SkeletonGraphic>()[2].enabled = false;
                 students[i].transform.SetSiblingIndex(1);
-                students[i].transform.localPosition = new Vector3(0, -190, 0);
+                students[i].transform.localPosition = new Vector3(0, -142.5f, 0);
             }
         }
     }
@@ -272,30 +273,56 @@ public class Game : MonoBehaviour
     {
         // 다음 바뀔 시간 체크
         float turnTime = Random.Range(typeFloat[2].inspecter[0].variable, typeFloat[2].inspecter[1].variable);
-
         // 선생님 상태 변환
-        if(typeFloat[2].inspecter[2].variable == 1)
-        {
-            int randomNum = Random.Range(0, 2);
-            if (randomNum == 1)
-            {
-                typeFloat[2].inspecter[2].variable += 1;
-            }
-            else
-            {
-                typeFloat[2].inspecter[2].variable = 0;
-            }
-        }
 
-        else
+        if (typeFloat[2].inspecter[2].variable == 0)
         {
             typeFloat[2].inspecter[2].variable += 1;
         }
 
-        if (typeFloat[2].inspecter[2].variable > 2)
+        else
         {
-            typeFloat[2].inspecter[2].variable = 0;
+            if (typeFloat[2].inspecter[2].variable == 5)
+            {
+                typeFloat[2].inspecter[2].variable = 0;
+            }
+
+            else if (typeFloat[2].inspecter[2].variable >= 2 && typeFloat[2].inspecter[2].variable <= 4)
+            {
+                int randomNum = Random.Range(0, 2);
+                if (randomNum == 1)
+                {
+                    typeFloat[2].inspecter[2].variable = 5;
+                    Debug.Log("Watch");
+                }
+                else
+                {
+                    typeFloat[2].inspecter[2].variable = 0;
+                }
+            }
+
+            else if (typeFloat[2].inspecter[2].variable == 1)
+            {
+                if (turnTime >= 2.5f)
+                {
+                    Debug.Log("ready");
+                    typeFloat[2].inspecter[2].variable += 1;
+                }
+
+                else if (turnTime >= 1.5f)
+                {
+                    Debug.Log("ready 1");
+                    typeFloat[2].inspecter[2].variable += 2;
+                }
+
+                else
+                {
+                    Debug.Log("ready 2");
+                    typeFloat[2].inspecter[2].variable += 3;
+                }
+            }
         }
+
         SpineTeacher.GetComponent<TeacherMove>().Move((byte)typeFloat[2].inspecter[2].variable);
         // turnTime 이후 다시 이 함수 실행
         Invoke("TeacherChange", turnTime);
@@ -367,13 +394,13 @@ public class Game : MonoBehaviour
             }
 
             // 만약 선생님이 보고 있는 중이라면
-            if (typeFloat[2].inspecter[2].variable == 2 && !isItemFog)
+            if (typeFloat[2].inspecter[2].variable == 5 && !isItemFog)
             {
                 // 게임을 잠시 멈춰주고 선생님의 상태변환도 멈춰준다.
                 isPlaying = false;
                 SoundManager.Instance.Vibrate();
                 CancelInvoke("TeacherChange");
-                SpineTeacher.GetComponent<TeacherMove>().Move(3);
+                SpineTeacher.GetComponent<TeacherMove>().Move(6);
                 MakeResult();
                 Invoke("EndGame", 0.3f);
             }

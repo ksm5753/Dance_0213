@@ -9,7 +9,7 @@ public class TeacherMove : MonoBehaviour
     // Start is called before the first frame update
     public void Move(byte check)
     {
-        if (check == 0 || check == 1)
+        if (check <= 4)
         {
             TeacherState[1].gameObject.SetActive(false);
             TeacherState[0].gameObject.SetActive(true);
@@ -25,13 +25,21 @@ public class TeacherMove : MonoBehaviour
             case 0:
                 TeacherState[0].AnimationState.SetAnimation(0, "basic", true);
                 break;
-            case 1:
+            case 2:
                 TeacherState[0].AnimationState.SetAnimation(0, "ready", true);
                 break;
-            case 2:
+            case 3:
+                TeacherState[0].AnimationState.SetAnimation(0, "ready2", true);
+                break;
+            case 4:
+                TeacherState[0].AnimationState.SetAnimation(0, "ready3", true);
+                break;
+
+            case 5:
                 TeacherState[1].AnimationState.SetAnimation(0, "Breathing", true);
                 break;
-            case 3:
+
+            case 6:
                 TeacherState[1].AnimationState.SetAnimation(0, "Sad", true);
                 break;
         }

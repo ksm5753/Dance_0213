@@ -26669,7 +26669,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  skeletonDataAsset: {fileID: 11400000, guid: e62e7a280c658bb4eab22cb9ff4db1aa, type: 2}
+  skeletonDataAsset: {fileID: 11400000, guid: 267c52991b098794c9d169c9eb7f47c8, type: 2}
   additiveMaterial: {fileID: 2100000, guid: 2e8245019faeb8c43b75f9ca3ac8ee34, type: 2}
   multiplyMaterial: {fileID: 2100000, guid: e74a1f8978a7da348a721508d0d58834, type: 2}
   screenMaterial: {fileID: 2100000, guid: bab24c479f34eec45be6ea8595891569, type: 2}
@@ -40651,7 +40651,7 @@ RectTransform:
   m_GameObject: {fileID: 1309471630}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2722, y: 1.2722, z: 1}
   m_Children: []
   m_Father: {fileID: 1792421451}
   m_RootOrder: 4
@@ -48943,7 +48943,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  skeletonDataAsset: {fileID: 11400000, guid: e62e7a280c658bb4eab22cb9ff4db1aa, type: 2}
+  skeletonDataAsset: {fileID: 11400000, guid: 267c52991b098794c9d169c9eb7f47c8, type: 2}
   additiveMaterial: {fileID: 2100000, guid: 2e8245019faeb8c43b75f9ca3ac8ee34, type: 2}
   multiplyMaterial: {fileID: 2100000, guid: e74a1f8978a7da348a721508d0d58834, type: 2}
   screenMaterial: {fileID: 2100000, guid: bab24c479f34eec45be6ea8595891569, type: 2}
@@ -58631,7 +58631,7 @@ RectTransform:
   m_GameObject: {fileID: 1868285026}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.1, y: 1.1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1574109009587554868}
   m_RootOrder: 7
