@@ -58,6 +58,7 @@ public class Game : MonoBehaviour
     [Header("아이템 관련")]
     public bool isItemFog; // 아이템이 사용중인가
     public bool isReviveOn; // 부활 아이템 구매 여부
+    public bool isFogOn; // 무적아이템을 구매했는가
 
     [SerializeField] GameObject[] itemBtn; // 0 : 무적아이템, 1 : 부활 ...아이템 버튼들
 
@@ -123,7 +124,10 @@ public class Game : MonoBehaviour
     public void StartGame()
     {
         danceButton.SetActive(true);
-        itemBtn[0].SetActive(true);
+        if (isFogOn)
+        {
+            itemBtn[0].SetActive(true);
+        }
         SoundManager.Instance.PlayBGM(2);
         ResetGame();
         Tuto();
@@ -480,7 +484,7 @@ public class Game : MonoBehaviour
         switch (itemNum)
         {
             case 0:
-                itemBtn[0].SetActive(true);
+                isFogOn = true;
                 BackendServerManager.GetInstance().BuyInGameItem((int)typeFloat[4].inspecter[0].variable);
                 break;
             case 1:

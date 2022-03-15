@@ -63,11 +63,6 @@ public class SeeAdForCard : MonoBehaviour
     public void HandleRewardedAdOpening(object sender, EventArgs args)
     {
         MonoBehaviour.print("HandleRewardedAdOpening event received");
-        if (!isStartGame)
-        {
-            int adNum = BackendServerManager.GetInstance().getAdviceCount() + 1;
-            BackendServerManager.GetInstance().setAdviceCount(5 - adNum);
-        }
     }
 
     public void HandleRewardedAdFailedToShow(object sender, AdErrorEventArgs args)
@@ -86,7 +81,6 @@ public class SeeAdForCard : MonoBehaviour
         this.rewardedAd.LoadAd(request);
         if (!isStartGame) 
         {
-            LobbyUI.GetInstance().SetAdCount();
             BackendServerManager.GetInstance().DrawCard(true);
         }
 
@@ -110,11 +104,17 @@ public class SeeAdForCard : MonoBehaviour
         if (!isStartGame)
         {
             int adNum = BackendServerManager.GetInstance().getAdviceCount(); // ÇÃ·¹ÀÌ¾îÀÇ ±¤°í º» È½¼ö)
-            if (adNum < 5)
+            if (adNum != 5)
             {
                 if (this.rewardedAd.IsLoaded())
                 {
                     this.rewardedAd.Show();
+                    if (!isStartGame)
+                    {
+                        adNum = BackendServerManager.GetInstance().getAdviceCount() + 1;
+                        BackendServerManager.GetInstance().setAdviceCount(5 - adNum);
+                        LobbyUI.GetInstance().SetAdCount();
+                    }
                 }
             }
         }
