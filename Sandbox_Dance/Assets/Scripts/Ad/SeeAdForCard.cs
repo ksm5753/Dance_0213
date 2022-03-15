@@ -50,7 +50,7 @@ public class SeeAdForCard : MonoBehaviour
     public void HandleRewardedAdLoaded(object sender, EventArgs args)
     {
         MonoBehaviour.print("HandleRewardedAdLoaded event received");
-        LobbyUI.GetInstance().isCanWatchAd = true;
+        if (SceneManager.GetActiveScene().name == "2. Lobby") { LobbyUI.GetInstance().isCanWatchAd = true; }
     }
 
     public void HandleRewardedAdFailedToLoad(object sender, AdErrorEventArgs args)
@@ -86,7 +86,6 @@ public class SeeAdForCard : MonoBehaviour
             if (SceneManager.GetActiveScene().name == "2. Lobby")
             {
                 LobbyUI.GetInstance().GameStart();
-                isStartGame = false;
             }
 
             else
