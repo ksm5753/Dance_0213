@@ -491,41 +491,37 @@ public class BackendServerManager : MonoBehaviour
     }
     public void UpdateScore2(int _score)
     {
-        // 유저 스코어 조회해보지 않은 경우
-        if (string.IsNullOrEmpty(userInDateScore))
+        Enqueue(Backend.GameData.Get, "score", new Where(), myScoreBro =>
         {
-            Backend.GameData.Get("score", new Where(), myScoreBro =>
+            Debug.Log("플레이어 점수 정보 - " + myScoreBro.ToString());
+            if (myScoreBro.IsSuccess())
             {
-                Debug.Log("플레이어 점수 정보 - " + myScoreBro.ToString());
-                if (myScoreBro.IsSuccess())
+                JsonData userData = myScoreBro.GetReturnValuetoJSON()["rows"];
+                // 유저 스코어가 존재하는 경우
+                if (userData.Count > 0)
                 {
-                    JsonData userData = myScoreBro.GetReturnValuetoJSON()["rows"];
-                    // 유저 스코어가 존재하는 경우
-                    if (userData.Count > 0)
-                    {
-                        userInDateScore = userData[0]["inDate"]["S"].ToString();
+                    userInDateScore = userData[0]["inDate"]["S"].ToString();
+                    print("이미 존재 : " + (int.Parse(userData[0]["score"]["N"].ToString()) < _score));
 
-                        // 유저 스코어 update
-                        if (int.Parse(userData[0]["score"]["N"].ToString()) > _score)
-                            UpdateScore(_score);
-                    }
-                    // 유저 스코어가 존재하지 않는 경우
-                    else
+                    // 유저 스코어 update
+                    if (int.Parse(userData[0]["score"]["N"].ToString()) < _score)
                     {
-                        // 유저 스코어 insert
-                        InsertScore(_score);
+                        print(_score);
+                        UpdateScore(_score);
                     }
                 }
+                // 유저 스코어가 존재하지 않는 경우
                 else
                 {
+                    // 유저 스코어 insert
                     InsertScore(_score);
                 }
-            });
-        }
-        else
-        {
-            UpdateScore(_score);
-        }
+            }
+            else
+            {
+                InsertScore(_score);
+            }
+        });
     }
     public void UpdateScores(int point)
     {
@@ -659,37 +655,6 @@ public class BackendServerManager : MonoBehaviour
 
     #region 카드 뽑기
 
-    public void ANG()
-    {
-        //Enqueue(Backend.GameData.GetMyData, "Option5", new Where(), callback =>
-        //{
-        //    if (callback.IsSuccess())
-        //    {
-        //        foreach (JsonData row in BackendReturnObject.Flatten(callback.Rows()))
-        //        {
-        //            print("B");
-        //            string[] ANG = row["Card " + string.Format("{0:D3}", 1)].ToString().Split('+');
-        //            var cardNum = row[0]["Card 001"]["N"];
-        //            print("ANG" + ANG[0].ToString());
-        //        }
-        //    }
-        //    else print("A : " + callback);
-        //});
-
-        Enqueue(Backend.GameData.GetMyData, "Option5", new Where(), callback =>
-        {
-            if (callback.IsSuccess())
-            {
-                foreach (JsonData row in BackendReturnObject.Flatten(callback.Rows()))
-                {
-                        string[] ANG = row["Card " + string.Format("{0:D3}", 1)].ToString().Split('+');
-                        print(int.Parse(ANG[0]));
-                }
-
-            }
-            else print("GetUserCards() - " + callback);
-        });
-    }
     public void DrawCard(bool isOne)
     {
         Enqueue(Backend.Probability.GetProbabilitys, "4044", isOne ? 1 : 11, callback =>
@@ -861,7 +826,7 @@ public class BackendServerManager : MonoBehaviour
 
     public void GiveMoeny(int num)
     {
-        Backend.GameData.GetMyData("User", new Where(),bro => 
+        Enqueue(Backend.GameData.GetMyData, "User", new Where(),bro => 
         {
             if (bro.IsSuccess())
             {
@@ -992,53 +957,51 @@ public class BackendServerManager : MonoBehaviour
     }
     #endregion
 
-            #endregion
+    #endregion
 
-            //=================================================================================================
+    //=================================================================================================
 
 
-            #region 게임 처음 초기화
-            public void InitalizeGameData()
+    #region 게임 처음 초기화
+    public void InitalizeGameData()
     {
-        Enqueue(Backend.GameData.Get, "User", new Where(), callback =>
+        var bro = Backend.GameData.Get("User", new Where());
+        if (bro.IsSuccess())
         {
-            if (callback.IsSuccess())
+            JsonData userData = bro.GetReturnValuetoJSON()["rows"];
+            if (userData.Count == 0)
             {
-                JsonData userData = callback.GetReturnValuetoJSON()["rows"];
-                if (userData.Count == 0)
+                Param param = new Param();
+
+                param.Add("Gold", 0);
+                param.Add("Diamond", 0);
+
+                param.Add("AD", 0);
+                param.Add("ADReset", 0);
+
+                Enqueue(Backend.GameData.Insert, "User", param, (callback) =>
                 {
-                    Param param = new Param();
+                    if (callback.IsSuccess()) print("성공");
+                    else print("실패");
+                });
 
-                    param.Add("Gold", 0);
-                    param.Add("Diamond", 0);
+                Param param2 = new Param();
+                for (int i = 0; i < 100; i++)
+                {
+                    param2.Add("Card " + string.Format("{0:D3}", (i + 1)), "000+0");
+                }
 
-                    param.Add("AD", 0);
-                    param.Add("ADReset", 0);
-
-                    Enqueue(Backend.GameData.Insert, "User", param, (callback) =>
+                for (int i = 1; i <= 5; i++)
+                {
+                    Enqueue(Backend.GameData.Insert, "Option" + i, param2, (callback) =>
                     {
                         if (callback.IsSuccess()) print("성공");
                         else print("실패");
                     });
-
-                    Param param2 = new Param();
-                    for (int i = 0; i < 100; i++)
-                    {
-                        param2.Add("Card " + string.Format("{0:D3}", (i + 1)), "000+0");
-                    }
-
-                    for (int i = 1; i <= 5; i++)
-                    {
-                        Enqueue(Backend.GameData.Insert, "Option" + i, param2, (callback) =>
-                        {
-                            if (callback.IsSuccess()) print("성공");
-                            else print("실패");
-                        });
-                    }
                 }
-                userIndate = userData[0]["inDate"]["S"].ToString();
             }
-        });
+            userIndate = userData[0]["inDate"]["S"].ToString();
+        }
     }
     #endregion
 

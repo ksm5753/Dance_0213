@@ -57,11 +57,6 @@ public class LobbyUI : MonoBehaviour
 
     private int currentDay = 0;
 
-    public void ANG()
-    {
-        BackendServerManager.GetInstance().ANG();
-    }
-
 
     #region ÃÊ±âÈ­ (ScaleCtrl -> Initialize)
     public void Initialize()

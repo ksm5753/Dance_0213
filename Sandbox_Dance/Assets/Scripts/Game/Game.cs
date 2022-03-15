@@ -460,6 +460,7 @@ public class Game : MonoBehaviour
     {
         if (!itemBtn[1].activeSelf)
         {
+            print((int)score * 10);
             score = Mathf.RoundToInt(score);
             finalPrice = Mathf.RoundToInt(score * 0.1f);
             BackendServerManager.GetInstance().GiveMoeny(finalPrice);
