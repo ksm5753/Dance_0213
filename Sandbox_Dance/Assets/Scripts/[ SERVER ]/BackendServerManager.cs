@@ -506,7 +506,7 @@ public class BackendServerManager : MonoBehaviour
                         userInDateScore = userData[0]["inDate"]["S"].ToString();
 
                         // 유저 스코어 update
-                        if (Game.Instance().bestScore < _score)
+                        if (int.Parse(userData[0]["score"]["N"].ToString()) < _score)
                             UpdateScore(_score);
                     }
                     // 유저 스코어가 존재하지 않는 경우

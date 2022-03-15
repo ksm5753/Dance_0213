@@ -35,11 +35,6 @@ public class CardChanger : MonoBehaviour
         if (cardStar > 3) { SoundManager.Instance.Vibrate(); }
     }
 
-    void Start()
-    {
-        //OneImage[1].AnimationState.Complete += Complete;
-    }
-
     public void OneCard(int cardNum) // 하나 뽑았을 때 실행
     {
         SingleCard.GetComponent<PlayableDirector>().Play();

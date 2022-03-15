@@ -40,7 +40,7 @@ public class LobbyUI : MonoBehaviour
     public Sprite[] cardOutLine;
     public Text adCount;
     public int testBOmb = 40; // юс╫ц х╝╥Э
-    bool isCanWatchAd;
+    public bool isCanWatchAd = false;
 
     [Space(15f)]
     [Header("DrawCard Panel")]
@@ -374,7 +374,6 @@ public class LobbyUI : MonoBehaviour
 
     void Awake()
     {
-        isCanWatchAd = true;
         if (!instance) instance = this;
     }
 }

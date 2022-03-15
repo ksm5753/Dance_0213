@@ -289,8 +289,8 @@ public class Game : MonoBehaviour
 
             else if (typeFloat[2].inspecter[2].variable >= 2 && typeFloat[2].inspecter[2].variable <= 4)
             {
-                int randomNum = Random.Range(0, 2);
-                if (randomNum == 1)
+                int randomNum = Random.Range(0, 4);
+                if (randomNum != 0)
                 {
                     typeFloat[2].inspecter[2].variable = 5;
                     Debug.Log("Watch");
@@ -452,11 +452,7 @@ public class Game : MonoBehaviour
             score = Mathf.RoundToInt(score);
             finalPrice = Mathf.RoundToInt(score * 0.1f);
             BackendServerManager.GetInstance().GiveMoeny(finalPrice);
-            if (score > bestScore)
-            {
-                bestScore = (int)score * 10;
-                BackendServerManager.GetInstance().UpdateScore2((int)score * 10);
-            }
+            BackendServerManager.GetInstance().UpdateScore2((int)score * 10);
         }
     }
     #endregion

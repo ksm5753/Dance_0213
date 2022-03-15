@@ -44,11 +44,13 @@ public class SeeAdForCard : MonoBehaviour
         // Load the rewarded ad with the request.
 
         this.rewardedAd.LoadAd(request);
+
     }
 
     public void HandleRewardedAdLoaded(object sender, EventArgs args)
     {
         MonoBehaviour.print("HandleRewardedAdLoaded event received");
+        LobbyUI.GetInstance().isCanWatchAd = true;
     }
 
     public void HandleRewardedAdFailedToLoad(object sender, AdErrorEventArgs args)
@@ -124,6 +126,11 @@ public class SeeAdForCard : MonoBehaviour
             if (this.rewardedAd.IsLoaded())
             {
                 this.rewardedAd.Show();
+            }
+
+            else
+            {
+                Game.instance.SceneChange("3. Game");
             }
         }
     }
