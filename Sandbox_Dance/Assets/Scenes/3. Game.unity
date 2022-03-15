@@ -5739,6 +5739,7 @@ MonoBehaviour:
   - {fileID: 1583649577}
   - {fileID: 353020656}
   storeObj: {fileID: 1619222811}
+  danceButton: {fileID: 1833249386}
   itemBuyBtns:
   - {fileID: 570322879}
   - {fileID: 767458846}

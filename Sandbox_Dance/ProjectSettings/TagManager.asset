@@ -7,6 +7,10 @@ TagManager:
   - Wall
   - Ground
   - Bottle
+  - Loading
+  - Background
+  - Element
+  - OnlyScale
   layers:
   - Default
   - TransparentFX

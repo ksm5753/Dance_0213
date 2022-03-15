@@ -47,6 +47,7 @@ public class Game : MonoBehaviour
     [SerializeField] GameObject actBar; // 플레이어의 딴짓 레벨 경험치 바
     [SerializeField] GameObject[] students; // 학생들 게임 오브젝트
     bool isDancing = false;
+    Vector3 studentPos = new Vector3(0,0,0);
 
     [Header("선생님 관련")]
     [SerializeField] GameObject SpineTeacher; // 선생님 스파인 오브젝트
@@ -61,6 +62,7 @@ public class Game : MonoBehaviour
     [SerializeField] GameObject[] itemBtn; // 0 : 무적아이템, 1 : 부활 ...아이템 버튼들
 
     public GameObject storeObj;
+    public GameObject danceButton;
 
     public Toggle[] itemBuyBtns; // 0 : 무적아이템, 1 : 시간 증가, 2 : 부활....아이템 구매 버튼들
 
@@ -113,10 +115,15 @@ public class Game : MonoBehaviour
             UIOBjs[3].SetActive(true);
             needMoney = 0;
         }
+        danceButton.SetActive(false);
+        itemBtn[0].SetActive(false);
+        
     }
 
     public void StartGame()
     {
+        danceButton.SetActive(true);
+        itemBtn[0].SetActive(true);
         SoundManager.Instance.PlayBGM(2);
         ResetGame();
         Tuto();
@@ -251,7 +258,7 @@ public class Game : MonoBehaviour
                     }
                     students[i].GetComponentsInChildren<SkeletonGraphic>()[2].enabled = false;
                     students[i].transform.SetSiblingIndex(2);
-                    students[i].transform.localPosition = new Vector3(0, -142.5f, 0);
+                    students[i].transform.localPosition = studentPos;
                 }
             }
         }
@@ -264,7 +271,7 @@ public class Game : MonoBehaviour
                 students[i].GetComponentsInChildren<SkeletonGraphic>()[1].enabled = false;
                 students[i].GetComponentsInChildren<SkeletonGraphic>()[2].enabled = false;
                 students[i].transform.SetSiblingIndex(1);
-                students[i].transform.localPosition = new Vector3(0, -142.5f, 0);
+                students[i].transform.localPosition = studentPos;
             }
         }
     }
@@ -565,6 +572,7 @@ public class Game : MonoBehaviour
             i.SetActive(false);
         }
         tutoObj.SetActive(false);
+        studentPos = students[0].transform.localPosition;
     }
     public static Game Instance()
     {

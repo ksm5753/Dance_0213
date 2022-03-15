@@ -446,7 +446,7 @@ public class BackendServerManager : MonoBehaviour
     public void setAdviceCount(int num)
     {
         Param param = new Param();
-        param.Add("AD", num);
+        param.Add("AD", 5 - num);
         Backend.GameData.UpdateV2("User", userIndate, Backend.UserInDate, param);
     }
     #endregion
@@ -1067,6 +1067,11 @@ public class BackendServerManager : MonoBehaviour
     void Start()
     {
         Initialize(); //서버 초기화
+        if (!PlayerPrefs.HasKey("isFirstGame"))
+        {
+            Backend.BMember.DeleteGuestInfo();
+            PlayerPrefs.SetInt("isFirstGame", 1);
+        }
     }
 
     void Update()

@@ -118,7 +118,7 @@ public class LobbyUI : MonoBehaviour
 
     public void SetAdCount()
     {
-        adCount.text = BackendServerManager.GetInstance().getAdviceCount().ToString();
+        adCount.text = (5 - BackendServerManager.GetInstance().getAdviceCount()).ToString();
     }
     public void GameStart()
     {
@@ -197,7 +197,7 @@ public class LobbyUI : MonoBehaviour
         }
         BackendServerManager.GetInstance().setAdviceReset(currentDay);
         if (currentDay != BackendServerManager.GetInstance().getAdviceReset())
-            BackendServerManager.GetInstance().setAdviceCount(5);
+            BackendServerManager.GetInstance().setAdviceCount(0);
     }
 
     public void setCardInfo(int cardNum, int count, int reward)
