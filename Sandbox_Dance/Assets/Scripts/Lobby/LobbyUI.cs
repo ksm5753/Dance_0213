@@ -158,6 +158,12 @@ public class LobbyUI : MonoBehaviour
 
     public void BuyWithGold(int num) => BackendServerManager.GetInstance().BuyItems(num, true);
 
+    public void BuyWithAd()
+    {
+        SeeAdForCard.instance.isStartGame = false;
+        SeeAdForCard.instance.UserChoseToWatchAd();
+    }
+
     public void BuyWithDiamond(int num) => BackendServerManager.GetInstance().BuyItems(num, false);
 
     public void getRankInfo() => BackendServerManager.GetInstance().getRank();

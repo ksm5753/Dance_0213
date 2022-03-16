@@ -183,6 +183,11 @@ public class Game : MonoBehaviour
         }
     }
 
+    public void Restart()
+    {
+        SeeAdForCard.instance.UserChoseToWatchAd();
+    }
+
     public void ContinueGame()
     {
         typeFloat[0].inspecter[1].variable = typeFloat[0].inspecter[1].variable + 2f;

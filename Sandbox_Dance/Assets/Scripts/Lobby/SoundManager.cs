@@ -75,6 +75,13 @@ public class SoundManager : MonoBehaviour
         {
             instance = this.GetComponent<SoundManager>();
         }
+
+        if (!PlayerPrefs.HasKey("BGM_Mute")) 
+        {
+            PlayerPrefs.SetInt("BGM_Mute", 1);
+            PlayerPrefs.SetInt("Effect_Mute", 1);
+            PlayerPrefs.SetInt("Vibrate_Mute", 1);
+        }
     }
 
     void Update()
