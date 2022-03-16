@@ -75,6 +75,7 @@ public class Game : MonoBehaviour
     public Text resultText;
     public Text[] pricesText; // 0 : °ñµå 1 : ·çºñ
     public Text currentScoreText;
+    public Text rankAdText;
 
     public float needMoney = 0;
 
@@ -93,6 +94,8 @@ public class Game : MonoBehaviour
     {
         SoundManager.Instance.bgmSource.Stop();
         typeFloat[0].inspecter[1].variable = typeFloat[0].inspecter[0].variable;
+        SpineTeacher.GetComponent<TeacherMove>().TeacherState[1].gameObject.SetActive(true);
+        SpineTeacher.GetComponent<TeacherMove>().TeacherState[0].gameObject.SetActive(false);
         for (int i = 0; i < itemBuyBtns.Length; i++)
         {
             if (itemBuyBtns[i].isOn)
@@ -123,6 +126,8 @@ public class Game : MonoBehaviour
 
     public void StartGame()
     {
+        SpineTeacher.GetComponent<TeacherMove>().TeacherState[1].gameObject.SetActive(false);
+        SpineTeacher.GetComponent<TeacherMove>().TeacherState[0].gameObject.SetActive(true);
         danceButton.SetActive(true);
         if (isFogOn)
         {
@@ -134,6 +139,7 @@ public class Game : MonoBehaviour
     }
     void EndGame()
     {
+        Time.timeScale = 1;
         SoundManager.Instance.bgmSource.Pause();
         SoundManager.Instance.gameBgm_2.Pause();
         resultWin.SetActive(true);
@@ -151,6 +157,7 @@ public class Game : MonoBehaviour
         {
             resultMenuBtn[0].SetActive(true);
             resultMenuBtn[1].SetActive(true);
+            rankAdText.gameObject.SetActive(true);
         }
 
         else
@@ -582,6 +589,7 @@ public class Game : MonoBehaviour
             i.SetActive(false);
         }
         tutoObj.SetActive(false);
+        rankAdText.gameObject.SetActive(false);
         studentPos = students[0].transform.localPosition;
     }
     public static Game Instance()

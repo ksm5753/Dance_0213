@@ -67,7 +67,6 @@ public class BackendServerManager : MonoBehaviour
 
         if (bro.IsSuccess())
         {
-
 #if UNITY_ANDROID //안드로이드에서만 작동
             Debug.Log("GoogleHash - " + Backend.Utils.GetGoogleHash());
 #endif
@@ -139,9 +138,13 @@ public class BackendServerManager : MonoBehaviour
                 OnBackendAuthorized(); //사전 유저 불러오기
                 return;
             }
-
-            Debug.Log("토큰 로그인 실패\n" + callback.ToString());
-            func(false, string.Empty); //실패시 토큰 초기화
+            else
+            {
+                Debug.Log("토큰 로그인 실패\n" + callback.ToString());
+                func(false, string.Empty); //실패시 토큰 초기화
+                Backend.BMember.DeleteGuestInfo();
+                LoginUI.GetInstance().TouchStart();
+            }
         });
     }
     #endregion
@@ -981,7 +984,7 @@ public class BackendServerManager : MonoBehaviour
 
                 Enqueue(Backend.GameData.Insert, "User", param, (callback) =>
                 {
-                    if (callback.IsSuccess()) print("성공");
+                    if (callback.IsSuccess()) print("성공1");
                     else print("실패");
                 });
 
@@ -995,10 +998,12 @@ public class BackendServerManager : MonoBehaviour
                 {
                     Enqueue(Backend.GameData.Insert, "Option" + i, param2, (callback) =>
                     {
-                        if (callback.IsSuccess()) print("성공");
+                        if (callback.IsSuccess()) print("성공2");
                         else print("실패");
                     });
                 }
+                InitalizeGameData();
+                return;
             }
             userIndate = userData[0]["inDate"]["S"].ToString();
         }
@@ -1030,11 +1035,6 @@ public class BackendServerManager : MonoBehaviour
     void Start()
     {
         Initialize(); //서버 초기화
-        if (!PlayerPrefs.HasKey("isFirstGame"))
-        {
-            Backend.BMember.DeleteGuestInfo();
-            PlayerPrefs.SetInt("isFirstGame", 1);
-        }
     }
 
     void Update()

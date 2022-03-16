@@ -5,6 +5,7 @@ using System;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Battlehub.Dispatcher;
+using BackEnd;
 
 
 public class LoginUI : MonoBehaviour
@@ -80,6 +81,7 @@ public class LoginUI : MonoBehaviour
                     ChangeLobbyScene();
                     return;
                 }
+
                 loadingObject.SetActive(false);
                 if (!error.Equals(string.Empty))
                 {
@@ -210,7 +212,9 @@ public class LoginUI : MonoBehaviour
                     errorObject.SetActive(true);
                     return;
                 }
-                ChangeLobbyScene();
+                //ChangeLobbyScene();
+                TouchStart();
+                //SceneManager.LoadScene("1. Login");
             });
         });
     }
