@@ -46103,7 +46103,7 @@ GameObject:
   - component: {fileID: 1483502098}
   - component: {fileID: 1483502097}
   m_Layer: 5
-  m_Name: Scroll View
+  m_Name: Scroll View_C
   m_TagString: Element
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46628,7 +46628,7 @@ GameObject:
   - component: {fileID: 1494561961}
   - component: {fileID: 1494561962}
   m_Layer: 5
-  m_Name: Content
+  m_Name: Content_C
   m_TagString: Element
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -54950,6 +54950,9 @@ MonoBehaviour:
   adCount: {fileID: 52877083}
   testBOmb: 40
   isCanWatchAd: 0
+  cardBookObjs:
+  - {fileID: 1483502095}
+  - {fileID: 1494561959}
   drawCardPanel: {fileID: 1041198466}
   goldText: {fileID: 851767503}
   diamondText: {fileID: 1548520472}

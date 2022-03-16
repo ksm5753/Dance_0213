@@ -42,6 +42,8 @@ public class LobbyUI : MonoBehaviour
     public int testBOmb = 40; // 임시 확률
     public bool isCanWatchAd = false;
 
+    public GameObject[] cardBookObjs;
+
     [Space(15f)]
     [Header("DrawCard Panel")]
     public GameObject drawCardPanel;
@@ -221,8 +223,8 @@ public class LobbyUI : MonoBehaviour
         Cards[cardNum].GetComponentInChildren<Text>().text = count.ToString();
         Cards[cardNum].GetComponent<Button>().onClick.AddListener(() => OpenCardInfo(cardNum, count.ToString(), reward, star));
 
-        GameObject.Find("Scroll View").GetComponent<ScrollRect>().velocity = new Vector2(0, 0); //스크롤 하면서 다른 창으로 넘어갈 때 스크롤 저항 생김
-        GameObject.Find("Content").GetComponent<RectTransform>().position = new Vector2(GameObject.Find("Content").GetComponent<RectTransform>().position.x, 0); //다른 창으로 넘길때 맨 위로 이동
+        cardBookObjs[0].GetComponent<ScrollRect>().velocity = new Vector2(0, 0); //스크롤 하면서 다른 창으로 넘어갈 때 스크롤 저항 생김
+        cardBookObjs[1].GetComponent<RectTransform>().position = new Vector2(cardBookObjs[1].GetComponent<RectTransform>().position.x, 0); //다른 창으로 넘길때 맨 위로 이동
     }
 
     public void OpenCardInfo(int cardNum, string count, int reward, int star)
