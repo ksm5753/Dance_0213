@@ -21,7 +21,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: Hierarchy
   m_RootView: {fileID: 2}
-  m_MinSize: {x: 875, y: 300}
+  m_MinSize: {x: 875, y: 471}
   m_MaxSize: {x: 10000, y: 10000}
   m_Maximized: 1
 --- !u!114 &2
@@ -46,7 +46,7 @@ MonoBehaviour:
     y: 0
     width: 1920
     height: 997
-  m_MinSize: {x: 875, y: 300}
+  m_MinSize: {x: 875, y: 471}
   m_MaxSize: {x: 10000, y: 10000}
   m_UseTopView: 1
   m_TopViewHeight: 30
@@ -121,10 +121,10 @@ MonoBehaviour:
     y: 30
     width: 1920
     height: 947
-  m_MinSize: {x: 910, y: 421}
-  m_MaxSize: {x: 22005, y: 10021}
+  m_MinSize: {x: 908, y: 421}
+  m_MaxSize: {x: 22003, y: 10021}
   vertical: 0
-  controlID: 83
+  controlID: 1744
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -149,7 +149,7 @@ MonoBehaviour:
   m_MinSize: {x: 201, y: 421}
   m_MaxSize: {x: 4001, y: 8021}
   vertical: 1
-  controlID: 16
+  controlID: 1719
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -340,7 +340,7 @@ MonoBehaviour:
     m_VAllowExceedBaseRangeMax: 1
     m_ScaleWithWindow: 0
     m_HSlider: 0
-    m_VSlider: 1
+    m_VSlider: 0
     m_IgnoreScrollWheelUntilClicked: 0
     m_EnableMouseInput: 1
     m_EnableSliderZoomHorizontal: 0
@@ -353,7 +353,7 @@ MonoBehaviour:
       y: 21
       width: 930
       height: 406
-    m_Scale: {x: 0.14425676, y: 0.14425676}
+    m_Scale: {x: 0.13716216, y: 0.13716216}
     m_Translation: {x: 465, y: 203}
     m_MarginLeft: 0
     m_MarginRight: 0
@@ -361,12 +361,12 @@ MonoBehaviour:
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
-      x: -3223.4192
-      y: -1407.2131
-      width: 6446.8384
-      height: 2814.4263
+      x: -3390.1477
+      y: -1480
+      width: 6780.2954
+      height: 2960
     m_MinimalGUI: 1
-  m_defaultScale: 0.14425676
+  m_defaultScale: 0.13716216
   m_LastWindowPixelSize: {x: 930, y: 427}
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
@@ -409,9 +409,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 677.22974, y: 1593.9928, z: -12.331644}
+    m_Target: {x: 3.9955769, y: -0.12107632, z: 108.25617}
     speed: 2
-    m_Value: {x: 681.20557, y: 1590.3864, z: -11.531195}
+    m_Value: {x: 3.9955769, y: -0.12107632, z: 108.25617}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -462,9 +462,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 185.88196
+    m_Target: 6.918699
     speed: 2
-    m_Value: 177.87747
+    m_Value: 6.918699
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -605,7 +605,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 4cfaffff24fbffffbe510000c2510000fa510000
+      m_ExpandedIDs: dadffffff8dfffff02e1ffff98e2ffffa0e2ffff5ee6ffff7ae6ffff92e6ffff08e8ffff10e8ffffdcebfffffaebffff08edffffa2eeffffaeeeffff08faffff24fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -667,22 +667,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Sprites/Lobby/Ingame
+    - Assets/GoogleMobileAds/Resources
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Sprites/Lobby/Ingame
+  - Assets/GoogleMobileAds/Resources
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\showmethevrgr07\Desktop\newDance\Dance_0213\Sandbox_Dance
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 170}
-    m_SelectedIDs: 244d0000
-    m_LastClickedID: 19748
-    m_ExpandedIDs: 00000000744c0000764c0000784c00007a4c00007c4c00007e4c0000804c0000824c0000844c0000864c0000884c00008a4c00008c4c00008e4c0000904c0000924c000000ca9a3b
+    m_SelectedIDs: 4a560000
+    m_LastClickedID: 22090
+    m_ExpandedIDs: 00000000e44e0000e64e0000e84e0000ea4e0000ec4e0000ee4e0000f04e0000f24e0000f44e0000f64e0000f84e0000fa4e0000fc4e0000fe4e0000004f0000024f00006e4f000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -710,7 +710,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000744c0000764c0000784c00007a4c00007c4c00007e4c0000804c0000824c0000844c0000864c0000884c00008a4c00008c4c00008e4c0000904c0000924c0000
+    m_ExpandedIDs: 00000000e44e0000e64e0000e84e0000ea4e0000ec4e0000ee4e0000f04e0000f24e0000f44e0000f64e0000f84e0000fa4e0000fc4e0000fe4e0000004f0000024f000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -737,7 +737,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 1
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: cc5f00005a5200007a7b00004c6600004c7e0000f0630000ca640000ae5d0000924f0000964f00009a4f00009e4f0000c67b0000647a000000000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0

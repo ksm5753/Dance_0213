@@ -17,10 +17,7 @@ public class SeeAdForCard : MonoBehaviour
     void Start()
     {
         DontDestroyOnLoad(this.gameObject);
-        MobileAds.Initialize(initStatus => 
-        {
-            RequestAd();
-        });
+        MobileAds.Initialize(initStatus => {});
         RequestAd();
     }
 
@@ -35,7 +32,7 @@ public class SeeAdForCard : MonoBehaviour
         adUnitId = "unexpected_platform";
 #endif
 
-        rewardedAd = new RewardedAd(adUnitId);
+        this.rewardedAd = new RewardedAd(adUnitId);
 
         // Called when an ad request has successfully loaded.
         rewardedAd.OnAdLoaded += HandleRewardedAdLoaded;
@@ -49,10 +46,9 @@ public class SeeAdForCard : MonoBehaviour
         rewardedAd.OnAdClosed += HandleRewardedAdClosed;
 
         // Create an empty ad request.
-        AdRequest request = new AdRequest.Builder()
-            .Build();
+        AdRequest request = new AdRequest.Builder().Build();
         // Load the rewarded ad with the request.
-        rewardedAd.LoadAd(request);
+        this.rewardedAd.LoadAd(request);
     }
 
     public void HandleRewardedAdLoaded(object sender, EventArgs args)
@@ -67,7 +63,7 @@ public class SeeAdForCard : MonoBehaviour
 
     public void HandleRewardedAdOpening(object sender, EventArgs args)
     {
-        
+        RequestAd();
     }
 
     public void HandleRewardedAdFailedToShow(object sender, AdErrorEventArgs args)
@@ -77,12 +73,12 @@ public class SeeAdForCard : MonoBehaviour
     public void HandleRewardedAdClosed(object sender, EventArgs args)
     {
         MonoBehaviour.print("HandleRewardedAdClosed event received");
-        RequestAd();
         if (isEarnDouble)
         {
             BackendServerManager.GetInstance().GiveMoeny(Game.instance.finalPrice);
             Game.instance.finalPrice = Game.instance.finalPrice * 2;
             Game.instance.pricesText[0].text = Game.instance.finalPrice.ToString();
+            Game.instance.DoublePrice.SetActive(false);
             isEarnDouble = false;
         }
 
@@ -120,7 +116,7 @@ public class SeeAdForCard : MonoBehaviour
                         adNum = BackendServerManager.GetInstance().getAdviceCount() + 1;
                         BackendServerManager.GetInstance().setAdviceCount(5 - adNum);
                         LobbyUI.GetInstance().SetAdCount();
-                        rewardedAd.Show();
+                        this.rewardedAd.Show();
                     }
                 }
             }
@@ -129,7 +125,7 @@ public class SeeAdForCard : MonoBehaviour
             {
                 if (rewardedAd.IsLoaded())
                 {
-                    rewardedAd.Show();
+                    this.rewardedAd.Show();
                 }
 
                 else
@@ -145,7 +141,7 @@ public class SeeAdForCard : MonoBehaviour
             {
                 if (rewardedAd.IsLoaded())
                 {
-                    rewardedAd.Show();
+                    this.rewardedAd.Show();
                 }
 
                 else
@@ -159,7 +155,7 @@ public class SeeAdForCard : MonoBehaviour
                 isStartGame = true;
                 if (rewardedAd.IsLoaded())
                 {
-                    rewardedAd.Show();
+                    this.rewardedAd.Show();
                 }
 
                 else
