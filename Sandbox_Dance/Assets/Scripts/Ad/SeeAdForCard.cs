@@ -98,10 +98,20 @@ public class SeeAdForCard : MonoBehaviour
 
     public void HandleUserEarnedReward(object sender, Reward args)
     {
-        string type = args.Type;
-        double amount = args.Amount;
+  
+
+        int adNum = BackendServerManager.GetInstance().getAdviceCount(); // ÇÃ·¹ÀÌ¾îÀÇ ±¤°í º» È½¼ö)
+        BackendServerManager.GetInstance().setAdviceCount(5 - (adNum + 1));
+        LobbyUI.GetInstance().SetAdCount();
     }
 
+    public void A()
+    {
+        if (rewardedAd.IsLoaded())
+        {
+            this.rewardedAd.Show();
+        }
+    }
     public void UserChoseToWatchAd()
     {
         if (SceneManager.GetActiveScene().name == "2. Lobby")
@@ -113,9 +123,6 @@ public class SeeAdForCard : MonoBehaviour
                 {
                     if (rewardedAd.IsLoaded())
                     {
-                        adNum = BackendServerManager.GetInstance().getAdviceCount() + 1;
-                        BackendServerManager.GetInstance().setAdviceCount(5 - adNum);
-                        LobbyUI.GetInstance().SetAdCount();
                         this.rewardedAd.Show();
                     }
                 }
