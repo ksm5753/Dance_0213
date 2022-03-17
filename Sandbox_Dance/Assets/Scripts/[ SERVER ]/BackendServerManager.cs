@@ -509,6 +509,7 @@ public class BackendServerManager : MonoBehaviour
                     // 유저 스코어 update
                     if (int.Parse(userData[0]["score"]["N"].ToString()) < _score)
                     {
+                        Game.instance.checkHighScore.SetActive(true);
                         print(_score);
                         UpdateScore(_score);
                     }
@@ -517,6 +518,7 @@ public class BackendServerManager : MonoBehaviour
                 else
                 {
                     // 유저 스코어 insert
+                    Game.instance.checkHighScore.SetActive(true);
                     InsertScore(_score);
                 }
             }

@@ -90,6 +90,7 @@ public class LobbyUI : MonoBehaviour
         settingPanel.GetComponentsInChildren<Toggle>()[0].isOn = PlayerPrefs.GetInt("BGM_Mute") == 1 ? true : false; //소리 설정
         settingPanel.GetComponentsInChildren<Toggle>()[1].isOn = PlayerPrefs.GetInt("Effect_Mute") == 1 ? true : false; // 효과음
         settingPanel.GetComponentsInChildren<Toggle>()[2].isOn = PlayerPrefs.GetInt("Vibrate_Mute") == 1 ? true : false; // 진동
+        LobbyUI.GetInstance().settingPanel.transform.GetChild(8).GetChild(0).GetComponent<Text>().text = PlayerPrefs.GetInt("LangIndex") == 0 ? "한국어" : "영어";
 
         BackendServerManager.GetInstance().InitalizeGameData(); //게임데이터 초기설정
 

@@ -12,6 +12,7 @@ public class SeeAdForCard : MonoBehaviour
     public static SeeAdForCard instance;
     private RewardedAd rewardedAd;
     public bool isStartGame;
+    public bool isEarnDouble;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +21,7 @@ public class SeeAdForCard : MonoBehaviour
         {
             RequestAd();
         });
+        RequestAd();
     }
 
     void RequestAd()
@@ -47,7 +49,8 @@ public class SeeAdForCard : MonoBehaviour
         rewardedAd.OnAdClosed += HandleRewardedAdClosed;
 
         // Create an empty ad request.
-        AdRequest request = new AdRequest.Builder().Build();
+        AdRequest request = new AdRequest.Builder()
+            .Build();
         // Load the rewarded ad with the request.
         rewardedAd.LoadAd(request);
     }
@@ -75,14 +78,25 @@ public class SeeAdForCard : MonoBehaviour
     {
         MonoBehaviour.print("HandleRewardedAdClosed event received");
         RequestAd();
-        if (!isStartGame) 
+        if (isEarnDouble)
         {
-            BackendServerManager.GetInstance().DrawCard(true);
+            BackendServerManager.GetInstance().GiveMoeny(Game.instance.finalPrice);
+            Game.instance.finalPrice = Game.instance.finalPrice * 2;
+            Game.instance.pricesText[0].text = Game.instance.finalPrice.ToString();
+            isEarnDouble = false;
         }
 
-        else 
+        else
         {
-            SceneManager.LoadScene("3. Game");
+            if (!isStartGame)
+            {
+                BackendServerManager.GetInstance().DrawCard(true);
+            }
+
+            else
+            {
+                SceneManager.LoadScene("3. Game");
+            }
         }
     }
 
@@ -127,15 +141,31 @@ public class SeeAdForCard : MonoBehaviour
 
         else
         {
-            isStartGame = true;
-            if (rewardedAd.IsLoaded())
+            if (isEarnDouble)
             {
-                rewardedAd.Show();
+                if (rewardedAd.IsLoaded())
+                {
+                    rewardedAd.Show();
+                }
+
+                else
+                {
+                    Game.instance.DoublePrice.SetActive(false);
+                }
             }
 
             else
             {
-                Game.instance.SceneChange("3. Game");
+                isStartGame = true;
+                if (rewardedAd.IsLoaded())
+                {
+                    rewardedAd.Show();
+                }
+
+                else
+                {
+                    Game.instance.SceneChange("3. Game");
+                }
             }
         }
     }

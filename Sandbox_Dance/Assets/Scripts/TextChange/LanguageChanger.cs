@@ -22,7 +22,8 @@ public class LanguageChanger : MonoBehaviour
     public struct ImageChanger 
     {
         public Image targetImage;
-        public Image[] images;
+        public Sprite images;
+        public Sprite KorImages;
     }
     [System.Serializable]
     public struct TextChanger 
@@ -34,7 +35,8 @@ public class LanguageChanger : MonoBehaviour
     public struct SpineChanger
     {
         public SkeletonGraphic targetImage;
-        public SkeletonDataAsset []images;
+        public SkeletonDataAsset images;
+        public SkeletonDataAsset KorImages;
     }
 
     public TextChanger[] textChanger;
@@ -58,6 +60,21 @@ public class LanguageChanger : MonoBehaviour
         return instance.Languages[instance.curLangIndex].value[keyIndex];
     }
 
+    public void LangChange()
+    {
+        if(PlayerPrefs.GetInt("LangIndex") == 1)
+        {
+            PlayerPrefs.SetInt("LangIndex", 0);
+            LobbyUI.GetInstance().settingPanel.transform.GetChild(8).GetChild(0).GetComponent<Text>().text = "한국어";
+        }
+        else
+        {
+            PlayerPrefs.SetInt("LangIndex", 1);
+            LobbyUI.GetInstance().settingPanel.transform.GetChild(8).GetChild(0).GetComponent<Text>().text = "영어";
+        }
+        instance.SetLangIndex(PlayerPrefs.GetInt("LangIndex"));
+    }
+
     public void LocalizeChanged()
     {
         for (int i = 0; i < textChanger.Length; i++)
@@ -69,7 +86,14 @@ public class LanguageChanger : MonoBehaviour
         {
             for (int i = 0; i < imageChanger.Length; i++)
             {
-                imageChanger[i].targetImage.sprite = imageChanger[i].images[PlayerPrefs.GetInt("LangIndex")].sprite;
+                if (PlayerPrefs.GetInt("LangIndex") == 1)
+                {
+                    imageChanger[i].targetImage.sprite = imageChanger[i].images;
+                }
+                else
+                {
+                    imageChanger[i].targetImage.sprite = imageChanger[i].KorImages;
+                }
             }
         }
         
@@ -77,7 +101,14 @@ public class LanguageChanger : MonoBehaviour
         {
             for (int i = 0; i < spineChanger.Length; i++)
             {
-                spineChanger[i].targetImage.skeletonDataAsset = spineChanger[i].images[PlayerPrefs.GetInt("LangIndex")];
+                if (PlayerPrefs.GetInt("LangIndex") == 1)
+                {
+                    spineChanger[i].targetImage.skeletonDataAsset = spineChanger[i].images;
+                }
+                else
+                {
+                    spineChanger[i].targetImage.skeletonDataAsset = spineChanger[i].KorImages;
+                }
             }
         }
     }

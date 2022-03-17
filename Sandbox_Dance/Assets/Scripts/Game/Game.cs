@@ -70,12 +70,14 @@ public class Game : MonoBehaviour
     public GameObject[] UIOBjs; // 게임이 시작되면 꺼야할 OBJ
     public GameObject[] resultMenuBtn;
     public GameObject tutoObj;
+    public GameObject DoublePrice;
 
     [Header("점수")]
     public Text resultText;
     public Text[] pricesText; // 0 : 골드 1 : 루비
     public Text currentScoreText;
     public Text rankAdText;
+    public GameObject checkHighScore;
 
     public float needMoney = 0;
 
@@ -158,12 +160,14 @@ public class Game : MonoBehaviour
             resultMenuBtn[0].SetActive(true);
             resultMenuBtn[1].SetActive(true);
             rankAdText.gameObject.SetActive(true);
+            DoublePrice.SetActive(true);
         }
 
         else
         {
             resultMenuBtn[0].SetActive(false);
             resultMenuBtn[1].SetActive(false);
+            DoublePrice.SetActive(false);
         }
     }
     void ResetGame()
@@ -192,7 +196,16 @@ public class Game : MonoBehaviour
 
     public void Restart()
     {
-        SeeAdForCard.instance.UserChoseToWatchAd();
+        int randomNum = Random.Range(0, 3);
+        if (randomNum == 0)
+        {
+            SeeAdForCard.instance.UserChoseToWatchAd();
+        }
+
+        else
+        {
+            SceneChange("3. Game");
+        }
     }
 
     public void ContinueGame()
@@ -203,6 +216,12 @@ public class Game : MonoBehaviour
         SoundManager.Instance.PlayBGM(0);
 
         itemBtn[1].SetActive(false);
+    }
+
+    public void GetDoublePrice()
+    {
+        SeeAdForCard.instance.isEarnDouble = true;
+        SeeAdForCard.instance.UserChoseToWatchAd();
     }
     #endregion
 
@@ -591,6 +610,7 @@ public class Game : MonoBehaviour
         tutoObj.SetActive(false);
         rankAdText.gameObject.SetActive(false);
         studentPos = students[0].transform.localPosition;
+        checkHighScore.SetActive(false);
     }
     public static Game Instance()
     {
