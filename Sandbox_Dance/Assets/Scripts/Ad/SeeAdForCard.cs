@@ -98,11 +98,17 @@ public class SeeAdForCard : MonoBehaviour
 
     public void HandleUserEarnedReward(object sender, Reward args)
     {
-  
+        if (SceneManager.GetActiveScene().name == "2. Lobby")
+        {
+            int adNum = BackendServerManager.GetInstance().getAdviceCount(); // 플레이어의 광고 본 횟수)
+            BackendServerManager.GetInstance().setAdviceCount(5 - (adNum + 1));
+            LobbyUI.GetInstance().SetAdCount();
+        }
 
-        int adNum = BackendServerManager.GetInstance().getAdviceCount(); // 플레이어의 광고 본 횟수)
-        BackendServerManager.GetInstance().setAdviceCount(5 - (adNum + 1));
-        LobbyUI.GetInstance().SetAdCount();
+        else if(SceneManager.GetActiveScene().name == "3. Game")
+        {
+            Game.instance.SetEndGameStatus();
+        }
     }
 
     public void A()

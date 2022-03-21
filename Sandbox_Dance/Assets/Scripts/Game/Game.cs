@@ -85,6 +85,10 @@ public class Game : MonoBehaviour
     public int bestScore;
     public int finalPrice; // 최종적으로 받는 돈
 
+    // 결과창 순서 관련
+    public GameObject[] resultObjs;
+    int currentResultStatus;
+
     // 게임 진행 관련
     [SerializeField] bool isPlaying = true; // 현재 게임이 진행중인지 {true = 진행중, false = 일시정지}
 
@@ -142,34 +146,52 @@ public class Game : MonoBehaviour
     void EndGame()
     {
         Time.timeScale = 1;
-        SoundManager.Instance.bgmSource.Pause();
-        SoundManager.Instance.gameBgm_2.Pause();
-        resultWin.SetActive(true);
-
-        score = Mathf.RoundToInt(score);
-        finalPrice = Mathf.RoundToInt(score * 0.1f);
-
-        resultText.text = score.ToString() + "0";
-
-        pricesText[0].text = finalPrice.ToString();
-
-        SoundManager.Instance.PlayEffect(1);
 
         if (!itemBtn[1].activeSelf)
         {
-            resultMenuBtn[0].SetActive(true);
-            resultMenuBtn[1].SetActive(true);
-            rankAdText.gameObject.SetActive(true);
-            DoublePrice.SetActive(true);
+            SetEndGameStatus();
+            SoundManager.Instance.bgmSource.Pause();
+            SoundManager.Instance.gameBgm_2.Pause();
+            resultWin.SetActive(true);
+
+            score = Mathf.RoundToInt(score);
+            finalPrice = Mathf.RoundToInt(score * 0.1f);
+
+            resultText.text = score.ToString() + "0";
+
+            pricesText[0].text = finalPrice.ToString();
+
+            SoundManager.Instance.PlayEffect(1);
         }
 
         else
         {
-            resultMenuBtn[0].SetActive(false);
-            resultMenuBtn[1].SetActive(false);
-            DoublePrice.SetActive(false);
+            itemBtn[1].GetComponent< PlayableDirector>().Play();
         }
     }
+
+    public void ReviveEnd()
+    {
+        ResetGame();
+        itemBtn[1].SetActive(false);
+    }
+
+    public void SetEndGameStatus()
+    {
+        if (currentResultStatus == 0)
+        {
+            resultObjs[0].SetActive(true);
+            resultObjs[1].SetActive(false);
+            currentResultStatus = 1;
+        }
+
+        else
+        {
+            resultObjs[0].SetActive(false);
+            resultObjs[1].SetActive(true);
+        }
+    }
+
     void ResetGame()
     {
         float turnTime = Random.Range(typeFloat[2].inspecter[0].variable, typeFloat[2].inspecter[1].variable);
@@ -196,16 +218,7 @@ public class Game : MonoBehaviour
 
     public void Restart()
     {
-        int randomNum = Random.Range(0, 3);
-        if (randomNum == 0)
-        {
-            SeeAdForCard.instance.UserChoseToWatchAd();
-        }
-
-        else
-        {
-            SceneChange("3. Game");
-        }
+        SceneChange("3. Game");
     }
 
     public void ContinueGame()
