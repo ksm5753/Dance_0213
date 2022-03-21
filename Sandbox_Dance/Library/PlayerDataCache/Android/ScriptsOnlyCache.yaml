@@ -23,9 +23,6 @@ ScriptsOnlyBuild:
     - TeacherMove
     Coffee.UIParticle.dll:
     - Coffee.UIExtensions.UIParticle
-    - Coffee.UIParticleExtensions.BakingCamera
-    GoogleMobileAds.Common.dll:
-    - GoogleMobileAds.Common.MobileAdsEventExecutor
     GoogleMobileAds.Editor.dll:
     - GoogleMobileAds.Editor.GoogleMobileAdsSettings
     TheBackendSettings.dll:
@@ -123,61 +120,61 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 20288}
+      Script: {instanceID: 1720}
     - Class: 114
-      Script: {instanceID: 20586}
+      Script: {instanceID: 2066}
     - Class: 114
-      Script: {instanceID: 20850}
+      Script: {instanceID: 2342}
     - Class: 114
-      Script: {instanceID: 21142}
+      Script: {instanceID: 2644}
     - Class: 114
-      Script: {instanceID: 21210}
+      Script: {instanceID: 2714}
     - Class: 114
-      Script: {instanceID: 21304}
+      Script: {instanceID: 2814}
     - Class: 114
-      Script: {instanceID: 21350}
+      Script: {instanceID: 2860}
     - Class: 114
-      Script: {instanceID: 21524}
+      Script: {instanceID: 3044}
     - Class: 114
-      Script: {instanceID: 22138}
+      Script: {instanceID: 3678}
     - Class: 114
-      Script: {instanceID: 22430}
+      Script: {instanceID: 3982}
     - Class: 114
-      Script: {instanceID: 22572}
+      Script: {instanceID: 4126}
     - Class: 114
-      Script: {instanceID: 22736}
+      Script: {instanceID: 4296}
     - Class: 114
-      Script: {instanceID: 22788}
+      Script: {instanceID: 4350}
     - Class: 114
-      Script: {instanceID: 23012}
+      Script: {instanceID: 4584}
     - Class: 114
-      Script: {instanceID: 23060}
+      Script: {instanceID: 4638}
     - Class: 114
-      Script: {instanceID: 23152}
+      Script: {instanceID: 4732}
     - Class: 114
-      Script: {instanceID: 23460}
+      Script: {instanceID: 5060}
     - Class: 114
-      Script: {instanceID: 23716}
+      Script: {instanceID: 5326}
     - Class: 114
-      Script: {instanceID: 23812}
+      Script: {instanceID: 5426}
     - Class: 114
-      Script: {instanceID: 23856}
+      Script: {instanceID: 5476}
     - Class: 114
-      Script: {instanceID: 24160}
+      Script: {instanceID: 5792}
     - Class: 114
-      Script: {instanceID: 24168}
+      Script: {instanceID: 5800}
     - Class: 114
-      Script: {instanceID: 24370}
+      Script: {instanceID: 6010}
     - Class: 114
-      Script: {instanceID: 24548}
+      Script: {instanceID: 6198}
     - Class: 114
-      Script: {instanceID: 24680}
+      Script: {instanceID: 6334}
     - Class: 114
-      Script: {instanceID: 25080}
+      Script: {instanceID: 6750}
     - Class: 114
-      Script: {instanceID: 25590}
+      Script: {instanceID: 7292}
     - Class: 114
-      Script: {instanceID: 25682}
+      Script: {instanceID: 7388}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -224,81 +221,81 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 20288}
+      Script: {instanceID: 1720}
     - Class: 114
-      Script: {instanceID: 20586}
+      Script: {instanceID: 2066}
     - Class: 114
-      Script: {instanceID: 20864}
+      Script: {instanceID: 2358}
     - Class: 114
-      Script: {instanceID: 21142}
+      Script: {instanceID: 2644}
     - Class: 114
-      Script: {instanceID: 21162}
+      Script: {instanceID: 2666}
     - Class: 114
-      Script: {instanceID: 21164}
+      Script: {instanceID: 2668}
     - Class: 114
-      Script: {instanceID: 21210}
+      Script: {instanceID: 2714}
     - Class: 114
-      Script: {instanceID: 21304}
+      Script: {instanceID: 2814}
     - Class: 114
-      Script: {instanceID: 21310}
+      Script: {instanceID: 2820}
     - Class: 114
-      Script: {instanceID: 21458}
+      Script: {instanceID: 2976}
     - Class: 114
-      Script: {instanceID: 21504}
+      Script: {instanceID: 3022}
     - Class: 114
-      Script: {instanceID: 21524}
+      Script: {instanceID: 3044}
     - Class: 114
-      Script: {instanceID: 21642}
+      Script: {instanceID: 3166}
     - Class: 114
-      Script: {instanceID: 22042}
+      Script: {instanceID: 3582}
     - Class: 114
-      Script: {instanceID: 22138}
+      Script: {instanceID: 3678}
     - Class: 114
-      Script: {instanceID: 22430}
+      Script: {instanceID: 3982}
     - Class: 114
-      Script: {instanceID: 22736}
+      Script: {instanceID: 4296}
     - Class: 114
-      Script: {instanceID: 22802}
+      Script: {instanceID: 4364}
     - Class: 114
-      Script: {instanceID: 22904}
+      Script: {instanceID: 4468}
     - Class: 114
-      Script: {instanceID: 23100}
+      Script: {instanceID: 4678}
     - Class: 114
-      Script: {instanceID: 23152}
+      Script: {instanceID: 4732}
     - Class: 114
-      Script: {instanceID: 23460}
+      Script: {instanceID: 5060}
     - Class: 114
-      Script: {instanceID: 23716}
+      Script: {instanceID: 5326}
     - Class: 114
-      Script: {instanceID: 23748}
+      Script: {instanceID: 5362}
     - Class: 114
-      Script: {instanceID: 23812}
+      Script: {instanceID: 5426}
     - Class: 114
-      Script: {instanceID: 23856}
+      Script: {instanceID: 5476}
     - Class: 114
-      Script: {instanceID: 24160}
+      Script: {instanceID: 5792}
     - Class: 114
-      Script: {instanceID: 24192}
+      Script: {instanceID: 5826}
     - Class: 114
-      Script: {instanceID: 24418}
+      Script: {instanceID: 6060}
     - Class: 114
-      Script: {instanceID: 24430}
+      Script: {instanceID: 6072}
     - Class: 114
-      Script: {instanceID: 24476}
+      Script: {instanceID: 6120}
     - Class: 114
-      Script: {instanceID: 24548}
+      Script: {instanceID: 6198}
     - Class: 114
-      Script: {instanceID: 24680}
+      Script: {instanceID: 6334}
     - Class: 114
-      Script: {instanceID: 24726}
+      Script: {instanceID: 6384}
     - Class: 114
-      Script: {instanceID: 24798}
+      Script: {instanceID: 6456}
     - Class: 114
-      Script: {instanceID: 24850}
+      Script: {instanceID: 6512}
     - Class: 114
-      Script: {instanceID: 25080}
+      Script: {instanceID: 6750}
     - Class: 114
-      Script: {instanceID: 25130}
+      Script: {instanceID: 6800}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -349,69 +346,77 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 20288}
+      Script: {instanceID: 1720}
     - Class: 114
-      Script: {instanceID: 20356}
+      Script: {instanceID: 1824}
     - Class: 114
-      Script: {instanceID: 20586}
+      Script: {instanceID: 2066}
     - Class: 114
-      Script: {instanceID: 21142}
+      Script: {instanceID: 2644}
     - Class: 114
-      Script: {instanceID: 21162}
+      Script: {instanceID: 2666}
     - Class: 114
-      Script: {instanceID: 21164}
+      Script: {instanceID: 2668}
     - Class: 114
-      Script: {instanceID: 21210}
+      Script: {instanceID: 2714}
     - Class: 114
-      Script: {instanceID: 21304}
+      Script: {instanceID: 2814}
     - Class: 114
-      Script: {instanceID: 21524}
+      Script: {instanceID: 2976}
     - Class: 114
-      Script: {instanceID: 21862}
+      Script: {instanceID: 3044}
     - Class: 114
-      Script: {instanceID: 21962}
+      Script: {instanceID: 3394}
     - Class: 114
-      Script: {instanceID: 22138}
+      Script: {instanceID: 3498}
     - Class: 114
-      Script: {instanceID: 22262}
+      Script: {instanceID: 3678}
     - Class: 114
-      Script: {instanceID: 22430}
+      Script: {instanceID: 3812}
     - Class: 114
-      Script: {instanceID: 22736}
+      Script: {instanceID: 3982}
     - Class: 114
-      Script: {instanceID: 23100}
+      Script: {instanceID: 4296}
     - Class: 114
-      Script: {instanceID: 23302}
+      Script: {instanceID: 4678}
     - Class: 114
-      Script: {instanceID: 23360}
+      Script: {instanceID: 4892}
     - Class: 114
-      Script: {instanceID: 23460}
+      Script: {instanceID: 4956}
     - Class: 114
-      Script: {instanceID: 23716}
+      Script: {instanceID: 5060}
     - Class: 114
-      Script: {instanceID: 23812}
+      Script: {instanceID: 5326}
     - Class: 114
-      Script: {instanceID: 23856}
+      Script: {instanceID: 5426}
     - Class: 114
-      Script: {instanceID: 24160}
+      Script: {instanceID: 5476}
     - Class: 114
-      Script: {instanceID: 24192}
+      Script: {instanceID: 5792}
     - Class: 114
-      Script: {instanceID: 24430}
+      Script: {instanceID: 5800}
     - Class: 114
-      Script: {instanceID: 24476}
+      Script: {instanceID: 5826}
     - Class: 114
-      Script: {instanceID: 24560}
+      Script: {instanceID: 6072}
     - Class: 114
-      Script: {instanceID: 24680}
+      Script: {instanceID: 6120}
     - Class: 114
-      Script: {instanceID: 24726}
+      Script: {instanceID: 6198}
     - Class: 114
-      Script: {instanceID: 24798}
+      Script: {instanceID: 6210}
     - Class: 114
-      Script: {instanceID: 24900}
+      Script: {instanceID: 6334}
     - Class: 114
-      Script: {instanceID: 25644}
+      Script: {instanceID: 6384}
+    - Class: 114
+      Script: {instanceID: 6456}
+    - Class: 114
+      Script: {instanceID: 6568}
+    - Class: 114
+      Script: {instanceID: 6750}
+    - Class: 114
+      Script: {instanceID: 7350}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -883,7 +888,7 @@ ScriptsOnlyBuild:
     className: TMP_InputField
   - hash:
       serializedVersion: 2
-      Hash: d66c255bde4bcb4fc4a5117810c5cafb
+      Hash: 971f7f39c46fe7a658448388cf57df8d
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: SeeAdForCard
@@ -931,7 +936,7 @@ ScriptsOnlyBuild:
     className: NearbyHelperObject
   - hash:
       serializedVersion: 2
-      Hash: 4f94d502fb78d0a235e3f01f84fe036c
+      Hash: dae43d83802335317194d7b510a0eaed
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Game
@@ -1318,4 +1323,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/1. Login.unity
   - Assets/Scenes/2. Lobby.unity
   - Assets/Scenes/3. Game.unity
-  playerPath: C:/Users/COM/Desktop/NewGit/Dance_0213/Sandbox_Dance/ANG2.apk
+  playerPath: C:/Users/showmethevrgr07/Desktop/0321.apk

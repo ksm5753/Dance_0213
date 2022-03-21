@@ -638,7 +638,15 @@ public class BackendServerManager : MonoBehaviour
             }
 
             //Rank UI
-            LobbyUI.GetInstance().ShowRankUI();
+            if (SceneManager.GetActiveScene().name == "2. Lobby")
+            {
+                LobbyUI.GetInstance().ShowRankUI();
+            }
+
+            else
+            {
+                Game.instance.resultObjs[1].transform.GetChild(2).gameObject.SetActive(true);
+            }
         });
 
 

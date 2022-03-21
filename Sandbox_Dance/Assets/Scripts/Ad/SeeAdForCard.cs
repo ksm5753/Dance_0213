@@ -108,6 +108,7 @@ public class SeeAdForCard : MonoBehaviour
         else if(SceneManager.GetActiveScene().name == "3. Game")
         {
             Game.instance.SetEndGameStatus();
+            Game.instance.getRankInfo();
         }
     }
 

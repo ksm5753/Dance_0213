@@ -53,7 +53,6 @@ public class Game : MonoBehaviour
     [SerializeField] GameObject SpineTeacher; // 선생님 스파인 오브젝트
 
     [SerializeField] GameObject resultWin; // 결과창
-    bool isNeedWatch = false; // 선생님 뒤돌아보고있는거 체크
 
     [Header("아이템 관련")]
     public bool isItemFog; // 아이템이 사용중인가
@@ -189,6 +188,7 @@ public class Game : MonoBehaviour
         {
             resultObjs[0].SetActive(false);
             resultObjs[1].SetActive(true);
+            resultObjs[1].transform.GetChild(2).gameObject.SetActive(false);
         }
     }
 
@@ -511,6 +511,41 @@ public class Game : MonoBehaviour
             BackendServerManager.GetInstance().UpdateScore2((int)score * 10);
         }
     }
+
+    public void DanceButton(bool isDance)
+    {
+        if (isPlaying && !isItemFog)
+        {
+            BgmManage(isDance);
+            if (isDance)
+            {
+                ChangeStudentAct(true);
+                isDancing = true;
+            }
+
+            else
+            {
+                ChangeStudentAct(false);
+                isDancing = false;
+            }
+        }
+    }
+
+    void BgmManage(bool isDance)
+    {
+        switch (isDance)
+        {
+            case false:
+                SoundManager.Instance.bgmSource.Play();
+                SoundManager.Instance.gameBgm_2.Pause();
+                break;
+
+            case true:
+                SoundManager.Instance.bgmSource.Pause();
+                SoundManager.Instance.gameBgm_2.Play();
+                break;
+        }
+    }
     #endregion
 
     #region 아이템 관련
@@ -564,6 +599,8 @@ public class Game : MonoBehaviour
 
     #endregion
 
+    public void getRankInfo() => BackendServerManager.GetInstance().getRank();
+
     public void Tuto()
     {
         if (!PlayerPrefs.HasKey("Tutocheck"))
@@ -577,40 +614,6 @@ public class Game : MonoBehaviour
     public void SceneChange(string SceneName)
     {
         SceneManager.LoadScene(SceneName);
-    }
-    public void DanceButton(bool isDance)
-    {
-        if (isPlaying && !isItemFog)
-        {
-            BgmManage(isDance);
-            if (isDance)
-            {
-                ChangeStudentAct(true);
-                isDancing = true;
-            }
-
-            else
-            {
-                ChangeStudentAct(false);
-                isDancing = false;
-            }
-        }
-    }
-
-    void BgmManage(bool isDance)
-    {
-        switch (isDance)
-        {
-            case false:
-                SoundManager.Instance.bgmSource.Play();
-                SoundManager.Instance.gameBgm_2.Pause();
-                break;
-
-            case true:
-                SoundManager.Instance.bgmSource.Pause();
-                SoundManager.Instance.gameBgm_2.Play();
-                break;
-        }
     }
 
     //해상도 초기화
