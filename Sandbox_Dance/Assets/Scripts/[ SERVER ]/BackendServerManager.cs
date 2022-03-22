@@ -1012,7 +1012,9 @@ public class BackendServerManager : MonoBehaviour
                         else print("½ÇÆÐ");
                     });
                 }
-                InitalizeGameData();
+                //InitalizeGameData();
+                SceneManager.LoadScene("1. Login");
+                //LoginUI.GetInstance().TouchStart();
                 return;
             }
             userIndate = userData[0]["inDate"]["S"].ToString();
