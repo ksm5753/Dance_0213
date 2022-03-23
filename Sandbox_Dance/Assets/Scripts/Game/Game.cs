@@ -99,8 +99,9 @@ public class Game : MonoBehaviour
     {
         SoundManager.Instance.bgmSource.Stop();
         typeFloat[0].inspecter[1].variable = typeFloat[0].inspecter[0].variable;
-        SpineTeacher.GetComponent<TeacherMove>().TeacherState[1].gameObject.SetActive(true);
+        SpineTeacher.GetComponent<TeacherMove>().TeacherState[1].gameObject.SetActive(false);
         SpineTeacher.GetComponent<TeacherMove>().TeacherState[0].gameObject.SetActive(false);
+        SpineTeacher.GetComponent<TeacherMove>().TeacherState[2].gameObject.SetActive(true);
         for (int i = 0; i < itemBuyBtns.Length; i++)
         {
             if (itemBuyBtns[i].isOn)
@@ -111,10 +112,7 @@ public class Game : MonoBehaviour
         if (int.Parse(GameUI.GetInstance().coinText.text) >= needMoney)
         {
             BuyItemBtn();
-            if (!isReviveOn)
-            {
-                itemBtn[1].SetActive(false);
-            }
+            itemBtn[1].SetActive(false);
             storeObj.SetActive(false);
             SpineTeacher.GetComponent<PlayableDirector>().Play();
         }
@@ -133,6 +131,7 @@ public class Game : MonoBehaviour
     {
         SpineTeacher.GetComponent<TeacherMove>().TeacherState[1].gameObject.SetActive(false);
         SpineTeacher.GetComponent<TeacherMove>().TeacherState[0].gameObject.SetActive(true);
+        SpineTeacher.GetComponent<TeacherMove>().TeacherState[2].gameObject.SetActive(false);
         danceButton.SetActive(true);
         if (isFogOn)
         {
@@ -146,7 +145,7 @@ public class Game : MonoBehaviour
     {
         Time.timeScale = 1;
 
-        if (!itemBtn[1].activeSelf)
+        if (!isReviveOn)
         {
             SetEndGameStatus();
             SoundManager.Instance.bgmSource.Pause();
@@ -165,7 +164,9 @@ public class Game : MonoBehaviour
 
         else
         {
-            itemBtn[1].GetComponent< PlayableDirector>().Play();
+            itemBtn[1].SetActive(true);
+            itemBtn[1].GetComponent<PlayableDirector>().Play();
+            isReviveOn = false;
         }
     }
 
@@ -281,6 +282,16 @@ public class Game : MonoBehaviour
                     students[i].GetComponentsInChildren<SkeletonGraphic>()[0].enabled = false;
                     students[i].GetComponentsInChildren<SkeletonGraphic>()[1].enabled = false;
                     students[i].GetComponentsInChildren<SkeletonGraphic>()[2].enabled = true;
+                    int ranNum = Random.Range(0, 2);
+                    if (ranNum == 0)
+                    {
+                        students[i].GetComponentsInChildren<SkeletonGraphic>()[2].AnimationState.SetAnimation(0, "dance", true);
+                    }
+
+                    else
+                    {
+                        students[i].GetComponentsInChildren<SkeletonGraphic>()[2].AnimationState.SetAnimation(0, "dance2", true);
+                    }
                     students[i].transform.SetSiblingIndex(2);
                     students[i].transform.localPosition = new Vector3(0, -300, 0);
                 }
@@ -298,10 +309,36 @@ public class Game : MonoBehaviour
                             students[i].GetComponentsInChildren<SkeletonGraphic>()[1].AnimationState.SetAnimation(0, "phone", true);
                             break;
                         case 1:
-                            students[i].GetComponentsInChildren<SkeletonGraphic>()[1].AnimationState.SetAnimation(0, "eat 1", true);
+                            int ranNum1 = Random.Range(0, 2);
+                            if(ranNum1 == 0)
+                            {
+                                students[i].GetComponentsInChildren<SkeletonGraphic>()[1].AnimationState.SetAnimation(0, "eat 1", true);
+                            }
+
+                            else
+                            {
+                                students[i].GetComponentsInChildren<SkeletonGraphic>()[1].AnimationState.SetAnimation(0, "eat 1-1", true);
+                            }
                             break;
                         case 2:
-                            students[i].GetComponentsInChildren<SkeletonGraphic>()[1].AnimationState.SetAnimation(0, "eat 2", true);
+                            int ranNum2 = Random.Range(0, 2);
+                            if (ranNum2 == 0)
+                            {
+                                students[i].GetComponentsInChildren<SkeletonGraphic>()[1].AnimationState.SetAnimation(0, "eat 2", true);
+                            }
+
+                            else
+                            {
+                                if (setStudentNum[i] == 2)
+                                {
+                                    students[i].GetComponentsInChildren<SkeletonGraphic>()[1].AnimationState.SetAnimation(0, "eat 2-2", true);
+                                }
+
+                                else
+                                {
+                                    students[i].GetComponentsInChildren<SkeletonGraphic>()[1].AnimationState.SetAnimation(0, "eat 2-1", true);
+                                }
+                            }
                             break;
                     }
                     students[i].GetComponentsInChildren<SkeletonGraphic>()[2].enabled = false;

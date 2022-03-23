@@ -7,6 +7,12 @@ public class TeacherMove : MonoBehaviour
 {
     public SkeletonGraphic[] TeacherState; // 0 : 뒤돌아있음 뒤돌기전, 1 : 뒤돌아봄
     // Start is called before the first frame update
+
+    public void SetBreath()
+    {
+        TeacherState[2].AnimationState.SetAnimation(0, "Breathing", true);
+    }
+
     public void Move(byte check)
     {
         if (check <= 4)
