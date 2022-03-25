@@ -145,6 +145,7 @@ public class Game : MonoBehaviour
     {
         Time.timeScale = 1;
 
+        ChangeStudentAct(false);
         if (!isReviveOn)
         {
             SetEndGameStatus();
@@ -166,6 +167,8 @@ public class Game : MonoBehaviour
         {
             itemBtn[1].SetActive(true);
             itemBtn[1].GetComponent<PlayableDirector>().Play();
+            SoundManager.Instance.bgmSource.Play();
+            SoundManager.Instance.gameBgm_2.Pause();
             isReviveOn = false;
         }
     }
@@ -227,7 +230,7 @@ public class Game : MonoBehaviour
         typeFloat[0].inspecter[1].variable = typeFloat[0].inspecter[1].variable + 2f;
 
         ResetGame();
-        SoundManager.Instance.PlayBGM(0);
+        SoundManager.Instance.bgmSource.Play();
 
         itemBtn[1].SetActive(false);
     }
@@ -305,10 +308,10 @@ public class Game : MonoBehaviour
                     students[i].GetComponentsInChildren<SkeletonGraphic>()[1].enabled = true;
                     switch (typeFloat[3].inspecter[2].variable)
                     {
-                        case 0:
+                        case 2:
                             students[i].GetComponentsInChildren<SkeletonGraphic>()[1].AnimationState.SetAnimation(0, "phone", true);
                             break;
-                        case 1:
+                        case 0:
                             int ranNum1 = Random.Range(0, 2);
                             if(ranNum1 == 0)
                             {
@@ -320,7 +323,7 @@ public class Game : MonoBehaviour
                                 students[i].GetComponentsInChildren<SkeletonGraphic>()[1].AnimationState.SetAnimation(0, "eat 1-1", true);
                             }
                             break;
-                        case 2:
+                        case 1:
                             int ranNum2 = Random.Range(0, 2);
                             if (ranNum2 == 0)
                             {

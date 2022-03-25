@@ -311,10 +311,10 @@ public class LobbyUI : MonoBehaviour
         switch (collectionGroup.GetFirstActiveToggle().name)
         {
             case "MenuToggle_0":
-                gameNameText.text = "±Þ½Ä¿Õ";
+                gameNameText.text = "¼±»ý´Ô ¸ô·¡";
                 if(PlayerPrefs.GetInt("LangIndex") == 1)
                 {
-                    gameNameText.text = LanguageParse.instance.Languages[1].value[3];
+                    gameNameText.text = LanguageParse.instance.Languages[1].value[7];
                 }
                 BackendServerManager.GetInstance().GetUserCards(1);
                 break;
@@ -343,10 +343,10 @@ public class LobbyUI : MonoBehaviour
                 BackendServerManager.GetInstance().GetUserCards(4);
                 break;
             case "MenuToggle_4":
-                gameNameText.text = "¼±»ý´Ô ¸ô·¡";
+                gameNameText.text = "±Þ½Ä¿Õ";
                 if (PlayerPrefs.GetInt("LangIndex") == 1)
                 {
-                    gameNameText.text = LanguageParse.instance.Languages[1].value[7];
+                    gameNameText.text = LanguageParse.instance.Languages[1].value[3];
                 }
                 BackendServerManager.GetInstance().GetUserCards(5);
                 break;

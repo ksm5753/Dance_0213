@@ -161,6 +161,7 @@ public class SeeAdForCard : MonoBehaviour
                 else
                 {
                     Game.instance.DoublePrice.SetActive(false);
+                    Game.instance.SetEndGameStatus();
                 }
             }
 
