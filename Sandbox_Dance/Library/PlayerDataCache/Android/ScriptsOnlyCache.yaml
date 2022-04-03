@@ -24,11 +24,9 @@ ScriptsOnlyBuild:
     - TeacherMove
     Coffee.UIParticle.dll:
     - Coffee.UIExtensions.UIParticle
-    - Coffee.UIParticleExtensions.BakingCamera
-    GoogleMobileAds.Common.dll:
-    - GoogleMobileAds.Common.MobileAdsEventExecutor
     GoogleMobileAds.Editor.dll:
     - GoogleMobileAds.Editor.GoogleMobileAdsSettings
+    - GoogleMobileAds.Editor.GoogleMobileAdsSettingsEditor
     TheBackendSettings.dll:
     - TheBackendSettings
     Unity.2D.Animation.Editor.dll:
@@ -37,8 +35,6 @@ ScriptsOnlyBuild:
     - UnityEditor.U2D.IK.IKEditorManager
     Unity.2D.Tilemap.Editor.dll:
     - UnityEditor.Tilemaps.GridPaintingState
-    - UnityEditor.Tilemaps.GridPaletteBrushes
-    - UnityEditor.Tilemaps.GridPalettes
     - UnityEditor.Tilemaps.SceneViewGridManager
     - UnityEditor.Tilemaps.SceneViewOpenTilePaletteHelper
     - UnityEditor.Tilemaps.TileDragAndDropManager
@@ -947,7 +943,7 @@ ScriptsOnlyBuild:
     className: NearbyHelperObject
   - hash:
       serializedVersion: 2
-      Hash: dae43d83802335317194d7b510a0eaed
+      Hash: 481abc3d9243418a4f29465d139c778f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Game
@@ -1334,4 +1330,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/1. Login.unity
   - Assets/Scenes/2. Lobby.unity
   - Assets/Scenes/3. Game.unity
-  playerPath: C:/Users/Lee Tae Ho/Desktop/0325.apk
+  playerPath: C:/Users/Lee Tae Ho/Desktop/0331.apk

@@ -3864,14 +3864,14 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  skeletonDataAsset: {fileID: 11400000, guid: 4d4fe0094def91a48a802f554abee659, type: 2}
+  skeletonDataAsset: {fileID: 11400000, guid: e45236ed460aba84394c70c9745e3fb8, type: 2}
   additiveMaterial: {fileID: 0}
   multiplyMaterial: {fileID: 0}
   screenMaterial: {fileID: 0}
   initialSkinName: 
   initialFlipX: 0
   initialFlipY: 0
-  startingAnimation: 
+  startingAnimation: title 01
   startingLoop: 0
   timeScale: 1
   freeze: 0
@@ -5516,6 +5516,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isStartGame: 0
+  isEarnDouble: 0
 --- !u!4 &1932344615
 Transform:
   m_ObjectHideFlags: 0

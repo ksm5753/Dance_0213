@@ -468,8 +468,8 @@ MonoBehaviour:
       width: 1
       height: 1
     trackHeightExtension: 0
-    m_MarkerTimeStampsKeys: fa91fffff46e0000de550000
-    m_MarkerTimeStampsValues: 4838b8fc4f02da089aff78437b05da08a8d72aa3be0cda08
+    m_MarkerTimeStampsKeys: fa91fffff46e0000de5500004c860000
+    m_MarkerTimeStampsValues: 4838b8fc4f02da089aff78437b05da08a8d72aa3be0cda08a6b3a2a00613da08
   - collapsed: 0
     showMarkers: 1
     showInlineCurves: 0
@@ -612,5 +612,5 @@ MonoBehaviour:
       width: 1
       height: 1
     trackHeightExtension: 0
-    m_MarkerTimeStampsKeys: 58d7ffff
-    m_MarkerTimeStampsValues: a82a8549bf0cda08
+    m_MarkerTimeStampsKeys: 58d7ffff50860000
+    m_MarkerTimeStampsValues: a82a8549bf0cda08827277a20613da08

@@ -5,12 +5,30 @@ using Spine.Unity;
 
 public class TeacherMove : MonoBehaviour
 {
-    public SkeletonGraphic[] TeacherState; // 0 : 뒤돌아있음 뒤돌기전, 1 : 뒤돌아봄
+    public SkeletonGraphic[] TeacherState; // 0 : 뒤돌아있음 뒤돌기전, 1 : 뒤돌아봄 2 : 움직임 3 : 화남
     // Start is called before the first frame update
 
     public void SetBreath()
     {
         TeacherState[2].AnimationState.SetAnimation(0, "Breathing", true);
+    }
+
+    public void SetMove()
+    {
+        TeacherState[0].gameObject.SetActive(false);
+        TeacherState[1].gameObject.SetActive(false);
+        TeacherState[2].gameObject.SetActive(true);
+        TeacherState[3].gameObject.SetActive(false);
+        TeacherState[2].AnimationState.SetAnimation(0, "Walking", true);
+    }
+
+    public void SetAngry()
+    {
+        TeacherState[0].gameObject.SetActive(false);
+        TeacherState[1].gameObject.SetActive(false);
+        TeacherState[2].gameObject.SetActive(false);
+        TeacherState[3].gameObject.SetActive(true);
+        TeacherState[3].AnimationState.SetAnimation(0, "angry", true);
     }
 
     public void Move(byte check)

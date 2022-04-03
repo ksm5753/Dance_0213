@@ -316,7 +316,7 @@ public class LobbyUI : MonoBehaviour
                 {
                     gameNameText.text = LanguageParse.instance.Languages[1].value[7];
                 }
-                BackendServerManager.GetInstance().GetUserCards(1);
+                BackendServerManager.GetInstance().GetUserCards(5);
                 break;
             case "MenuToggle_1":
                 gameNameText.text = "±Þ½Ä¿Õ2";
@@ -348,7 +348,7 @@ public class LobbyUI : MonoBehaviour
                 {
                     gameNameText.text = LanguageParse.instance.Languages[1].value[3];
                 }
-                BackendServerManager.GetInstance().GetUserCards(5);
+                BackendServerManager.GetInstance().GetUserCards(1);
                 break;
             default:
                 break;
